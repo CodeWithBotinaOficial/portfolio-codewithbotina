@@ -1,87 +1,68 @@
-# Portfolio CodeWithBotina
+# Portafolio CodeWithBotina
 
-¡Bienvenido al código fuente de mi portafolio personal! Este proyecto muestra mis habilidades, experiencia y los proyectos en los que he trabajado. Está diseñado para ser rápido, moderno y totalmente gestionado a través de un CMS headless (Contentful).
+¡Bienvenido a mi portafolio personal! Este proyecto muestra mis habilidades y experiencia como desarrollador de software. Aquí encontrarás información sobre mí, los proyectos en los que he trabajado y las tecnologías que domino.
 
-![Vista Previa del Portafolio](public/codewithbotina-preview.png)
-
-## 🔗 Demo en Vivo
-
-Puedes ver el portafolio en acción en [**portfolio.codewithbotina.com**](https://portfolio.codewithbotina.com) (este es un ejemplo, ajusta la URL a tu dominio).
+![Previsualización del Portafolio](./public/codewithbotina-preview.png)
 
 ## ✨ Características
 
--   **React con Vite:** Desarrollo de alta velocidad y un rendimiento de producción optimizado.
--   **TypeScript:** Código más seguro y mantenible.
--   **Tailwind CSS:** Un framework de CSS "utility-first" para un diseño rápido y personalizado.
--   **Framer Motion:** Animaciones fluidas y atractivas para una mejor experiencia de usuario.
--   **Contentful:** Todo el contenido (proyectos, experiencia, habilidades) se gestiona desde Contentful, lo que permite actualizaciones sin necesidad de tocar el código.
--   **Diseño Responsivo:** Totalmente adaptable a dispositivos móviles, tabletas y computadoras de escritorio.
+-   **Diseño Moderno y Responsivo**: Una interfaz de usuario limpia y adaptable a cualquier tamaño de pantalla, construida con Tailwind CSS.
+-   **Componentes Reutilizables**: Desarrollado con React y TypeScript, siguiendo una arquitectura basada en componentes para facilitar el mantenimiento y la escalabilidad.
+-   **Gestión de Contenido**: El contenido del portafolio (proyectos, experiencia, etc.) se gestiona a través de Contentful, lo que permite actualizaciones sencillas sin necesidad de modificar el código.
+-   **Animaciones Fluidas**: Uso de Framer Motion para animaciones sutiles que mejoran la experiencia de usuario.
+-   **Optimizado para el Rendimiento**: Construido con Vite para un desarrollo rápido y un empaquetado optimizado para producción.
 
-## 🛠️ Tecnologías Utilizadas
+## 🚀 Tecnologías Utilizadas
 
--   **Frontend:** [React](https://react.dev/), [Vite](https://vitejs.dev/), [TypeScript](https://www.typescriptlang.org/)
--   **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
--   **Animaciones:** [Framer Motion](https://www.framer.com/motion/)
--   **CMS:** [Contentful](https://www.contentful.com/)
--   **Iconos:** [Lucide React](https://lucide.dev/guide/packages/lucide-react)
+-   **Frontend**:
+    -   [React](https://reactjs.org/)
+    -   [TypeScript](https://www.typescriptlang.org/)
+    -   [Vite](https://vitejs.dev/)
+    -   [Tailwind CSS](https://tailwindcss.com/)
+    -   [Framer Motion](https://www.framer.com/motion/)
+-   **CMS**:
+    -   [Contentful](https://www.contentful.com/)
+-   **Despliegue**:
+    -   [Cloudflare Pages](https://pages.cloudflare.com/)
 
-## 🚀 Cómo Empezar
+## 🛠️ Instalación y Uso Local
 
-Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.
+Para ejecutar este proyecto en tu entorno local, sigue estos pasos:
 
-### Prerrequisitos
-
--   [Node.js](https://nodejs.org/) (versión 18 o superior)
--   [pnpm](https://pnpm.io/) (o puedes usar `npm` o `yarn`)
--   Una cuenta de [Contentful](https://www.contentful.com/)
-
-### 1. Clonar el Repositorio
-
-```bash
-git clone https://github.com/CodeWithBotinaOficial/portfolio-codewithbotina.git
-cd portfolio-codewithbotina
-```
-
-### 2. Instalar Dependencias
-
-```bash
-npm install
-```
-
-### 3. Configurar Variables de Entorno
-
-Este proyecto requiere credenciales de Contentful para obtener el contenido.
-
-1.  Crea un archivo `.env.local` en la raíz del proyecto.
-2.  Añade las siguientes variables con tus credenciales de Contentful:
-
-    ```env
-    # Credenciales de Contentful
-    VITE_CONTENTFUL_SPACE_ID="TU_SPACE_ID"
-    VITE_CONTENTFUL_ACCESS_TOKEN="TU_ACCESS_TOKEN"
+1.  **Clona el Repositorio**:
+    ```bash
+    git clone https://github.com/CodeWithBotinaOficial/portfolio-codewithbotina.git
+    cd portfolio-codewithbotina
     ```
 
-    Puedes encontrar estas claves en tu espacio de Contentful, en **Settings > API keys**.
+2.  **Instala las Dependencias**:
+    ```bash
+    npm install
+    ```
 
-### 4. Ejecutar el Servidor de Desarrollo
+3.  **Configura las Variables de Entorno**:
+    Crea un archivo `.env.local` en la raíz del proyecto y añade tus credenciales de Contentful:
+    ```env
+    VITE_CONTENTFUL_SPACE_ID=tu_space_id
+    VITE_CONTENTFUL_ACCESS_TOKEN=tu_access_token
+    ```
 
-Una vez configuradas las variables de entorno, puedes iniciar el servidor de desarrollo.
+4.  **Ejecuta el Servidor de Desarrollo**:
+    ```bash
+    npm run dev
+    ```
+    Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver el proyecto.
 
-```bash
-npm run dev
-```
+##  Scripts Disponibles
 
-Abre [http://localhost:5173](http://localhost:5173) (o el puerto que indique Vite) en tu navegador para ver el proyecto.
-
-## 📜 Scripts Disponibles
+En el archivo `package.json` encontrarás los siguientes scripts:
 
 -   `npm run dev`: Inicia el servidor de desarrollo de Vite.
--   `npm run build`: Compila el proyecto para producción (usa TypeScript y Vite).
--   `npm run lint`: Ejecuta ESLint para analizar el código en busca de errores y problemas de estilo.
--   `npm run preview`: Sirve localmente el build de producción para previsualizarlo.
+-   `npm run build`: Compila el proyecto para producción.
+-   `npm run lint`: Ejecuta ESLint para analizar el código.
+-   `npm run preview`: Sirve el build de producción localmente para previsualización.
+-   `npm run deploy`: Despliega el proyecto en Cloudflare Pages (ver `DEPLOY_CLOUDFLARE.md`).
 
-## ☁️ Despliegue
+## 📄 Licencia
 
-Este proyecto está configurado para un despliegue sencillo en plataformas de Jamstack como [Cloudflare Pages](https://pages.cloudflare.com/), [Vercel](https://vercel.com/) o [Netlify](https://www.netlify.com/).
-
-Para obtener una guía detallada sobre cómo desplegar este sitio en Cloudflare Pages, consulta el archivo [**DEPLOY_CLOUDFLARE.md**](./DEPLOY_CLOUDFLARE.md).
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.

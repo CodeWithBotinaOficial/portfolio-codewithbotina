@@ -1,79 +1,61 @@
+# Despliegue en Cloudflare Pages
 
-# Guía de Despliegue en Cloudflare Pages
+Esta guía te ayudará a desplegar tu portafolio en Cloudflare Pages.
 
-Esta guía te mostrará cómo desplegar tu portafolio en [Cloudflare Pages](https://pages.cloudflare.com/), una plataforma de alojamiento rápida, segura y gratuita para sitios estáticos y Jamstack.
+## Configuración del Proyecto
 
-## Prerrequisitos
+Para facilitar el despliegue, he realizado los siguientes cambios en el proyecto:
 
--   Una cuenta de [GitHub](https://github.com/).
--   Una cuenta de [Cloudflare](https://dash.cloudflare.com/sign-up).
--   Tener el código del proyecto en un repositorio de GitHub (puedes hacer un "fork" del original y subirlo a tu cuenta).
--   Tus credenciales de [Contentful](https://www.contentful.com/) (`SPACE_ID` y `ACCESS_TOKEN`).
+1.  **`wrangler.toml`**: He añadido un archivo de configuración `wrangler.toml` en la raíz del proyecto. Este archivo le indica a Cloudflare cómo desplegar tu sitio.
 
----
+    ```toml
+    name = "portfolio-codewithbotina"
+    main = "dist/index.html"
+    compatibility_date = "2024-05-12"
 
-## Paso 1: Conectar Cloudflare con tu Repositorio de GitHub
+    [pages]
+    "*" = "dist"
+    ```
 
-1.  Inicia sesión en tu panel de control de Cloudflare.
-2.  En el menú lateral, ve a **Workers & Pages**.
-3.  Haz clic en **Create application** > **Pages** > **Connect to Git**.
-4.  Selecciona tu cuenta de GitHub y elige el repositorio de tu portafolio.
+2.  **`package.json`**: He añadido un script `deploy` a tu `package.json` para simplificar el proceso de despliegue.
 
----
+    ```json
+      "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "deploy": "wrangler pages deploy dist"
+      },
+    ```
 
-## Paso 2: Configurar los Ajustes de Build
+## Pasos para el Despliegue
 
-Una vez que selecciones el repositorio, Cloudflare te pedirá que configures el proceso de build.
+1.  **Inicia Sesión en Cloudflare**: 
+    Abre tu terminal y ejecuta el siguiente comando para iniciar sesión en tu cuenta de Cloudflare:
+    ```bash
+    npx wrangler login
+    ```
 
-1.  **Project name:** Elige un nombre para tu proyecto (ej. `mi-portafolio`).
-2.  **Production branch:** Selecciona la rama principal de tu repositorio (normalmente `main` o `master`).
-3.  **Framework preset:** Elige **`Vite`** en el menú desplegable. Cloudflare autocompletará la mayoría de los ajustes.
-4.  **Build command:** Asegúrate de que esté configurado como `npm run build`.
-5.  **Build output directory:** Debe ser `dist`.
+2.  **Construye tu Proyecto**:
+    Asegúrate de que tu proyecto esté construido y listo para desplegar.
+    ```bash
+    npm run build
+    ```
 
-La configuración debería verse así:
+3.  **Despliega tu Proyecto**:
+    Una vez que hayas iniciado sesión y construido tu proyecto, puedes desplegarlo con el siguiente comando:
+    ```bash
+    npm run deploy
+    ```
 
--   **Framework preset:** `Vite`
--   **Build command:** `npm run build`
--   **Build output directory:** `/dist`
--   **Root directory:** `/`
+Después de ejecutar estos comandos, tu sitio estará desplegado en Cloudflare Pages. Podrás ver la URL de tu sitio en la salida del comando `npm run deploy`.
 
----
+## Configuración del Subdominio (Opcional)
 
-## Paso 3: Añadir las Variables de Entorno
+Si deseas utilizar un subdominio personalizado (por ejemplo, `portfolio.tudominio.com`), sigue estos pasos en tu dashboard de Cloudflare:
 
-Este es un paso crucial para que tu sitio pueda obtener los datos de Contentful.
-
-1.  Dentro de la configuración del proyecto, haz clic en **Environment variables**.
-2.  Añade las siguientes dos variables para el entorno de **Producción**:
-
-    | Variable name                | Value                  |
-    | ---------------------------- | ---------------------- |
-    | `VITE_CONTENTFUL_SPACE_ID`   | `TU_SPACE_ID`          |
-    | `VITE_CONTENTFUL_ACCESS_TOKEN` | `TU_ACCESS_TOKEN`      |
-
-    > **Importante:** Reemplaza `TU_SPACE_ID` y `TU_ACCESS_TOKEN` con tus propias credenciales de Contentful. Asegúrate de que los nombres de las variables coincidan exactamente.
-
-3.  No es necesario hacer clic en "Encrypt", ya que Cloudflare lo maneja de forma segura.
-
----
-
-## Paso 4: Desplegar el Sitio
-
-1.  Con la configuración de build y las variables de entorno listas, haz clic en **Save and Deploy**.
-2.  Cloudflare comenzará a construir tu sitio. Puedes ver el progreso en tiempo real.
-3.  Una vez completado, tu sitio estará disponible en una URL de `*.pages.dev` (ej. `mi-portafolio.pages.dev`).
-
----
-
-## Paso 5 (Opcional): Configurar un Subdominio Personalizado
-
-Si tienes un dominio registrado en Cloudflare, puedes asignarle un subdominio a tu nuevo sitio.
-
-1.  Una vez que el despliegue inicial sea exitoso, ve a la pestaña **Custom domains** dentro de tu proyecto de Pages.
-2.  Haz clic en **Set up a custom domain**.
-3.  Introduce el subdominio que deseas usar (ej. `portfolio.tudominio.com`).
-4.  Cloudflare verificará tu dominio y te guiará. Como tu dominio ya está en Cloudflare, el proceso es casi automático. Generalmente, solo necesitas confirmar. Cloudflare creará el registro CNAME necesario en tu configuración DNS por ti.
-5.  Espera unos minutos a que los cambios de DNS se propaguen y Cloudflare emita un certificado SSL para tu subdominio.
-
-¡Y eso es todo! Tu portafolio ahora está alojado en Cloudflare Pages con tu propio subdominio, listo para ser compartido con el mundo.
+1.  Ve a la sección **Workers & Pages** y selecciona tu proyecto.
+2.  Ve a la pestaña **Custom Domains**.
+3.  Haz clic en **Set up a custom domain**.
+4.  Sigue las instrucciones para añadir tu subdominio. Esto generalmente implica añadir un registro CNAME en la configuración de DNS de tu dominio.
