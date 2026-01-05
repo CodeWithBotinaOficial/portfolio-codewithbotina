@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Section, Card, Button } from '../ui';
+import { Section, Card, Button, MarkdownLite } from '../ui';
 import { useFeaturedProjects } from '../../hooks';
-import { Github, ExternalLink, Calendar } from 'lucide-react';
+import {
+  Github,
+  ExternalLink,
+  Calendar,
+  ArrowLeft,
+} from 'lucide-react';
 import { getImageUrl } from '../../services/contentful';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -95,93 +100,120 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Card className="h-full flex flex-col">
-              {/* Project Image */}
-              {project.imagenPrincipal && (
-                <div className="relative h-48 bg-gray-200 overflow-hidden">
-                  <img
-                    src={getImageUrl(project.imagenPrincipal) || ''}
-                    alt={project.titulo}
-                    className="w-full h-full object-cover"
-                  />
-                  {project.destacado && (
-                    <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
-                      ⭐ Destacado
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Project Content */}
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold mb-2">{project.titulo}</h3>
-                <p className="text-gray-600 mb-4 flex-grow">
-                  {project.descripcionCorta}
-                </p>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tecnologias?.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
+            <Card
+              className="h-[550px]"
+              isFlippable
+              cardBack={
+                <div className="p-6 flex flex-col h-full bg-white">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-bold">Más Detalles</h4>
+                    <button
+                      className="text-gray-500 hover:text-primary-600"
+                      aria-label="Volver a la vista principal"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tecnologias && project.tecnologias.length > 3 && (
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">
-                      +{project.tecnologias.length - 3}
-                    </span>
-                  )}
+                      <ArrowLeft className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="prose prose-sm lg:prose-base overflow-y-auto flex-grow mb-4">
+                    <MarkdownLite text={project.descripcionCompleta} />
+                  </div>
                 </div>
-
-                {/* Date */}
-                {project.fecha && (
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    {format(new Date(project.fecha), 'MMMM yyyy', {
-                      locale: es,
-                    })}
+              }
+            >
+              {/* Card Front */}
+              <div className="h-full flex flex-col">
+                {/* Project Image */}
+                {project.imagenPrincipal && (
+                  <div className="relative h-48 bg-gray-200 overflow-hidden">
+                    <img
+                      src={getImageUrl(project.imagenPrincipal) || ''}
+                      alt={project.titulo}
+                      className="w-full h-full object-cover"
+                    />
+                    {project.destacado && (
+                      <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                        ⭐ Destacado
+                      </div>
+                    )}
                   </div>
                 )}
 
-                {/* Actions */}
-                <div className="flex gap-3">
-                  {project.urlGithub && (
-                    <a
-                      href={project.urlGithub}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1"
-                    >
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        icon={<Github className="w-4 h-4" />}
-                        className="w-full"
+                {/* Project Content */}
+                <div className="p-6 flex-grow flex flex-col">
+                  <h3 className="text-xl font-bold mb-2">{project.titulo}</h3>
+                  <p className="text-gray-600 mb-4 flex-grow">
+                    {project.descripcionCorta}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tecnologias?.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
                       >
-                        Código
-                      </Button>
-                    </a>
+                        {tech}
+                      </span>
+                    ))}
+                    {project.tecnologias && project.tecnologias.length > 4 && (
+                      <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">
+                        +{project.tecnologias.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Date */}
+                  {project.fecha && (
+                    <div className="flex items-center text-sm text-gray-500 mb-4">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {format(new Date(project.fecha), 'MMMM yyyy', {
+                        locale: es,
+                      })}
+                    </div>
                   )}
-                  {project.urlDemo && (
-                    <a
-                      href={project.urlDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1"
-                    >
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        icon={<ExternalLink className="w-4 h-4" />}
-                        className="w-full"
+
+                  {/* Actions */}
+                  <div className="flex gap-3 mt-auto">
+                    {project.urlGithub && (
+                      <a
+                        href={project.urlGithub}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        Demo
-                      </Button>
-                    </a>
-                  )}
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          icon={<Github className="w-4 h-4" />}
+                          className="w-full"
+                        >
+                          Código
+                        </Button>
+                      </a>
+                    )}
+                    {project.urlDemo && (
+                      <a
+                        href={project.urlDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          icon={<ExternalLink className="w-4 h-4" />}
+                          className="w-full"
+                        >
+                          Demo
+                        </Button>
+                      </a>
+                    )}
+                  </div>
+                  <div className="text-center text-sm text-gray-500 mt-4">
+                    Click para ver más
+                  </div>
                 </div>
               </div>
             </Card>
