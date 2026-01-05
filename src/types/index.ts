@@ -29,6 +29,7 @@ export interface ContentfulAsset {
 // ============================================================================
 
 export interface Proyecto {
+  id?: string;
   titulo: string;
   descripcionCorta: string;
   descripcionCompleta: string;
@@ -55,13 +56,14 @@ export interface ProyectoEntry {
 // ============================================================================
 
 export interface Experiencia {
+  id?: string;
   institucion: string;
   cargoTitulo: string;
   descripcion?: string;
   fechaInicio: string;
   fechaFin?: string;
   logo?: ContentfulAsset;
-  tipo: 'Educación' | 'Certificación' | 'Experiencia';
+  tipo: string[];
   ubicacion?: string;
 }
 
@@ -79,6 +81,7 @@ export interface ExperienciaEntry {
 // ============================================================================
 
 export interface Habilidad {
+  id?: string;
   nombre: string;
   categoria: 'Frontend' | 'Backend' | 'Herramientas' | 'Lenguajes' | 'Otros';
   nivel: number;

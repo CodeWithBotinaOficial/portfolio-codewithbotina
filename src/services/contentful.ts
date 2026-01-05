@@ -145,8 +145,8 @@ export const getExperiencias = async (
       order: '-fields.fechaInicio',
     };
 
-    if (tipo) {
-      query['fields.tipo'] = tipo;
+    if (tipo && tipo.length > 0) {
+      query['fields.tipo[in]'] = tipo.join(',');
     }
 
     const response = await client.getEntries(query);
@@ -161,14 +161,14 @@ export const getExperiencias = async (
  * Fetch education experiences only
  */
 export const getEducacion = async (): Promise<Experiencia[]> => {
-  return getExperiencias('Educación');
+  return getExperiencias(['Educación']);
 };
 
 /**
  * Fetch certifications only
  */
 export const getCertificaciones = async (): Promise<Experiencia[]> => {
-  return getExperiencias('Certificación');
+  return getExperiencias(['Certificación']);
 };
 
 // ============================================================================

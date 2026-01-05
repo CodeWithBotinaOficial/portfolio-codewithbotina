@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Section } from '../ui';
 import { useExperience } from '../../hooks';
-import { Calendar, MapPin, Award } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { getImageUrl } from '../../services/contentful';
@@ -43,14 +43,7 @@ const Experience = () => {
     );
   }
 
-  // Group experiences by type
-  const educacion = experiences.filter((exp) => exp.tipo === 'Educación');
-  const certificaciones = experiences.filter(
-    (exp) => exp.tipo === 'Certificación'
-  );
-  const experienciaLaboral = experiences.filter(
-    (exp) => exp.tipo === 'Experiencia'
-  );
+
 
   const formatDate = (date: string) => {
     return format(new Date(date), 'MMMM yyyy', { locale: es });
@@ -97,14 +90,18 @@ const Experience = () => {
         <div className="flex items-start justify-between mb-4">
           <div className="flex-grow">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{getTypeIcon(exp.tipo)}</span>
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-bold ${getTypeColor(
-                  exp.tipo
-                )}`}
-              >
-                {exp.tipo}
-              </span>
+              {exp.tipo?.length > 0 && (
+                <>
+                  <span className="text-2xl">{getTypeIcon(exp.tipo[0])}</span>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-bold ${getTypeColor(
+                      exp.tipo[0]
+                    )}`}
+                  >
+                    {exp.tipo[0]}
+                  </span>
+                </>
+              )}
             </div>
             <h3 className="text-xl font-bold mb-1">{exp.cargoTitulo}</h3>
             <p className="text-primary-600 font-semibold">{exp.institucion}</p>
@@ -152,62 +149,11 @@ const Experience = () => {
       className="bg-white"
     >
       <div className="max-w-4xl mx-auto">
-        {/* Education Section */}
-        {educacion.length > 0 && (
-          <div className="mb-16">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl font-bold mb-8 flex items-center gap-3"
-            >
-              <span className="text-3xl">🎓</span>
-              Educación
-            </motion.h3>
-            {educacion.map((exp, index) => (
-              <ExperienceCard key={exp.institucion} exp={exp} index={index} />
-            ))}
-          </div>
-        )}
-
-        {/* Certifications Section */}
-        {certificaciones.length > 0 && (
-          <div className="mb-16">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl font-bold mb-8 flex items-center gap-3"
-            >
-              <Award className="w-8 h-8 text-primary-600" />
-              Certificaciones
-            </motion.h3>
-            {certificaciones.map((exp, index) => (
-              <ExperienceCard key={exp.institucion} exp={exp} index={index} />
-            ))}
-          </div>
-        )}
-
-        {/* Work Experience Section */}
-        {experienciaLaboral.length > 0 && (
-          <div>
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl font-bold mb-8 flex items-center gap-3"
-            >
-              <span className="text-3xl">💼</span>
-              Experiencia Laboral
-            </motion.h3>
-            {experienciaLaboral.map((exp, index) => (
-              <ExperienceCard key={exp.institucion} exp={exp} index={index} />
-            ))}
-          </div>
-        )}
-
-        {/* Empty State */}
-        {experiences.length === 0 && (
+        {experiences.length > 0 ? (
+          experiences.map((exp, index) => (
+            <ExperienceCard key={exp.id || index} exp={exp} index={index} />
+          ))
+        ) : (
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg">
               No hay experiencias registradas aún.
