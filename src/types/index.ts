@@ -6,6 +6,7 @@ export interface ContentfulAsset {
   sys: {
     id: string;
   };
+  metadata: Record<string, unknown>;
   fields: {
     title: string;
     description?: string;

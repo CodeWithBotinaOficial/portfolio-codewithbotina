@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { getProyectos, getProyectosDestacados } from '../services/contentful';
 import type { Proyecto, FilterOptions, SortOrder } from '../types';
 
@@ -18,11 +18,21 @@ export const useProjects = (
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchProjects = async () => {
+  const filtersString = JSON.stringify(filters);
+  const memoizedFilters = useMemo(() => {
+    if (!filtersString) return undefined;
+    try {
+      return JSON.parse(filtersString) as FilterOptions;
+    } catch {
+      return undefined;
+    }
+  }, [filtersString]);
+
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getProyectos(filters, sortBy, order);
+      const data = await getProyectos(memoizedFilters, sortBy, order);
       setProjects(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch projects');
@@ -30,11 +40,11 @@ export const useProjects = (
     } finally {
       setLoading(false);
     }
-  };
+  }, [memoizedFilters, sortBy, order]);
 
   useEffect(() => {
     fetchProjects();
-  }, [JSON.stringify(filters), sortBy, order]);
+  }, [fetchProjects]);
 
   return {
     projects,
@@ -49,23 +59,27 @@ export const useFeaturedProjects = (): UseProjectsReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const data = await getProyectosDestacados();
       setProjects(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch featured projects');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to fetch featured projects'
+      );
       console.error('Error fetching featured projects:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [fetchProjects]);
 
   return {
     projects,

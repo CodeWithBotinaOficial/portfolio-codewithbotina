@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react';
-import { getExperiencias, getEducacion, getCertificaciones } from '../services/contentful';
+import { useState, useEffect, useCallback } from 'react';
+import {
+  getExperiencias,
+  getEducacion,
+  getCertificaciones,
+} from '../services/contentful';
 import type { Experiencia } from '../types';
 
 interface UseExperienceReturn {
@@ -9,28 +13,32 @@ interface UseExperienceReturn {
   refetch: () => Promise<void>;
 }
 
-export const useExperience = (tipo?: Experiencia['tipo']): UseExperienceReturn => {
+export const useExperience = (
+  tipo?: Experiencia['tipo']
+): UseExperienceReturn => {
   const [experiences, setExperiences] = useState<Experiencia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchExperiences = async () => {
+  const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const data = await getExperiencias(tipo);
       setExperiences(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch experiences');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch experiences'
+      );
       console.error('Error fetching experiences:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [tipo]);
 
   useEffect(() => {
     fetchExperiences();
-  }, [tipo]);
+  }, [fetchExperiences]);
 
   return {
     experiences,
@@ -45,23 +53,25 @@ export const useEducation = (): UseExperienceReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchExperiences = async () => {
+  const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const data = await getEducacion();
       setExperiences(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch education');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch education'
+      );
       console.error('Error fetching education:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchExperiences();
-  }, []);
+  }, [fetchExperiences]);
 
   return {
     experiences,
@@ -76,23 +86,25 @@ export const useCertifications = (): UseExperienceReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchExperiences = async () => {
+  const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const data = await getCertificaciones();
       setExperiences(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch certifications');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch certifications'
+      );
       console.error('Error fetching certifications:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchExperiences();
-  }, []);
+  }, [fetchExperiences]);
 
   return {
     experiences,

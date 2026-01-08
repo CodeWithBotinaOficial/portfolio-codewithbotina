@@ -1,10 +1,12 @@
-import { createClient, type Entry } from 'contentful';
+import { createClient } from 'contentful';
+import type { ContentfulEntry } from '../types/contentful';
 import type {
   Proyecto,
   Experiencia,
   Habilidad,
   FilterOptions,
   SortOrder,
+  ContentfulAsset,
 } from '../types';
 
 // ============================================================================
@@ -35,9 +37,9 @@ const client = createClient({
 /**
  * Extract image URL from Contentful asset
  */
-export const getImageUrl = (asset: any): string | null => {
+export const getImageUrl = (asset: ContentfulAsset): string | null => {
   if (!asset?.fields?.file?.url) return null;
-  const url = asset.fields.file.url;
+  const url = asset.fields.file.url as string;
   // Ensure HTTPS
   return url.startsWith('//') ? `https:${url}` : url;
 };
@@ -45,7 +47,7 @@ export const getImageUrl = (asset: any): string | null => {
 /**
  * Parse Contentful entry to typed object
  */
-const parseEntry = <T>(entry: Entry<any>): T => {
+const parseEntry = <T>(entry: ContentfulEntry): T => {
   return {
     ...entry.fields,
     id: entry.sys.id,
@@ -57,27 +59,40 @@ const parseEntry = <T>(entry: Entry<any>): T => {
 /**
  * Handle API errors gracefully
  */
-const handleError = (error: any, context: string) => {
+const handleError = (error: unknown, context: string) => {
   console.error(`[Contentful Error - ${context}]:`, error);
-  
-  if (error.sys?.id === 'NotFound') {
-    throw new Error(`Content not found: ${context}`);
+
+  if (typeof error === 'object' && error !== null && 'sys' in error) {
+    const sys = (error as { sys: { id: string } }).sys;
+    if (sys?.id === 'NotFound') {
+      throw new Error(`Content not found: ${context}`);
+    }
+    if (sys?.id === 'RateLimitExceeded') {
+      throw new Error('Rate limit exceeded. Please try again later.');
+    }
   }
-  
-  if (error.sys?.id === 'RateLimitExceeded') {
-    throw new Error('Rate limit exceeded. Please try again later.');
-  }
-  
-  if (error.message?.includes('Network')) {
+
+  if (error instanceof Error && error.message?.includes('Network')) {
     throw new Error('Network error. Please check your connection.');
   }
-  
-  throw new Error(`Failed to fetch ${context}: ${error.message}`);
+
+  throw new Error(
+    `Failed to fetch ${context}: ${
+      error instanceof Error ? error.message : String(error)
+    }`
+  );
 };
 
 // ============================================================================
 // PROJECTS API
 // ============================================================================
+
+interface ContentfulQuery {
+  content_type: string;
+  order: string;
+  'fields.destacado'?: boolean;
+  'fields.tecnologias[in]'?: string;
+}
 
 /**
  * Fetch all projects with optional filtering and sorting
@@ -88,7 +103,7 @@ export const getProyectos = async (
   order: SortOrder = 'asc'
 ): Promise<Proyecto[]> => {
   try {
-    const query: any = {
+    const query: ContentfulQuery = {
       content_type: 'proyecto',
       order: `${order === 'asc' ? '' : '-'}fields.${sortBy}`,
     };
@@ -102,7 +117,9 @@ export const getProyectos = async (
     }
 
     const response = await client.getEntries(query);
-    return response.items.map((item) => parseEntry<Proyecto>(item));
+    return response.items.map((item) =>
+      parseEntry<Proyecto>(item as unknown as ContentfulEntry)
+    );
   } catch (error) {
     handleError(error, 'projects');
     return [];
@@ -122,7 +139,7 @@ export const getProyectosDestacados = async (): Promise<Proyecto[]> => {
 export const getProyectoById = async (id: string): Promise<Proyecto | null> => {
   try {
     const entry = await client.getEntry(id);
-    return parseEntry<Proyecto>(entry);
+    return parseEntry<Proyecto>(entry as unknown as ContentfulEntry);
   } catch (error) {
     handleError(error, `project with ID ${id}`);
     return null;
@@ -133,6 +150,12 @@ export const getProyectoById = async (id: string): Promise<Proyecto | null> => {
 // EXPERIENCE API
 // ============================================================================
 
+interface ExperienceQuery {
+  content_type: 'experiencia';
+  order: string;
+  'fields.tipo[in]'?: string;
+}
+
 /**
  * Fetch all experiences sorted by date
  */
@@ -140,7 +163,7 @@ export const getExperiencias = async (
   tipo?: Experiencia['tipo']
 ): Promise<Experiencia[]> => {
   try {
-    const query: any = {
+    const query: ExperienceQuery = {
       content_type: 'experiencia',
       order: '-fields.fechaInicio',
     };
@@ -150,7 +173,9 @@ export const getExperiencias = async (
     }
 
     const response = await client.getEntries(query);
-    return response.items.map((item) => parseEntry<Experiencia>(item));
+    return response.items.map((item) =>
+      parseEntry<Experiencia>(item as unknown as ContentfulEntry)
+    );
   } catch (error) {
     handleError(error, 'experiences');
     return [];
@@ -178,24 +203,31 @@ export const getCertificaciones = async (): Promise<Experiencia[]> => {
 /**
  * Fetch all skills grouped by category
  */
-export const getHabilidades = async (): Promise<Record<string, Habilidad[]>> => {
+export const getHabilidades = async (): Promise<
+  Record<string, Habilidad[]>
+> => {
   try {
     const response = await client.getEntries({
       content_type: 'habilidad',
       order: ['-fields.nivel'],
     });
 
-    const habilidades = response.items.map((item) => parseEntry<Habilidad>(item));
+    const habilidades = response.items.map((item) =>
+      parseEntry<Habilidad>(item as unknown as ContentfulEntry)
+    );
 
     // Group by category
-    return habilidades.reduce((acc, skill) => {
-      const category = skill.categoria || 'Otros';
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(skill);
-      return acc;
-    }, {} as Record<string, Habilidad[]>);
+    return habilidades.reduce(
+      (acc, skill) => {
+        const category = skill.categoria || 'Otros';
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(skill);
+        return acc;
+      },
+      {} as Record<string, Habilidad[]>
+    );
   } catch (error) {
     handleError(error, 'skills');
     return {};
@@ -215,7 +247,9 @@ export const getHabilidadesPorCategoria = async (
       order: ['-fields.nivel'],
     });
 
-    return response.items.map((item) => parseEntry<Habilidad>(item));
+    return response.items.map((item) =>
+      parseEntry<Habilidad>(item as unknown as ContentfulEntry)
+    );
   } catch (error) {
     handleError(error, `skills in category ${categoria}`);
     return [];
@@ -233,11 +267,11 @@ export const getTecnologiasUnicas = async (): Promise<string[]> => {
   try {
     const proyectos = await getProyectos();
     const tecnologias = new Set<string>();
-    
+
     proyectos.forEach((proyecto) => {
       proyecto.tecnologias?.forEach((tech) => tecnologias.add(tech));
     });
-    
+
     return Array.from(tecnologias).sort();
   } catch (error) {
     console.error('Error fetching unique technologies:', error);

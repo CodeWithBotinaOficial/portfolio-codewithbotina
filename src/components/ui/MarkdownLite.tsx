@@ -20,11 +20,11 @@ const MarkdownLite: React.FC<MarkdownLiteProps> = ({ text }) => {
     html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
 
     // Unordered lists
-    html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
+    html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
     html = `<ul>${html}</ul>`.replace(/<\/li>(\n)?<ul>/g, '</li><ul>');
 
     // Links
-    html = html.replace(/\\\[(.*?)\\\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    html = html.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
     
     // Paragraphs
     html = html.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');

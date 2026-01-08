@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
-import { getHabilidades, getHabilidadesPorCategoria } from '../services/contentful';
+import { useState, useEffect, useCallback } from 'react';
+import {
+  getHabilidades,
+  getHabilidadesPorCategoria,
+} from '../services/contentful';
 import type { Habilidad } from '../types';
 
 interface UseSkillsReturn {
@@ -14,7 +17,7 @@ export const useSkills = (): UseSkillsReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSkills = async () => {
+  const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -26,11 +29,11 @@ export const useSkills = (): UseSkillsReturn => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchSkills();
-  }, []);
+  }, [fetchSkills]);
 
   return {
     skills,
@@ -54,7 +57,7 @@ export const useSkillsByCategory = (
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSkills = async () => {
+  const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -66,11 +69,11 @@ export const useSkillsByCategory = (
     } finally {
       setLoading(false);
     }
-  };
+  }, [categoria]);
 
   useEffect(() => {
     fetchSkills();
-  }, [categoria]);
+  }, [fetchSkills]);
 
   return {
     skills,

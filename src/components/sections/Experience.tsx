@@ -5,6 +5,7 @@ import { Calendar, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { getImageUrl } from '../../services/contentful';
+import type { Experiencia } from '../../types';
 
 const Experience = () => {
   const { experiences, loading, error } = useExperience();
@@ -75,7 +76,7 @@ const Experience = () => {
     }
   };
 
-  const ExperienceCard = ({ exp, index }: { exp: any; index: number }) => (
+  const ExperienceCard = ({ exp, index }: { exp: Experiencia; index: number }) => (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
