@@ -136,38 +136,28 @@ const Hero = () => {
               size="lg"
               icon={<FileDown className="w-5 h-5" />}
               onClick={() => {
-                // Use local asset path from environment variable with fallback
-                const cvPath =
-                  import.meta.env.VITE_CV_DOWNLOAD_URL ||
-                  '/assets/cv/DiegoBotina_CV.pdf';
+                // 1. Get the path and sanitize it (remove accidental quotes from env variables)
+                const rawPath = import.meta.env.VITE_CV_DOWNLOAD_URL || '/assets/cv/DiegoBotina_CV.pdf';
+                const cvPath = rawPath.replace(/[中心"]/g, '');
 
-                // Create absolute URL for the asset (works in both dev and production)
-                const baseUrl = window.location.origin;
-                const cvUrl = `${baseUrl}${
-                  cvPath.startsWith('/') ? cvPath : '/' + cvPath
-                }`;
-
-                // Add cache-busting timestamp to ensure latest version downloads
-                const timestamp = new Date().getTime();
-                const downloadUrl = `${cvUrl}?v=${timestamp}`;
-
-                // Create and trigger download link
+                // 2. Create a hidden anchor element to trigger the download
                 const link = document.createElement('a');
-                link.href = downloadUrl;
-                link.download = 'DiegoBotina_CV.pdf'; // Suggested filename for download
-                link.style.display = 'none'; // Keep it hidden
-                link.rel = 'noopener noreferrer'; // Security best practice
-
+                link.href = cvPath;
+                
+                // 3. Set the download attribute with the desired filename
+                link.setAttribute('download', 'DiegoBotina_CV.pdf');
+                
+                // 4. Security and accessibility best practices
+                link.style.display = 'none';
+                link.rel = 'noopener noreferrer';
+                
+                // 5. Append, trigger, and cleanup
                 document.body.appendChild(link);
                 link.click();
-
-                // Clean up after download initiation
+                
+                // Small delay for cleanup to ensure browser handles the click event
                 setTimeout(() => {
                   document.body.removeChild(link);
-                  // Revoke object URL if created (though not needed for local files)
-                  if (link.href.startsWith('blob:')) {
-                    URL.revokeObjectURL(link.href);
-                  }
                 }, 100);
               }}
             >
