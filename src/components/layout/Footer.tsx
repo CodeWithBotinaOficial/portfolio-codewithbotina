@@ -63,7 +63,7 @@ const Footer = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-primary-400 transition-colors"
+                    className="text-gray-400 hover:text-valentine-rose transition-colors"
                   >
                     {link.label}
                   </a>
@@ -82,7 +82,7 @@ const Footer = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary-400 transition-colors p-2 hover:bg-gray-800 rounded-lg"
+                  className="text-gray-400 hover:text-valentine-rose transition-colors p-2 hover:bg-gray-800 rounded-lg"
                   aria-label={link.label}
                 >
                   {link.icon}
@@ -98,7 +98,7 @@ const Footer = () => {
             © {currentYear} Diego Alejandro Botina. Todos los derechos reservados.
           </p>
           <p className="text-gray-400 text-sm flex items-center gap-2">
-            Hecho con <Heart className="w-4 h-4 text-red-500 fill-current" /> en
+            Hecho con <Heart className="w-4 h-4 text-valentine-crimson fill-current" /> en
             Colombia
           </p>
         </div>

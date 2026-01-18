@@ -17,42 +17,36 @@ const Contact = () => {
       title: 'Email',
       value: 'info@codewithbotina.com',
       href: 'mailto:info@codewithbotina.com',
-      color: 'bg-red-100 text-red-600',
     },
     {
       icon: <Github className="w-8 h-8" />,
       title: 'GitHub',
       value: '@CodeWithBotinaOficial',
       href: 'https://github.com/CodeWithBotinaOficial',
-      color: 'bg-gray-100 text-gray-900',
     },
     {
       icon: <Linkedin className="w-8 h-8" />,
       title: 'LinkedIn',
       value: 'codewithbotinaoficial',
       href: 'https://www.linkedin.com/in/codewithbotinaoficial',
-      color: 'bg-blue-100 text-blue-600',
     },
     {
       icon: <Youtube className="w-8 h-8" />,
       title: 'YouTube',
       value: '@CodeWithBotina',
       href: 'https://www.youtube.com/@CodeWithBotina',
-      color: 'bg-red-100 text-red-600',
     },
     {
       icon: <Instagram className="w-8 h-8" />,
       title: 'Instagram',
       value: '@codewithbotina',
       href: 'https://www.instagram.com/codewithbotina/',
-      color: 'bg-pink-100 text-pink-600',
     },
     {
       icon: <Facebook className="w-8 h-8" />,
       title: 'Facebook',
       value: 'codewithbotina',
       href: 'https://www.facebook.com/codewithbotina',
-      color: 'bg-blue-100 text-blue-700',
     },
   ];
 
@@ -62,7 +56,7 @@ const Contact = () => {
       title="Conectemos"
       subtitle="¿Tienes un proyecto en mente? ¿Quieres colaborar? ¡Hablemos!"
       centered
-      className="bg-gradient-to-br from-primary-50 to-blue-50"
+      className="bg-gradient-to-br from-valentine-rose/10 to-blue-50"
     >
       <div className="max-w-5xl mx-auto">
         {/* Intro */}
@@ -116,10 +110,10 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group focus:ring-2 focus:ring-valentine-rose"
             >
               <div
-                className={`w-16 h-16 rounded-full ${method.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                className="w-16 h-16 rounded-full bg-valentine-rose/20 text-valentine-crimson flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
               >
                 {method.icon}
               </div>
@@ -176,7 +170,7 @@ const Contact = () => {
         >
           <p className="text-gray-600 mb-4">
             ¿Te gusta mi contenido? Únete a la comunidad{' '}
-            <strong className="text-primary-600">CodeWithBotina</strong>
+            <strong className="text-valentine-crimson">CodeWithBotina</strong>
           </p>
           <div className="flex justify-center gap-4">
             <a

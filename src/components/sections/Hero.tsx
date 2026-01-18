@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Youtube, FileDown } from 'lucide-react';
 import { Button } from '../ui';
+import Particles from '../ui/Particles';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -31,12 +32,13 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-primary-50 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-valentine-rose/20 via-white to-valentine-rose/20 relative overflow-hidden"
     >
+      <Particles />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute top-20 left-10 w-72 h-72 bg-valentine-rose rounded-full mix-blend-multiply filter blur-xl opacity-70"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -48,7 +50,7 @@ const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-valentine-crimson/50 rounded-full mix-blend-multiply filter blur-xl opacity-70"
           animate={{
             x: [0, -100, 0],
             y: [0, -50, 0],
@@ -70,7 +72,7 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="mb-6"
           >
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-primary-600 font-semibold shadow-lg text-sm md:text-base">
+            <span className="inline-block px-4 py-2 bg-valentine-crimson rounded-full text-white font-semibold shadow-lg text-sm md:text-base">
               👋 Hola, soy Diego Alejandro Botina
             </span>
           </motion.div>
@@ -135,6 +137,7 @@ const Hero = () => {
               variant="ghost"
               size="lg"
               icon={<FileDown className="w-5 h-5" />}
+              className="animate-pulse"
               onClick={() => {
                 // 1. Get the path and sanitize it (remove accidental quotes from env variables)
                 const rawPath = import.meta.env.VITE_CV_DOWNLOAD_URL || '/assets/cv/DiegoBotina_CV.pdf';
@@ -178,7 +181,7 @@ const Hero = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 transition-colors p-3 hover:bg-white rounded-full hover:shadow-lg"
+                className="text-gray-600 hover:text-valentine-crimson transition-colors p-3 hover:bg-white rounded-full hover:shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -201,7 +204,7 @@ const Hero = () => {
         >
           <motion.button
             onClick={() => scrollToSection('#about')}
-            className="flex flex-col items-center text-gray-500 hover:text-primary-600 transition-colors"
+            className="flex flex-col items-center text-gray-500 hover:text-valentine-crimson transition-colors"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >

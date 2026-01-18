@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { forwardRef, useState } from 'react';
+import HeartIcon from './HeartIcon';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
@@ -21,10 +22,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
   ) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
-    const baseStyles = 'bg-white rounded-xl shadow-lg overflow-hidden';
+    // Use the global 'card' class from index.css for consistent styling (shadows, rounded, bg, etc.)
+    const baseStyles = 'card relative';
+    
     const hoverStyles =
       hover && !isFlippable
-        ? 'hover:shadow-2xl hover:-translate-y-1 transition-all duration-300'
+        ? 'hover:-translate-y-1' // shadow and transition are handled by .card class
         : '';
 
     const handleFlip = () => {
@@ -32,6 +35,15 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         setIsFlipped(!isFlipped);
       }
     };
+
+    const cardContent = (
+      <>
+        <div className="absolute top-2 right-2 z-10">
+          <HeartIcon className="w-6 h-6 text-valentine-crimson/50" />
+        </div>
+        {children}
+      </>
+    );
 
     if (isFlippable) {
       return (
@@ -43,7 +55,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         >
           <div className="flip-card-inner h-full">
             <div className="flip-card-front">
-              <div className={`${baseStyles} h-full`}>{children}</div>
+              <div className={`${baseStyles} h-full`}>{cardContent}</div>
             </div>
             <div className="flip-card-back">
               <div className={`${baseStyles} h-full`}>{cardBack}</div>
@@ -59,7 +71,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         className={`${baseStyles} ${hoverStyles} ${className}`}
         {...props}
       >
-        {children}
+        {cardContent}
       </div>
     );
   }

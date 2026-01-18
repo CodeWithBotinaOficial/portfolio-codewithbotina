@@ -87,7 +87,7 @@ const Header = () => {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-valentine-crimson font-medium transition-colors"
               >
                 {item.label}
               </a>
@@ -102,7 +102,7 @@ const Header = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 transition-colors"
+                className="text-gray-600 hover:text-valentine-crimson transition-colors"
                 aria-label={link.label}
               >
                 {link.icon}
@@ -113,7 +113,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-primary-600 transition-colors"
+            className="md:hidden text-gray-700 hover:text-valentine-crimson transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -143,7 +143,7 @@ const Header = () => {
                     e.preventDefault();
                     scrollToSection(item.href);
                   }}
-                  className="block text-gray-700 hover:text-primary-600 font-medium transition-colors py-2"
+                  className="block text-gray-700 hover:text-valentine-crimson font-medium transition-colors py-2"
                 >
                   {item.label}
                 </a>
@@ -155,7 +155,7 @@ const Header = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary-600 transition-colors"
+                    className="text-gray-600 hover:text-valentine-crimson transition-colors"
                     aria-label={link.label}
                   >
                     {link.icon}

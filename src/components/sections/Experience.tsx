@@ -20,7 +20,7 @@ const Experience = () => {
         className="bg-white"
       >
         <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-600"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-valentine-crimson"></div>
         </div>
       </Section>
     );
@@ -53,11 +53,11 @@ const Experience = () => {
   const getTypeColor = (tipo: string) => {
     switch (tipo) {
       case 'Educación':
-        return 'bg-blue-100 text-blue-700';
+        return 'bg-valentine-rose/20 text-valentine-crimson';
       case 'Certificación':
-        return 'bg-green-100 text-green-700';
+        return 'bg-valentine-rose/10 text-valentine-burgundy';
       case 'Experiencia':
-        return 'bg-purple-100 text-purple-700';
+        return 'bg-gray-100 text-gray-700';
       default:
         return 'bg-gray-100 text-gray-700';
     }
@@ -82,9 +82,9 @@ const Experience = () => {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative pl-8 pb-12 border-l-2 border-primary-300 last:pb-0"
+      className="relative pl-8 pb-12 border-l-2 border-valentine-rose last:pb-0"
     >
-      <div className="absolute left-0 top-0 w-4 h-4 bg-primary-600 rounded-full transform -translate-x-[9px]" />
+      <div className="absolute left-0 top-0 w-4 h-4 bg-valentine-crimson rounded-full transform -translate-x-[9px]" />
       
       <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
         {/* Header */}
@@ -105,7 +105,7 @@ const Experience = () => {
               )}
             </div>
             <h3 className="text-xl font-bold mb-1">{exp.cargoTitulo}</h3>
-            <p className="text-primary-600 font-semibold">{exp.institucion}</p>
+            <p className="text-valentine-crimson font-semibold">{exp.institucion}</p>
           </div>
           {exp.logo && (
             <img
