@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Youtube, Instagram } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.svg';
 
@@ -26,24 +26,14 @@ const Header = () => {
 
   const socialLinks = [
     {
-      icon: <Github className="w-5 h-5" />,
+      icon: <Github className="w-4 h-4" />,
       href: 'https://github.com/CodeWithBotinaOficial',
       label: 'GitHub',
     },
     {
-      icon: <Linkedin className="w-5 h-5" />,
+      icon: <Linkedin className="w-4 h-4" />,
       href: 'https://www.linkedin.com/in/codewithbotinaoficial',
       label: 'LinkedIn',
-    },
-    {
-      icon: <Youtube className="w-5 h-5" />,
-      href: 'https://www.youtube.com/@CodeWithBotina',
-      label: 'YouTube',
-    },
-    {
-      icon: <Instagram className="w-5 h-5" />,
-      href: 'https://www.instagram.com/codewithbotina/',
-      label: 'Instagram',
     },
   ];
 
