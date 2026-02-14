@@ -37,7 +37,7 @@ const Projects = () => {
         className="bg-gray-50"
       >
         <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-600"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-valentine-crimson"></div>
         </div>
       </Section>
     );
@@ -108,7 +108,7 @@ const Projects = () => {
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="text-lg font-bold">Más Detalles</h4>
                     <button
-                      className="text-gray-500 hover:text-primary-600"
+                      className="text-gray-500 hover:text-valentine-crimson"
                       aria-label="Volver a la vista principal"
                     >
                       <ArrowLeft className="w-5 h-5" />
@@ -150,7 +150,7 @@ const Projects = () => {
                     {project.tecnologias?.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
+                        className="px-3 py-1 bg-valentine-rose/20 text-valentine-crimson rounded-full text-xs font-medium"
                       >
                         {tech}
                       </span>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Youtube, FileDown } from 'lucide-react';
+import { ArrowDown, FileDown } from 'lucide-react';
 import { Button } from '../ui';
+import Particles from '../ui/Particles';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -10,33 +11,16 @@ const Hero = () => {
     }
   };
 
-  const socialLinks = [
-    {
-      icon: <Github className="w-6 h-6" />,
-      href: 'https://github.com/CodeWithBotinaOficial',
-      label: 'GitHub',
-    },
-    {
-      icon: <Linkedin className="w-6 h-6" />,
-      href: 'https://www.linkedin.com/in/codewithbotinaoficial',
-      label: 'LinkedIn',
-    },
-    {
-      icon: <Youtube className="w-6 h-6" />,
-      href: 'https://www.youtube.com/@CodeWithBotina',
-      label: 'YouTube',
-    },
-  ];
-
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-primary-50 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center bg-gradient-to-br from-valentine-rose/20 via-white to-valentine-rose/20 relative overflow-hidden"
     >
+      <Particles />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute top-20 left-10 w-72 h-72 bg-valentine-rose rounded-full mix-blend-multiply filter blur-xl opacity-70"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -48,7 +32,7 @@ const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-valentine-crimson/50 rounded-full mix-blend-multiply filter blur-xl opacity-70"
           animate={{
             x: [0, -100, 0],
             y: [0, -50, 0],
@@ -61,7 +45,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 flex-grow flex flex-col justify-center">
         <div className="max-w-4xl mx-auto text-center">
           {/* Greeting */}
           <motion.div
@@ -70,7 +54,7 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="mb-6"
           >
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-primary-600 font-semibold shadow-lg text-sm md:text-base">
+            <span className="inline-block px-4 py-2 bg-valentine-crimson rounded-full text-white font-semibold shadow-lg text-sm md:text-base">
               👋 Hola, soy Diego Alejandro Botina
             </span>
           </motion.div>
@@ -115,7 +99,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button
               variant="primary"
@@ -135,6 +119,7 @@ const Hero = () => {
               variant="ghost"
               size="lg"
               icon={<FileDown className="w-5 h-5" />}
+              className="animate-pulse"
               onClick={() => {
                 // 1. Get the path and sanitize it (remove accidental quotes from env variables)
                 const rawPath = import.meta.env.VITE_CV_DOWNLOAD_URL || '/assets/cv/DiegoBotina_CV.pdf';
@@ -164,44 +149,19 @@ const Hero = () => {
               Descargar CV
             </Button>
           </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex justify-center items-center gap-6"
-          >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 transition-colors p-3 hover:bg-white rounded-full hover:shadow-lg"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                aria-label={link.label}
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </motion.div>
         </div>
+      </div>
 
-        {/* Scroll Indicator */}
+      {/* Scroll Indicator */}
+      <div className="relative z-10 pb-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         >
           <motion.button
             onClick={() => scrollToSection('#about')}
-            className="flex flex-col items-center text-gray-500 hover:text-primary-600 transition-colors"
+            className="flex flex-col items-center text-gray-500 hover:text-valentine-crimson transition-colors mx-auto"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >

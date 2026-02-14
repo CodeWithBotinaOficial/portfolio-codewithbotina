@@ -119,9 +119,9 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center p-6 rounded-xl bg-gray-50 hover:bg-primary-50 transition-colors"
+              className="text-center p-6 rounded-xl bg-gray-50 hover:bg-valentine-rose/10 transition-colors"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 text-primary-600 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-valentine-rose/20 text-valentine-crimson rounded-full mb-4">
                 {value.icon}
               </div>
               <h4 className="text-xl font-bold mb-3">{value.title}</h4>
@@ -149,11 +149,11 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative pl-8 pb-12 border-l-2 border-primary-300 last:pb-0"
+              className="relative pl-8 pb-12 border-l-2 border-valentine-rose last:pb-0"
             >
-              <div className="absolute left-0 top-0 w-4 h-4 bg-primary-600 rounded-full transform -translate-x-[9px]" />
+              <div className="absolute left-0 top-0 w-4 h-4 bg-valentine-crimson rounded-full transform -translate-x-[9px]" />
               <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <div className="text-primary-600 font-bold text-sm mb-2">
+                <div className="text-valentine-crimson font-bold text-sm mb-2">
                   {milestone.year}
                 </div>
                 <h4 className="text-xl font-bold mb-2">{milestone.title}</h4>

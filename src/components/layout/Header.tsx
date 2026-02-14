@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Youtube, Instagram } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.svg';
 
@@ -26,24 +26,14 @@ const Header = () => {
 
   const socialLinks = [
     {
-      icon: <Github className="w-5 h-5" />,
+      icon: <Github className="w-4 h-4" />,
       href: 'https://github.com/CodeWithBotinaOficial',
       label: 'GitHub',
     },
     {
-      icon: <Linkedin className="w-5 h-5" />,
+      icon: <Linkedin className="w-4 h-4" />,
       href: 'https://www.linkedin.com/in/codewithbotinaoficial',
       label: 'LinkedIn',
-    },
-    {
-      icon: <Youtube className="w-5 h-5" />,
-      href: 'https://www.youtube.com/@CodeWithBotina',
-      label: 'YouTube',
-    },
-    {
-      icon: <Instagram className="w-5 h-5" />,
-      href: 'https://www.instagram.com/codewithbotina/',
-      label: 'Instagram',
     },
   ];
 
@@ -87,7 +77,7 @@ const Header = () => {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-valentine-crimson font-medium transition-colors"
               >
                 {item.label}
               </a>
@@ -102,7 +92,7 @@ const Header = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 transition-colors"
+                className="text-gray-600 hover:text-valentine-crimson transition-colors"
                 aria-label={link.label}
               >
                 {link.icon}
@@ -113,7 +103,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-primary-600 transition-colors"
+            className="md:hidden text-gray-700 hover:text-valentine-crimson transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -143,7 +133,7 @@ const Header = () => {
                     e.preventDefault();
                     scrollToSection(item.href);
                   }}
-                  className="block text-gray-700 hover:text-primary-600 font-medium transition-colors py-2"
+                  className="block text-gray-700 hover:text-valentine-crimson font-medium transition-colors py-2"
                 >
                   {item.label}
                 </a>
@@ -155,7 +145,7 @@ const Header = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary-600 transition-colors"
+                    className="text-gray-600 hover:text-valentine-crimson transition-colors"
                     aria-label={link.label}
                   >
                     {link.icon}
