@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Section, Card, Button, MarkdownLite } from '../ui';
+import { Section, Card, MarkdownLite } from '../ui';
 import { useFeaturedProjects } from '../../hooks';
 import {
   Github,
@@ -34,10 +34,10 @@ const Projects = () => {
         title="Proyectos Destacados"
         subtitle="Soluciones innovadoras que demuestran mi pasión por la tecnología"
         centered
-        className="bg-gray-50"
+        className="bg-beige-100"
       >
         <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-valentine-crimson"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-charcoal"></div>
         </div>
       </Section>
     );
@@ -49,11 +49,11 @@ const Projects = () => {
         id="projects"
         title="Proyectos Destacados"
         centered
-        className="bg-gray-50"
+        className="bg-beige-100"
       >
         <div className="text-center py-20">
           <p className="text-red-600 mb-4">{error}</p>
-          <p className="text-gray-600">
+          <p className="text-text-muted">
             Por favor, verifica tu conexión a Contentful.
           </p>
         </div>
@@ -67,26 +67,32 @@ const Projects = () => {
       title="Proyectos Destacados"
       subtitle="Soluciones innovadoras que demuestran mi pasión por la tecnología"
       centered
-      className="bg-gray-50"
+      className="bg-beige-100"
     >
       {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-3 mb-12">
-        <Button
-          variant={filter === 'all' ? 'primary' : 'ghost'}
-          size="sm"
+        <button
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            filter === 'all'
+              ? 'bg-charcoal text-white shadow-soft'
+              : 'bg-white text-text-muted hover:bg-beige-200 hover:text-charcoal'
+          }`}
           onClick={() => setFilter('all')}
         >
           Todos ({projects.length})
-        </Button>
+        </button>
         {technologies.map((tech) => (
-          <Button
+          <button
             key={tech}
-            variant={filter === tech ? 'primary' : 'ghost'}
-            size="sm"
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              filter === tech
+                ? 'bg-charcoal text-white shadow-soft'
+                : 'bg-white text-text-muted hover:bg-beige-200 hover:text-charcoal'
+            }`}
             onClick={() => setFilter(tech)}
           >
             {tech}
-          </Button>
+          </button>
         ))}
       </div>
 
@@ -101,37 +107,37 @@ const Projects = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <Card
-              className="h-[550px]"
+              className="h-[550px] border-none shadow-soft hover:shadow-hover transition-shadow duration-300 rounded-2xl"
               isFlippable
               cardBack={
-                <div className="p-6 flex flex-col h-full bg-white">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-bold">Más Detalles</h4>
+                <div className="p-6 flex flex-col h-full bg-surface rounded-2xl">
+                  <div className="flex items-center justify-between mb-4 border-b border-beige-200 pb-2">
+                    <h4 className="text-lg font-bold text-charcoal">Más Detalles</h4>
                     <button
-                      className="text-gray-500 hover:text-valentine-crimson"
+                      className="text-text-muted hover:text-charcoal transition-colors"
                       aria-label="Volver a la vista principal"
                     >
                       <ArrowLeft className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="prose prose-sm lg:prose-base overflow-y-auto flex-grow mb-4">
+                  <div className="prose prose-sm lg:prose-base overflow-y-auto flex-grow mb-4 text-text-muted">
                     <MarkdownLite text={project.descripcionCompleta} />
                   </div>
                 </div>
               }
             >
               {/* Card Front */}
-              <div className="h-full flex flex-col">
+              <div className="h-full flex flex-col bg-surface rounded-2xl overflow-hidden">
                 {/* Project Image */}
                 {project.imagenPrincipal && (
-                  <div className="relative h-48 bg-gray-200 overflow-hidden">
+                  <div className="relative h-48 bg-beige-200 overflow-hidden group">
                     <img
                       src={getImageUrl(project.imagenPrincipal) || ''}
                       alt={project.titulo}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     {project.destacado && (
-                      <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                      <div className="absolute top-4 right-4 bg-charcoal text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                         ⭐ Destacado
                       </div>
                     )}
@@ -140,8 +146,8 @@ const Projects = () => {
 
                 {/* Project Content */}
                 <div className="p-6 flex-grow flex flex-col">
-                  <h3 className="text-xl font-bold mb-2">{project.titulo}</h3>
-                  <p className="text-gray-600 mb-4 flex-grow">
+                  <h3 className="text-xl font-bold mb-2 text-charcoal">{project.titulo}</h3>
+                  <p className="text-text-muted mb-4 flex-grow text-sm leading-relaxed">
                     {project.descripcionCorta}
                   </p>
 
@@ -150,13 +156,13 @@ const Projects = () => {
                     {project.tecnologias?.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-valentine-rose/20 text-valentine-crimson rounded-full text-xs font-medium"
+                        className="px-3 py-1 bg-beige-100 text-charcoal-light rounded-full text-xs font-medium border border-beige-200"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.tecnologias && project.tecnologias.length > 4 && (
-                      <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">
+                      <span className="px-3 py-1 bg-beige-100 text-text-muted rounded-full text-xs font-medium border border-beige-200">
                         +{project.tecnologias.length - 4}
                       </span>
                     )}
@@ -164,8 +170,8 @@ const Projects = () => {
 
                   {/* Date */}
                   {project.fecha && (
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <Calendar className="w-4 h-4 mr-2" />
+                    <div className="flex items-center text-xs text-text-light mb-4">
+                      <Calendar className="w-3 h-3 mr-2" />
                       {format(new Date(project.fecha), 'MMMM yyyy', {
                         locale: es,
                       })}
@@ -182,14 +188,10 @@ const Projects = () => {
                         className="flex-1"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          icon={<Github className="w-4 h-4" />}
-                          className="w-full"
-                        >
+                        <button className="w-full py-2 px-4 bg-transparent border border-charcoal text-charcoal rounded-xl text-sm font-medium hover:bg-charcoal hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                          <Github className="w-4 h-4" />
                           Código
-                        </Button>
+                        </button>
                       </a>
                     )}
                     {project.urlDemo && (
@@ -200,19 +202,15 @@ const Projects = () => {
                         className="flex-1"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Button
-                          variant="primary"
-                          size="sm"
-                          icon={<ExternalLink className="w-4 h-4" />}
-                          className="w-full"
-                        >
+                        <button className="w-full py-2 px-4 bg-charcoal text-white rounded-xl text-sm font-medium hover:bg-charcoal-dark hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2">
+                          <ExternalLink className="w-4 h-4" />
                           Demo
-                        </Button>
+                        </button>
                       </a>
                     )}
                   </div>
-                  <div className="text-center text-sm text-gray-500 mt-4">
-                    Click para ver más
+                  <div className="text-center text-xs text-text-light mt-4 italic">
+                    Click en la tarjeta para ver detalles
                   </div>
                 </div>
               </div>
@@ -224,31 +222,30 @@ const Projects = () => {
       {/* Empty State */}
       {filteredProjects.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-600 text-lg">
+          <p className="text-text-muted text-lg">
             No se encontraron proyectos con "{filter}"
           </p>
-          <Button
-            variant="ghost"
-            size="sm"
+          <button
             onClick={() => setFilter('all')}
-            className="mt-4"
+            className="mt-4 text-charcoal hover:underline font-medium"
           >
             Ver todos los proyectos
-          </Button>
+          </button>
         </div>
       )}
 
       {/* View All Projects Link */}
       {projects.length > 6 && (
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <a
             href="https://github.com/CodeWithBotinaOficial"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-block"
           >
-            <Button variant="primary" size="lg">
+            <button className="btn-primary rounded-xl">
               Ver Todos los Proyectos en GitHub
-            </Button>
+            </button>
           </a>
         </div>
       )}
