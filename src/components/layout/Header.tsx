@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.svg';
 
 /**
@@ -55,7 +55,7 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -72,124 +72,118 @@ const Header = () => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-surface/90 backdrop-blur-md shadow-soft py-2'
-          : 'bg-transparent py-4'
-      }`}
-    >
-      <div className="container-custom">
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#hero');
-            }}
-            className="relative z-50"
-            aria-label="CodeWithBotina Home"
-          >
-            <img 
-              src={logo} 
-              alt="CodeWithBotina Logo" 
-              className="h-10 w-auto transition-transform duration-300 hover:scale-105" 
-            />
-          </a>
+    <LazyMotion features={domAnimation}>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'bg-surface/90 backdrop-blur-md shadow-soft py-2'
+            : 'bg-transparent py-4'
+        }`}
+      >
+        <div className="container-custom">
+          <nav className="flex items-center justify-between">
+            {/* Logo */}
+            <button
+              type="button"
+              onClick={() => scrollToSection('#hero')}
+              className="relative z-50 bg-transparent p-0 border-0"
+              aria-label="CodeWithBotina Home"
+            >
+              <img 
+                src={logo} 
+                alt="CodeWithBotina Logo" 
+                className="h-10 w-auto transition-transform duration-300 hover:scale-105" 
+              />
+            </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-text-muted hover:text-charcoal font-medium text-sm tracking-wide transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-charcoal transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-          </div>
-
-          {/* Social Links - Desktop */}
-          <div className="hidden md:flex items-center gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-muted hover:text-charcoal transition-colors p-2 hover:bg-beige-100 rounded-full"
-                aria-label={link.label}
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden relative z-50 p-2 text-charcoal hover:bg-beige-100 rounded-lg transition-colors"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 bg-surface border-b border-beige-200 shadow-medium md:hidden"
-          >
-            <div className="container-custom py-6 flex flex-col gap-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.label}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className="text-text-main hover:text-charcoal font-medium text-lg py-2 border-b border-beige-100 last:border-0"
+                  type="button"
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-text-muted hover:text-charcoal font-medium text-sm tracking-wide transition-colors relative group bg-transparent border-0 p-0"
                 >
                   {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-charcoal transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              ))}
+            </div>
+
+            {/* Social Links - Desktop */}
+            <div className="hidden md:flex items-center gap-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-text-muted hover:text-charcoal transition-colors p-2 hover:bg-beige-100 rounded-full"
+                  aria-label={link.label}
+                >
+                  {link.icon}
                 </a>
               ))}
-              <div className="flex items-center gap-6 pt-4 mt-2">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-text-muted hover:text-charcoal transition-colors"
-                    aria-label={link.label}
-                  >
-                    {link.icon}
-                  </a>
-                ))}
-              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden relative z-50 p-2 text-charcoal hover:bg-beige-100 rounded-lg transition-colors"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </nav>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <m.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-surface border-b border-beige-200 shadow-medium md:hidden"
+            >
+              <div className="container-custom py-6 flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => scrollToSection(item.href)}
+                    className="text-text-main hover:text-charcoal font-medium text-lg py-2 border-b border-beige-100 last:border-0 bg-transparent text-left"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <div className="flex items-center gap-6 pt-4 mt-2">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-muted hover:text-charcoal transition-colors"
+                      aria-label={link.label}
+                    >
+                      {link.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </LazyMotion>
   );
 };
 

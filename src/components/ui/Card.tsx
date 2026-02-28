@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, MouseEventHandler, KeyboardEventHandler } from 'react';
 import { forwardRef, useState } from 'react';
 
 /**
@@ -24,6 +24,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       className = '',
       isFlippable = false,
       cardBack,
+      onClick,
+      onKeyDown,
       ...props
     },
     ref
@@ -40,7 +42,26 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
     const handleFlip = () => {
       if (isFlippable) {
-        setIsFlipped(!isFlipped);
+        setIsFlipped((prev) => !prev);
+      }
+    };
+
+    const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
+      onClick?.(event);
+      if (!event.defaultPrevented) {
+        handleFlip();
+      }
+    };
+
+    const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
+      onKeyDown?.(event);
+      if (event.defaultPrevented || !isFlippable) {
+        return;
+      }
+
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        handleFlip();
       }
     };
 
@@ -49,8 +70,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         <div
           ref={ref}
           className={`flip-card ${isFlipped ? 'flipped' : ''} ${className}`}
-          onClick={handleFlip}
           {...props}
+          role="button"
+          tabIndex={0}
+          aria-pressed={isFlipped}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
         >
           <div className="flip-card-inner h-full">
             <div className="flip-card-front">
