@@ -64,7 +64,7 @@ export interface Experiencia {
   fechaInicio: string;
   fechaFin?: string;
   logo?: ContentfulAsset;
-  tipo: string[];
+  tipo: string;
   ubicacion?: string;
 }
 

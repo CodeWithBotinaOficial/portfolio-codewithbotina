@@ -7,37 +7,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fff0f5', // Lavender Blush
-          100: '#ffe4e1', // Misty Rose
-          200: '#ffc0cb', // Pink
-          300: '#ffb6c1', // Light Pink (Rose)
-          400: '#dc143c', // Crimson Light
-          500: '#b00000', // Crimson Medium
-          600: '#8B0000', // Crimson (Main)
-          700: '#4A0404', // Burgundy
-          800: '#2d0202', // Dark Burgundy
-          900: '#1a0000', // Very Dark
+        background: '#F9F6F0', // Bone White
+        surface: '#FFFFFF', // Pure White for cards/sections
+        beige: {
+          100: '#F5F1E8',
+          200: '#EAE0D5',
+          300: '#E1D9D1', // Standard Beige
+          400: '#D8CFC4',
+          500: '#C6B7A2',
         },
-        valentine: {
-          'crimson': '#8B0000',
-          'rose': '#FFB6C1',
-          'burgundy': '#4A0404',
-          'neon-pink': '#FF00FF',
-          'muted-purple': '#800080',
+        charcoal: {
+          DEFAULT: '#2C3E50', // Deep Navy/Charcoal
+          light: '#34495E',
+          dark: '#1A252F',
+        },
+        text: {
+          main: '#1A1A1A', // Soft Black
+          muted: '#4A4A4A', // Dark Gray
+          light: '#717171', // Light Gray
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
-      keyframes: {
-        pulse: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
-        },
+      boxShadow: {
+        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        'medium': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+        'hover': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02)',
       },
       animation: {
-        pulse: 'pulse 2s infinite',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'slide-up': 'slideUp 0.8s ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
     },
   },

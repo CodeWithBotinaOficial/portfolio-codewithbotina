@@ -1,5 +1,4 @@
 import { createClient } from 'contentful';
-import type { ContentfulEntry } from '../types/contentful';
 import type {
   Proyecto,
   Experiencia,
@@ -26,8 +25,6 @@ if (!SPACE_ID || !ACCESS_TOKEN) {
 const client = createClient({
   space: SPACE_ID,
   accessToken: ACCESS_TOKEN,
-  // CORS is handled by Contentful's CDN automatically
-  // No additional configuration needed for production
 });
 
 // ============================================================================
@@ -37,9 +34,9 @@ const client = createClient({
 /**
  * Extract image URL from Contentful asset
  */
-export const getImageUrl = (asset: ContentfulAsset): string | null => {
+export const getImageUrl = (asset: ContentfulAsset | undefined): string | null => {
   if (!asset?.fields?.file?.url) return null;
-  const url = asset.fields.file.url as string;
+  const url = asset.fields.file.url;
   // Ensure HTTPS
   return url.startsWith('//') ? `https:${url}` : url;
 };
@@ -47,7 +44,8 @@ export const getImageUrl = (asset: ContentfulAsset): string | null => {
 /**
  * Parse Contentful entry to typed object
  */
-const parseEntry = <T>(entry: ContentfulEntry): T => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseEntry = <T>(entry: any): T => {
   return {
     ...entry.fields,
     id: entry.sys.id,
@@ -56,43 +54,9 @@ const parseEntry = <T>(entry: ContentfulEntry): T => {
   } as T;
 };
 
-/**
- * Handle API errors gracefully
- */
-const handleError = (error: unknown, context: string) => {
-  console.error(`[Contentful Error - ${context}]:`, error);
-
-  if (typeof error === 'object' && error !== null && 'sys' in error) {
-    const sys = (error as { sys: { id: string } }).sys;
-    if (sys?.id === 'NotFound') {
-      throw new Error(`Content not found: ${context}`);
-    }
-    if (sys?.id === 'RateLimitExceeded') {
-      throw new Error('Rate limit exceeded. Please try again later.');
-    }
-  }
-
-  if (error instanceof Error && error.message?.includes('Network')) {
-    throw new Error('Network error. Please check your connection.');
-  }
-
-  throw new Error(
-    `Failed to fetch ${context}: ${
-      error instanceof Error ? error.message : String(error)
-    }`
-  );
-};
-
 // ============================================================================
 // PROJECTS API
 // ============================================================================
-
-interface ContentfulQuery {
-  content_type: string;
-  order: string;
-  'fields.destacado'?: boolean;
-  'fields.tecnologias[in]'?: string;
-}
 
 /**
  * Fetch all projects with optional filtering and sorting
@@ -103,7 +67,8 @@ export const getProyectos = async (
   order: SortOrder = 'asc'
 ): Promise<Proyecto[]> => {
   try {
-    const query: ContentfulQuery = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: any = {
       content_type: 'proyecto',
       order: `${order === 'asc' ? '' : '-'}fields.${sortBy}`,
     };
@@ -117,11 +82,9 @@ export const getProyectos = async (
     }
 
     const response = await client.getEntries(query);
-    return response.items.map((item) =>
-      parseEntry<Proyecto>(item as unknown as ContentfulEntry)
-    );
+    return response.items.map((item) => parseEntry<Proyecto>(item));
   } catch (error) {
-    handleError(error, 'projects');
+    console.error('Error fetching projects:', error);
     return [];
   }
 };
@@ -133,51 +96,31 @@ export const getProyectosDestacados = async (): Promise<Proyecto[]> => {
   return getProyectos({ destacado: true }, 'orden', 'asc');
 };
 
-/**
- * Fetch single project by ID
- */
-export const getProyectoById = async (id: string): Promise<Proyecto | null> => {
-  try {
-    const entry = await client.getEntry(id);
-    return parseEntry<Proyecto>(entry as unknown as ContentfulEntry);
-  } catch (error) {
-    handleError(error, `project with ID ${id}`);
-    return null;
-  }
-};
-
 // ============================================================================
 // EXPERIENCE API
 // ============================================================================
-
-interface ExperienceQuery {
-  content_type: 'experiencia';
-  order: string;
-  'fields.tipo[in]'?: string;
-}
 
 /**
  * Fetch all experiences sorted by date
  */
 export const getExperiencias = async (
-  tipo?: Experiencia['tipo']
+  tipo?: string
 ): Promise<Experiencia[]> => {
   try {
-    const query: ExperienceQuery = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: any = {
       content_type: 'experiencia',
       order: '-fields.fechaInicio',
     };
 
-    if (tipo && tipo.length > 0) {
-      query['fields.tipo[in]'] = tipo.join(',');
+    if (tipo) {
+      query['fields.tipo[in]'] = tipo;
     }
 
     const response = await client.getEntries(query);
-    return response.items.map((item) =>
-      parseEntry<Experiencia>(item as unknown as ContentfulEntry)
-    );
+    return response.items.map((item) => parseEntry<Experiencia>(item));
   } catch (error) {
-    handleError(error, 'experiences');
+    console.error('Error fetching experiences:', error);
     return [];
   }
 };
@@ -186,14 +129,14 @@ export const getExperiencias = async (
  * Fetch education experiences only
  */
 export const getEducacion = async (): Promise<Experiencia[]> => {
-  return getExperiencias(['Educación']);
+  return getExperiencias('Educación');
 };
 
 /**
  * Fetch certifications only
  */
 export const getCertificaciones = async (): Promise<Experiencia[]> => {
-  return getExperiencias(['Certificación']);
+  return getExperiencias('Certificación');
 };
 
 // ============================================================================
@@ -203,18 +146,14 @@ export const getCertificaciones = async (): Promise<Experiencia[]> => {
 /**
  * Fetch all skills grouped by category
  */
-export const getHabilidades = async (): Promise<
-  Record<string, Habilidad[]>
-> => {
+export const getHabilidades = async (): Promise<Record<string, Habilidad[]>> => {
   try {
     const response = await client.getEntries({
       content_type: 'habilidad',
       order: ['-fields.nivel'],
     });
 
-    const habilidades = response.items.map((item) =>
-      parseEntry<Habilidad>(item as unknown as ContentfulEntry)
-    );
+    const habilidades = response.items.map((item) => parseEntry<Habilidad>(item));
 
     // Group by category
     return habilidades.reduce(
@@ -229,7 +168,7 @@ export const getHabilidades = async (): Promise<
       {} as Record<string, Habilidad[]>
     );
   } catch (error) {
-    handleError(error, 'skills');
+    console.error('Error fetching skills:', error);
     return {};
   }
 };
@@ -247,53 +186,9 @@ export const getHabilidadesPorCategoria = async (
       order: ['-fields.nivel'],
     });
 
-    return response.items.map((item) =>
-      parseEntry<Habilidad>(item as unknown as ContentfulEntry)
-    );
+    return response.items.map((item) => parseEntry<Habilidad>(item));
   } catch (error) {
-    handleError(error, `skills in category ${categoria}`);
+    console.error(`Error fetching skills in category ${categoria}:`, error);
     return [];
   }
 };
-
-// ============================================================================
-// ANALYTICS & UTILITIES
-// ============================================================================
-
-/**
- * Get all unique technologies used across projects
- */
-export const getTecnologiasUnicas = async (): Promise<string[]> => {
-  try {
-    const proyectos = await getProyectos();
-    const tecnologias = new Set<string>();
-
-    proyectos.forEach((proyecto) => {
-      proyecto.tecnologias?.forEach((tech) => tecnologias.add(tech));
-    });
-
-    return Array.from(tecnologias).sort();
-  } catch (error) {
-    console.error('Error fetching unique technologies:', error);
-    return [];
-  }
-};
-
-/**
- * Check if Contentful service is available
- */
-export const checkContentfulHealth = async (): Promise<boolean> => {
-  try {
-    await client.getSpace();
-    return true;
-  } catch (error) {
-    console.error('Contentful health check failed:', error);
-    return false;
-  }
-};
-
-// ============================================================================
-// EXPORT CLIENT FOR ADVANCED USAGE
-// ============================================================================
-
-export { client };

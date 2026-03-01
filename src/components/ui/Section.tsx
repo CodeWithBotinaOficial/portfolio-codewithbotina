@@ -1,11 +1,21 @@
 import type { HTMLAttributes } from 'react';
 
+/**
+ * Props for the Section component.
+ */
 interface SectionProps extends HTMLAttributes<HTMLElement> {
+  /** Optional section title */
   title?: string;
+  /** Optional section subtitle/description */
   subtitle?: string;
+  /** Whether to center the title and subtitle */
   centered?: boolean;
 }
 
+/**
+ * Standard layout section with consistent padding and container width.
+ * Optionally renders a title and subtitle.
+ */
 const Section = ({
   children,
   title,
@@ -24,17 +34,17 @@ const Section = ({
       <div className="container-custom">
         {(title || subtitle) && (
           <div
-            className={`mb-12 ${
+            className={`mb-16 ${
               centered ? 'text-center max-w-3xl mx-auto' : ''
             }`}
           >
             {title && (
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-charcoal mb-6 tracking-tight font-heading">
                 {title}
               </h2>
             )}
             {subtitle && (
-              <p className="text-lg md:text-xl text-gray-600">{subtitle}</p>
+              <p className="text-lg md:text-xl text-text-muted font-light leading-relaxed">{subtitle}</p>
             )}
           </div>
         )}

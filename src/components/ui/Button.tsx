@@ -2,13 +2,25 @@ import type { ButtonHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import { Loader2 } from 'lucide-react';
 
+/**
+ * Props for the Button component.
+ * Extends standard HTML button attributes.
+ */
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Visual style variant of the button */
   variant?: 'primary' | 'secondary' | 'ghost';
+  /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether the button is in a loading state */
   isLoading?: boolean;
+  /** Optional icon to display before the text */
   icon?: React.ReactNode;
 }
 
+/**
+ * Reusable Button component with different variants and sizes.
+ * Supports loading state and icons.
+ */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -24,15 +36,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center gap-2 font-heading font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed tracking-wide';
 
     const variants = {
       primary:
-        'bg-valentine-crimson hover:bg-valentine-burgundy text-white focus:ring-valentine-crimson shadow-lg hover:shadow-xl',
+        'bg-charcoal hover:bg-charcoal-dark text-white focus:ring-charcoal shadow-soft hover:shadow-medium hover:-translate-y-0.5',
       secondary:
-        'bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-300 focus:ring-gray-400 hover:border-valentine-rose hover:text-valentine-crimson',
+        'bg-transparent hover:bg-charcoal text-charcoal hover:text-white border border-charcoal focus:ring-charcoal hover:shadow-medium hover:-translate-y-0.5',
       ghost:
-        'bg-transparent hover:bg-valentine-rose/10 text-valentine-crimson focus:ring-valentine-rose',
+        'bg-transparent hover:bg-beige-100 text-charcoal focus:ring-charcoal',
     };
 
     const sizes = {
