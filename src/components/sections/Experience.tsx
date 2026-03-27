@@ -1,21 +1,47 @@
+import React from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Section } from '../ui';
 import { useExperience } from '../../hooks';
 import { Calendar, MapPin, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { es, enUS } from 'date-fns/locale';
 import { getImageUrl } from '../../services/contentful';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS, type Document } from '@contentful/rich-text-types';
+
+const richTextOptions = {
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (_node: unknown, children: React.ReactNode) => (
+      <p className="mb-4 text-sm leading-relaxed whitespace-pre-wrap text-left">{children}</p>
+    ),
+    [BLOCKS.UL_LIST]: (_node: unknown, children: React.ReactNode) => (
+      <ul className="list-disc list-inside mb-4 space-y-2 text-sm text-left">{children}</ul>
+    ),
+    [BLOCKS.LIST_ITEM]: (_node: unknown, children: React.ReactNode) => (
+      <li className="leading-relaxed mb-1">{children}</li>
+    ),
+  },
+  renderMark: {
+    [MARKS.BOLD]: (text: React.ReactNode) => (
+      <strong className="font-semibold text-charcoal">{text}</strong>
+    ),
+  },
+};
 
 const Experience = () => {
+  const { t, i18n } = useTranslation();
   const { experiences, loading, error } = useExperience();
+
+  const dateLocale = i18n.language.startsWith('es') ? es : enUS;
 
   if (loading) {
     return (
       <LazyMotion features={domAnimation}>
         <Section
           id="experience"
-          title="Experiencia & Educación"
-          subtitle="Mi trayectoria académica y profesional"
+          title={t('experience.title')}
+          subtitle={t('experience.subtitle')}
           centered
           className="bg-surface"
         >
@@ -32,14 +58,16 @@ const Experience = () => {
       <LazyMotion features={domAnimation}>
         <Section
           id="experience"
-          title="Experiencia & Educación"
+          title={t('experience.title')}
           centered
           className="bg-surface"
         >
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
             <p className="text-text-muted">
-              Por favor, verifica tu conexión a Contentful.
+              {i18n.language.startsWith('es') 
+                ? 'Por favor, verifica tu conexión a Contentful.' 
+                : 'Please check your connection to Contentful.'}
             </p>
           </div>
         </Section>
@@ -49,14 +77,13 @@ const Experience = () => {
 
   const formatDate = (dateString: string) => {
     try {
-      return format(new Date(dateString), 'MMM yyyy', { locale: es });
+      return format(new Date(dateString), 'MMM yyyy', { locale: dateLocale });
     } catch {
       return dateString;
     }
   };
 
   const getTypeIcon = (type: string | string[]) => {
-    // Handle both string and array of strings (Contentful can return arrays for multi-select)
     const typeStr = Array.isArray(type) ? type[0] : type;
     const lowerType = typeStr?.toLowerCase() || '';
     
@@ -69,12 +96,31 @@ const Experience = () => {
     return Array.isArray(type) ? type[0] : type;
   };
 
+  /**
+   * Helper to safely render description whether it's Rich Text or plain string
+   */
+  const renderDescription = (description: Document | string | undefined) => {
+    if (!description) return null;
+    
+    // Check if it's a Rich Text Document
+    if (typeof description === 'object' && 'nodeType' in description && description.nodeType === 'document') {
+      return documentToReactComponents(description as Document, richTextOptions);
+    }
+    
+    // Fallback to plain text if it's a string or other format
+    if (typeof description === 'string') {
+      return <p className="text-sm leading-relaxed whitespace-pre-wrap text-left">{description}</p>;
+    }
+
+    return null;
+  };
+
   return (
     <LazyMotion features={domAnimation}>
       <Section
         id="experience"
-        title="Experiencia & Educación"
-        subtitle="Mi trayectoria académica y profesional"
+        title={t('experience.title')}
+        subtitle={t('experience.subtitle')}
         centered
         className="bg-surface"
       >
@@ -132,7 +178,7 @@ const Experience = () => {
                     <div className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       <span>
-                        {formatDate(exp.fechaInicio)} - {exp.fechaFin ? formatDate(exp.fechaFin) : 'Presente'}
+                        {formatDate(exp.fechaInicio)} - {exp.fechaFin ? formatDate(exp.fechaFin) : (i18n.language.startsWith('es') ? 'Presente' : 'Present')}
                       </span>
                     </div>
                     {exp.ubicacion && (
@@ -144,9 +190,9 @@ const Experience = () => {
                   </div>
 
                   {exp.descripcion && (
-                    <p className="text-text-muted text-sm leading-relaxed">
-                      {exp.descripcion}
-                    </p>
+                    <div className="text-text-muted text-sm leading-relaxed">
+                      {renderDescription(exp.descripcion)}
+                    </div>
                   )}
                 </div>
               </div>
@@ -159,7 +205,7 @@ const Experience = () => {
           {experiences.length === 0 && (
             <div className="text-center py-12">
               <p className="text-text-muted text-lg">
-                No hay experiencias registradas aún.
+                {i18n.language.startsWith('es') ? 'No hay experiencias registradas aún.' : 'No experiences registered yet.'}
               </p>
             </div>
           )}

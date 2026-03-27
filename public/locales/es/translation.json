@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy Diego Alejandro Botina",
+    "titlePrefix": "De los Campos de Buga a la",
+    "titleHighlight": "Vanguardia Tecnológica",
+    "subtitle": "Software Engineer | System Architect | Estudiante de Commercial Software Engineering en Jala University",
+    "description": "Con un hambre insaciable por la innovación, sueño con crear un sistema operativo universal y un lenguaje de programación que combine la simplicidad del lenguaje natural con la eficiencia de C y Assembly. Poniendo a Colombia en la élite de la tecnología de punta.",
+    "ctaProjects": "Ver Proyectos",
+    "ctaContact": "Contactar",
+    "downloadCV": "Descargar CV",
+    "discoverMore": "Descubre más"
+  },
+  "about": {
+    "title": "Mi Historia",
+    "subtitle": "Un viaje desde los campos de Buga hasta la vanguardia tecnológica",
+    "story1": "Soy <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, conocido como Alejandro o simplemente Botina. Nací el 1 de febrero de 2007 en Guadalajara de Buga, Valle del Cauca, Colombia. Mis raíces son campesinas — tanto mamá como papá crecieron en el campo, y yo tuve la fortuna de vivir en ese entorno antes de mudarme a un lugar más urbano donde descubrí mi pasión por la tecnología.",
+    "story2": "Estudié en la Institución Educativa Nuestra Señora de Fátima, donde me gradué con honores como el estudiante con el <strong class='text-charcoal font-semibold'>mayor puntaje ICFES</strong> de mi generación, reconocido por mi compromiso académico y mis aportaciones a la institución. Obtuve títulos técnicos en Agropecuaria y Operación Turística Local, además de mi técnico en Sistemas Informáticos.",
+    "quote": "Lo más triste de la vida es el talento desperdiciado, y las decisiones que tomes moldearán tu vida para siempre.",
+    "quoteAuthor": "Una historia del Bronx (1993)",
+    "story3": "Esta cita resume mi filosofía: no desperdiciaré mi talento. Mis padres me brindaron su apoyo emocional y económico, y he llegado con la frente en alto hasta hoy, orgulloso de quien soy y con un futuro que no pienso desperdiciar.",
+    "valuesTitle": "Mis Valores",
+    "values": {
+      "vision": {
+        "title": "Visión",
+        "description": "Crear tecnología que inspire y transforme. Mis sueños incluyen desarrollar un sistema operativo universal y un lenguaje de programación revolucionario."
+      },
+      "loyalty": {
+        "title": "Lealtad",
+        "description": "Valoro por encima de todo la lealtad, el respeto y el compromiso. Creo en construir relaciones duraderas basadas en la confianza mutua."
+      },
+      "determination": {
+        "title": "Determinación",
+        "description": "Con un hambre insaciable por el conocimiento, estoy dispuesto a sacrificar y trabajar duro para alcanzar mis objetivos y no desperdiciar mi talento."
+      },
+      "excellence": {
+        "title": "Excelencia",
+        "description": "Graduado con honores en cada etapa educativa, busco siempre la excelencia en todo lo que hago, desde el código hasta las relaciones humanas."
+      }
+    },
+    "trajectoryTitle": "Mi Trayectoria",
+    "milestones": {
+      "m1": {
+        "year": "2007",
+        "title": "Nací en Buga, Valle del Cauca",
+        "description": "Crecí en el campo, conectado con mis raíces campesinas."
+      },
+      "m2": {
+        "year": "2024",
+        "title": "Graduado Bachiller con Honores",
+        "description": "Mayor puntaje ICFES de mi colegio. Técnico Agropecuario y Técnico en Operación Turística Local (SENA)."
+      },
+      "m3": {
+        "year": "2024",
+        "title": "Técnico en Sistemas Informáticos",
+        "description": "Graduado con honores de Discenter's Buga."
+      },
+      "m4": {
+        "year": "2025",
+        "title": "Jala University",
+        "description": "Inicié mi carrera en Commercial Software Engineering with a concentration in Design and Architecture."
+      }
+    }
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Una selección de mis trabajos más recientes",
+    "viewMore": "Ver más proyectos",
+    "github": "Código",
+    "demo": "Demo"
+  },
+  "experience": {
+    "title": "Experiencia & Educación",
+    "subtitle": "Mi trayectoria académica y profesional",
+    "education": "Educación",
+    "certification": "Certificaciones",
+    "work": "Experiencia Laboral"
+  },
+  "contact": {
+    "title": "Conectemos",
+    "subtitle": "¿Tienes un proyecto en mente? ¿Quieres colaborar? ¡Hablemos!",
+    "description": "Estoy siempre abierto a nuevas oportunidades, colaboraciones y conversaciones interesantes. Ya sea que tengas una pregunta, una propuesta de proyecto, o simplemente quieras conectar, ¡no dudes en contactarme!",
+    "sendEmail": "Enviar Email",
+    "collabTitle": "¿Interesado en colaborar?",
+    "collabDescription": "Siempre estoy buscando nuevos desafíos y oportunidades para crecer. Si tienes un proyecto emocionante, una idea innovadora, o simplemente quieres charlar sobre tecnología, estaré encantado de escucharte.",
+    "linkedinCta": "Conectar en LinkedIn"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "seo": {
+    "home": {
+      "title": "Diego Botina | Desarrollador de Software",
+      "description": "Portafolio de Diego Alejandro Botina, desarrollador de software especializado en React, TypeScript y Node.js."
+    },
+    "projects": {
+      "title": "Proyectos | Diego Botina",
+      "description": "Explora los proyectos de software desarrollados por Diego Botina."
+    },
+    "experience": {
+      "title": "Experiencia | Diego Botina",
+      "description": "Trayectoria profesional y académica de Diego Alejandro Botina."
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { Document } from '@contentful/rich-text-types';
+
 // ============================================================================
 // CONTENTFUL TYPES
 // ============================================================================
@@ -60,7 +62,7 @@ export interface Experiencia {
   id?: string;
   institucion: string;
   cargoTitulo: string;
-  descripcion?: string;
+  descripcion?: Document;
   fechaInicio: string;
   fechaFin?: string;
   logo?: ContentfulAsset;

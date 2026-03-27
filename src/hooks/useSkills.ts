@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   getHabilidades,
   getHabilidadesPorCategoria,
@@ -28,12 +29,13 @@ export const useSkills = (): UseSkillsReturn => {
   const [skills, setSkills] = useState<Record<string, Habilidad[]>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getHabilidades();
+      const data = await getHabilidades(i18n.language);
       setSkills(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch skills';
@@ -42,7 +44,7 @@ export const useSkills = (): UseSkillsReturn => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     fetchSkills();
@@ -82,12 +84,13 @@ export const useSkillsByCategory = (
   const [skills, setSkills] = useState<Habilidad[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getHabilidadesPorCategoria(categoria);
+      const data = await getHabilidadesPorCategoria(categoria, i18n.language);
       setSkills(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch skills';
@@ -96,7 +99,7 @@ export const useSkillsByCategory = (
     } finally {
       setLoading(false);
     }
-  }, [categoria]);
+  }, [categoria, i18n.language]);
 
   useEffect(() => {
     fetchSkills();
