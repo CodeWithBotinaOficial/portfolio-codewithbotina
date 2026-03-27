@@ -1,88 +1,67 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { Section } from '../ui';
 import { Award, Heart, Target, Zap } from 'lucide-react';
-
-/**
- * Interface for a core value item.
- */
-interface ValueItem {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-/**
- * Interface for a timeline milestone item.
- */
-interface MilestoneItem {
-  year: string;
-  title: string;
-  description: string;
-}
-
-const values: ValueItem[] = [
-  {
-    icon: <Target className="w-6 h-6" />,
-    title: 'Visión',
-    description:
-      'Crear tecnología que inspire y transforme. Mis sueños incluyen desarrollar un sistema operativo universal y un lenguaje de programación revolucionario.',
-  },
-  {
-    icon: <Heart className="w-6 h-6" />,
-    title: 'Lealtad',
-    description:
-      'Valoro por encima de todo la lealtad, el respeto y el compromiso. Creo en construir relaciones duraderas basadas en la confianza mutua.',
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: 'Determinación',
-    description:
-      'Con un hambre insaciable por el conocimiento, estoy dispuesto a sacrificar y trabajar duro para alcanzar mis objetivos y no desperdiciar mi talento.',
-  },
-  {
-    icon: <Award className="w-6 h-6" />,
-    title: 'Excelencia',
-    description:
-      'Graduado con honores en cada etapa educativa, busco siempre la excelencia en todo lo que hago, desde el código hasta las relaciones humanas.',
-  },
-];
-
-const milestones: MilestoneItem[] = [
-  {
-    year: '2007',
-    title: 'Nací en Buga, Valle del Cauca',
-    description: 'Crecí en el campo, conectado con mis raíces campesinas.',
-  },
-  {
-    year: '2024',
-    title: 'Graduado Bachiller con Honores',
-    description:
-      'Mayor puntaje ICFES de mi colegio. Técnico Agropecuario y Técnico en Operación Turística Local (SENA).',
-  },
-  {
-    year: '2024',
-    title: 'Técnico en Sistemas Informáticos',
-    description: "Graduado con honores de Discenter's Buga.",
-  },
-  {
-    year: '2025',
-    title: 'Jala University',
-    description:
-      'Inicié mi carrera en Commercial Software Engineering with a concentration in Design and Architecture.',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 /**
  * About section component.
  * Displays personal history, core values, and a timeline of achievements.
  */
 const About = () => {
+  const { t } = useTranslation();
+
+  const values = [
+    {
+      icon: <Target className="w-6 h-6" />,
+      title: t('about.values.vision.title'),
+      description: t('about.values.vision.description'),
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      title: t('about.values.loyalty.title'),
+      description: t('about.values.loyalty.description'),
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: t('about.values.determination.title'),
+      description: t('about.values.determination.description'),
+    },
+    {
+      icon: <Award className="w-6 h-6" />,
+      title: t('about.values.excellence.title'),
+      description: t('about.values.excellence.description'),
+    },
+  ];
+
+  const milestones = [
+    {
+      year: t('about.milestones.m1.year'),
+      title: t('about.milestones.m1.title'),
+      description: t('about.milestones.m1.description'),
+    },
+    {
+      year: t('about.milestones.m2.year'),
+      title: t('about.milestones.m2.title'),
+      description: t('about.milestones.m2.description'),
+    },
+    {
+      year: t('about.milestones.m3.year'),
+      title: t('about.milestones.m3.title'),
+      description: t('about.milestones.m3.description'),
+    },
+    {
+      year: t('about.milestones.m4.year'),
+      title: t('about.milestones.m4.title'),
+      description: t('about.milestones.m4.description'),
+    },
+  ];
+
   return (
     <LazyMotion features={domAnimation}>
       <Section
         id="about"
-        title="Mi Historia"
-        subtitle="Un viaje desde los campos de Buga hasta la vanguardia tecnológica"
+        title={t('about.title')}
+        subtitle={t('about.subtitle')}
         centered
         className="bg-surface"
       >
@@ -95,32 +74,17 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="prose prose-lg mx-auto text-text-muted"
           >
-          <p className="text-lg md:text-xl leading-relaxed font-light">
-            Soy <strong className="text-charcoal font-semibold">Diego Alejandro Botina Herrera</strong>, conocido como
-            Alejandro o simplemente Botina. Nací el 1 de febrero de 2007 en
-            Guadalajara de Buga, Valle del Cauca, Colombia. Mis raíces son
-            campesinas — tanto mamá como papá crecieron en el campo, y yo tuve
-            la fortuna de vivir en ese entorno antes de mudarme a un lugar más
-            urbano donde descubrí mi pasión por la tecnología.
-          </p>
-          <p className="text-lg md:text-xl leading-relaxed mt-6 font-light">
-            Estudié en la Institución Educativa Nuestra Señora de Fátima, donde
-            me gradué con honores como el estudiante con el{' '}
-            <strong className="text-charcoal font-semibold">mayor puntaje ICFES</strong> de mi generación, reconocido
-            por mi compromiso académico y mis aportaciones a la institución.
-            Obtuve títulos técnicos en Agropecuaria y Operación Turística Local,
-            además de mi técnico en Sistemas Informáticos.
-          </p>
-          <blockquote className="mt-8 pl-6 border-l-4 border-beige-300 italic text-charcoal-light text-xl">
-            "Lo más triste de la vida es el talento desperdiciado, y las
-            decisiones que tomes moldearán tu vida para siempre."
-            <footer className="text-sm mt-2 not-italic text-text-light">— Una historia del Bronx (1993)</footer>
-          </blockquote>
-          <p className="text-lg md:text-xl leading-relaxed mt-6 font-light">
-            Esta cita resume mi filosofía: no desperdiciaré mi talento. Mis padres me brindaron su apoyo
-            emocional y económico, y he llegado con la frente en alto hasta hoy,
-            orgulloso de quien soy y con un futuro que no pienso desperdiciar.
-          </p>
+            <p className="text-lg md:text-xl leading-relaxed font-light" dangerouslySetInnerHTML={{ __html: t('about.story1') }} />
+            <p className="text-lg md:text-xl leading-relaxed mt-6 font-light" dangerouslySetInnerHTML={{ __html: t('about.story2') }} />
+            
+            <blockquote className="mt-8 pl-6 border-l-4 border-beige-300 italic text-charcoal-light text-xl">
+              "{t('about.quote')}"
+              <footer className="text-sm mt-2 not-italic text-text-light">— {t('about.quoteAuthor')}</footer>
+            </blockquote>
+            
+            <p className="text-lg md:text-xl leading-relaxed mt-6 font-light">
+              {t('about.story3')}
+            </p>
           </m.div>
         </div>
 
@@ -132,7 +96,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-2xl md:text-3xl font-bold text-center mb-16 text-charcoal font-heading"
           >
-            Mis Valores
+            {t('about.valuesTitle')}
           </m.h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
@@ -162,7 +126,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-2xl md:text-3xl font-bold text-center mb-16 text-charcoal font-heading"
           >
-            Mi Trayectoria
+            {t('about.trajectoryTitle')}
           </m.h3>
           <div className="max-w-3xl mx-auto relative">
             {/* Vertical Line */}

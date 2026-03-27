@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Section, Card, MarkdownLite } from '../ui';
 import { useFeaturedProjects } from '../../hooks';
 import {
@@ -10,11 +11,14 @@ import {
 } from 'lucide-react';
 import { getImageUrl } from '../../services/contentful';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { es, enUS } from 'date-fns/locale';
 
 const Projects = () => {
+  const { t, i18n } = useTranslation();
   const { projects, loading, error } = useFeaturedProjects();
   const [filter, setFilter] = useState<string>('all');
+
+  const dateLocale = i18n.language.startsWith('es') ? es : enUS;
 
   // Get unique technologies
   const technologies = Array.from(
@@ -32,8 +36,8 @@ const Projects = () => {
       <LazyMotion features={domAnimation}>
         <Section
           id="projects"
-          title="Proyectos Destacados"
-          subtitle="Soluciones innovadoras que demuestran mi pasión por la tecnología"
+          title={t('projects.title')}
+          subtitle={t('projects.subtitle')}
           centered
           className="bg-beige-100"
         >
@@ -50,14 +54,16 @@ const Projects = () => {
       <LazyMotion features={domAnimation}>
         <Section
           id="projects"
-          title="Proyectos Destacados"
+          title={t('projects.title')}
           centered
           className="bg-beige-100"
         >
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
             <p className="text-text-muted">
-              Por favor, verifica tu conexión a Contentful.
+              {i18n.language.startsWith('es') 
+                ? 'Por favor, verifica tu conexión a Contentful.' 
+                : 'Please check your connection to Contentful.'}
             </p>
           </div>
         </Section>
@@ -69,8 +75,8 @@ const Projects = () => {
     <LazyMotion features={domAnimation}>
       <Section
         id="projects"
-        title="Proyectos Destacados"
-        subtitle="Soluciones innovadoras que demuestran mi pasión por la tecnología"
+        title={t('projects.title')}
+        subtitle={t('projects.subtitle')}
         centered
         className="bg-beige-100"
       >
@@ -84,7 +90,7 @@ const Projects = () => {
             }`}
             onClick={() => setFilter('all')}
           >
-            Todos ({projects.length})
+            {i18n.language.startsWith('es') ? 'Todos' : 'All'} ({projects.length})
           </button>
           {technologies.map((tech) => (
             <button
@@ -117,10 +123,10 @@ const Projects = () => {
                 cardBack={
                   <div className="p-6 flex flex-col h-full bg-surface rounded-2xl">
                     <div className="flex items-center justify-between mb-4 border-b border-beige-200 pb-2">
-                      <h4 className="text-lg font-bold text-charcoal">Más Detalles</h4>
+                      <h4 className="text-lg font-bold text-charcoal">{i18n.language.startsWith('es') ? 'Más Detalles' : 'More Details'}</h4>
                       <button
                         className="text-text-muted hover:text-charcoal transition-colors"
-                        aria-label="Volver a la vista principal"
+                        aria-label={i18n.language.startsWith('es') ? 'Volver a la vista principal' : 'Back to main view'}
                       >
                         <ArrowLeft className="w-5 h-5" />
                       </button>
@@ -143,7 +149,7 @@ const Projects = () => {
                       />
                       {project.destacado && (
                         <div className="absolute top-4 right-4 bg-charcoal text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                          ⭐ Destacado
+                          ⭐ {i18n.language.startsWith('es') ? 'Destacado' : 'Featured'}
                         </div>
                       )}
                     </div>
@@ -178,7 +184,7 @@ const Projects = () => {
                       <div className="flex items-center text-xs text-text-light mb-4">
                         <Calendar className="w-3 h-3 mr-2" />
                         {format(new Date(project.fecha), 'MMMM yyyy', {
-                          locale: es,
+                          locale: dateLocale,
                         })}
                       </div>
                     )}
@@ -195,7 +201,7 @@ const Projects = () => {
                         >
                           <button className="w-full py-2 px-4 bg-transparent border border-charcoal text-charcoal rounded-xl text-sm font-medium hover:bg-charcoal hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
                             <Github className="w-4 h-4" />
-                            Código
+                            {t('projects.github')}
                           </button>
                         </a>
                       )}
@@ -209,13 +215,13 @@ const Projects = () => {
                         >
                           <button className="w-full py-2 px-4 bg-charcoal text-white rounded-xl text-sm font-medium hover:bg-charcoal-dark hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2">
                             <ExternalLink className="w-4 h-4" />
-                            Demo
+                            {t('projects.demo')}
                           </button>
                         </a>
                       )}
                     </div>
                     <div className="text-center text-xs text-text-light mt-4 italic">
-                      Click en la tarjeta para ver detalles
+                      {i18n.language.startsWith('es') ? 'Click en la tarjeta para ver detalles' : 'Click on card to see details'}
                     </div>
                   </div>
                 </div>
@@ -228,13 +234,13 @@ const Projects = () => {
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-text-muted text-lg">
-              No se encontraron proyectos con "{filter}"
+              {i18n.language.startsWith('es') ? `No se encontraron proyectos con "${filter}"` : `No projects found with "${filter}"`}
             </p>
             <button
               onClick={() => setFilter('all')}
               className="mt-4 text-charcoal hover:underline font-medium"
             >
-              Ver todos los proyectos
+              {i18n.language.startsWith('es') ? 'Ver todos los proyectos' : 'View all projects'}
             </button>
           </div>
         )}
@@ -249,7 +255,7 @@ const Projects = () => {
               className="inline-block"
             >
               <button className="btn-primary rounded-xl">
-                Ver Todos los Proyectos en GitHub
+                {i18n.language.startsWith('es') ? 'Ver Todos los Proyectos en GitHub' : 'View All Projects on GitHub'}
               </button>
             </a>
           </div>

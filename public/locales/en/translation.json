@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About me",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I am Diego Alejandro Botina",
+    "titlePrefix": "From the Fields of Buga to the",
+    "titleHighlight": "Technological Vanguard",
+    "subtitle": "Software Engineer | System Architect | Commercial Software Engineering Student at Jala University",
+    "description": "With an insatiable hunger for innovation, I dream of creating a universal operating system and a programming language that combines the simplicity of natural language with the efficiency of C and Assembly. Putting Colombia in the elite of cutting-edge technology.",
+    "ctaProjects": "See Projects",
+    "ctaContact": "Contact",
+    "downloadCV": "Download CV",
+    "discoverMore": "Discover more"
+  },
+  "about": {
+    "title": "My Story",
+    "subtitle": "A journey from the fields of Buga to the technological vanguard",
+    "story1": "I am <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, known as Alejandro or simply Botina. I was born on February 1, 2007, in Guadalajara de Buga, Valle del Cauca, Colombia. My roots are rural — both my mom and dad grew up in the countryside, and I was fortunate to live in that environment before moving to a more urban place where I discovered my passion for technology.",
+    "story2": "I studied at the Institución Educativa Nuestra Señora de Fátima, where I graduated with honors as the student with the <strong class='text-charcoal font-semibold'>highest ICFES score</strong> of my generation, recognized for my academic commitment and contributions to the institution. I obtained technical degrees in Agriculture and Local Tourism Operation, in addition to my Computer Systems technician degree.",
+    "quote": "The saddest thing in life is wasted talent, and the choices you make will shape your life forever.",
+    "quoteAuthor": "A Bronx Tale (1993)",
+    "story3": "This quote sums up my philosophy: I will not waste my talent. My parents provided me with their emotional and financial support, and I have arrived with my head held high today, proud of who I am and with a future that I do not intend to waste.",
+    "valuesTitle": "My Values",
+    "values": {
+      "vision": {
+        "title": "Vision",
+        "description": "To create technology that inspires and transforms. My dreams include developing a universal operating system and a revolutionary programming language."
+      },
+      "loyalty": {
+        "title": "Loyalty",
+        "description": "I value loyalty, respect, and commitment above all else. I believe in building lasting relationships based on mutual trust."
+      },
+      "determination": {
+        "title": "Determination",
+        "description": "With an insatiable hunger for knowledge, I am willing to sacrifice and work hard to achieve my goals and not waste my talent."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Graduated with honors in every educational stage, I always seek excellence in everything I do, from code to human relationships."
+      }
+    },
+    "trajectoryTitle": "My Journey",
+    "milestones": {
+      "m1": {
+        "year": "2007",
+        "title": "Born in Buga, Valle del Cauca",
+        "description": "I grew up in the countryside, connected to my peasant roots."
+      },
+      "m2": {
+        "year": "2024",
+        "title": "Graduated with High School Honors",
+        "description": "Highest ICFES score in my school. Agricultural Technician and Local Tourism Operation Technician (SENA)."
+      },
+      "m3": {
+        "year": "2024",
+        "title": "Computer Systems Technician",
+        "description": "Graduated with honors from Discenter's Buga."
+      },
+      "m4": {
+        "year": "2025",
+        "title": "Jala University",
+        "description": "I started my career in Commercial Software Engineering with a concentration in Design and Architecture."
+      }
+    }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "A selection of my most recent works",
+    "viewMore": "View more projects",
+    "github": "Code",
+    "demo": "Demo"
+  },
+  "experience": {
+    "title": "Experience & Education",
+    "subtitle": "My academic and professional journey",
+    "education": "Education",
+    "certification": "Certifications",
+    "work": "Work Experience"
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Have a project in mind? Want to collaborate? Let's talk!",
+    "description": "I am always open to new opportunities, collaborations, and interesting conversations. Whether you have a question, a project proposal, or just want to connect, don't hesitate to reach out!",
+    "sendEmail": "Send Email",
+    "collabTitle": "Interested in collaborating?",
+    "collabDescription": "I am always looking for new challenges and opportunities to grow. If you have an exciting project, an innovative idea, or just want to chat about technology, I will be happy to hear from you.",
+    "linkedinCta": "Connect on LinkedIn"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "seo": {
+    "home": {
+      "title": "Diego Botina | Software Developer",
+      "description": "Portfolio of Diego Alejandro Botina, software developer specializing in React, TypeScript, and Node.js."
+    },
+    "projects": {
+      "title": "Projects | Diego Botina",
+      "description": "Explore the software projects developed by Diego Botina."
+    },
+    "experience": {
+      "title": "Experience | Diego Botina",
+      "description": "Professional and academic trajectory of Diego Alejandro Botina."
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   getExperiencias,
   getEducacion,
@@ -32,12 +33,13 @@ export const useExperience = (
   const [experiences, setExperiences] = useState<Experiencia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getExperiencias(tipo);
+      const data = await getExperiencias(tipo, i18n.language);
       setExperiences(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch experiences';
@@ -46,7 +48,7 @@ export const useExperience = (
     } finally {
       setLoading(false);
     }
-  }, [tipo]);
+  }, [tipo, i18n.language]);
 
   useEffect(() => {
     fetchExperiences();
@@ -69,12 +71,13 @@ export const useEducation = (): UseExperienceReturn => {
   const [experiences, setExperiences] = useState<Experiencia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getEducacion();
+      const data = await getEducacion(i18n.language);
       setExperiences(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch education';
@@ -83,7 +86,7 @@ export const useEducation = (): UseExperienceReturn => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     fetchExperiences();
@@ -106,12 +109,13 @@ export const useCertifications = (): UseExperienceReturn => {
   const [experiences, setExperiences] = useState<Experiencia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchExperiences = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getCertificaciones();
+      const data = await getCertificaciones(i18n.language);
       setExperiences(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch certifications';
@@ -120,7 +124,7 @@ export const useCertifications = (): UseExperienceReturn => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     fetchExperiences();

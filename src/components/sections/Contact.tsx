@@ -1,4 +1,5 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Section } from '../ui';
 import { socialLinks } from '../../utils/socialLinks';
 import { Mail, ArrowRight } from 'lucide-react';
@@ -8,12 +9,14 @@ import { Mail, ArrowRight } from 'lucide-react';
  * Provides multiple ways for users to get in touch.
  */
 const Contact = () => {
+  const { t } = useTranslation();
+
   return (
     <LazyMotion features={domAnimation}>
       <Section
         id="contact"
-        title="Conectemos"
-        subtitle="¿Tienes un proyecto en mente? ¿Quieres colaborar? ¡Hablemos!"
+        title={t('contact.title')}
+        subtitle={t('contact.subtitle')}
         centered
         className="bg-beige-100"
       >
@@ -26,10 +29,7 @@ const Contact = () => {
             className="text-center mb-16"
           >
             <p className="text-lg md:text-xl text-text-muted mb-8 max-w-3xl mx-auto font-light leading-relaxed">
-              Estoy siempre abierto a nuevas oportunidades, colaboraciones y
-              conversaciones interesantes. Ya sea que tengas una pregunta, una
-              propuesta de proyecto, o simplemente quieras conectar, ¡no dudes en
-              contactarme!
+              {t('contact.description')}
             </p>
             <div className="flex justify-center">
               <a 
@@ -37,7 +37,7 @@ const Contact = () => {
                 className="btn-primary group rounded-xl"
               >
                 <Mail className="w-5 h-5 mr-2" />
-                Enviar Email
+                {t('contact.sendEmail')}
                 <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </a>
             </div>
@@ -84,13 +84,10 @@ const Contact = () => {
             
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-6 font-heading">
-                ¿Interesado en colaborar?
+                {t('contact.collabTitle')}
               </h3>
               <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed mb-8">
-                Siempre estoy buscando nuevos desafíos y oportunidades para crecer.
-                Si tienes un proyecto emocionante, una idea innovadora, o
-                simplemente quieres charlar sobre tecnología, estaré encantado de
-                escucharte.
+                {t('contact.collabDescription')}
               </p>
               <a 
                 href="https://www.linkedin.com/in/codewithbotinaoficial" 
@@ -98,7 +95,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-3 border border-white/30 text-white rounded-xl hover:bg-white hover:text-charcoal transition-all duration-300 font-medium font-heading"
               >
-                Conectar en LinkedIn
+                {t('contact.linkedinCta')}
               </a>
             </div>
           </m.div>

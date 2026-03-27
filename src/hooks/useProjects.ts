@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getProyectos, getProyectosDestacados } from '../services/contentful';
 import type { Proyecto, FilterOptions, SortOrder } from '../types';
 
@@ -35,6 +36,7 @@ export const useProjects = (
   const [projects, setProjects] = useState<Proyecto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   // Memoize filters to prevent effect loops if a new object is passed on every render
   const filtersString = JSON.stringify(filters);
@@ -55,7 +57,7 @@ export const useProjects = (
     try {
       setLoading(true);
       setError(null);
-      const data = await getProyectos(memoizedFilters, sortBy, order);
+      const data = await getProyectos(memoizedFilters, sortBy, order, i18n.language);
       setProjects(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch projects';
@@ -64,7 +66,7 @@ export const useProjects = (
     } finally {
       setLoading(false);
     }
-  }, [memoizedFilters, sortBy, order]);
+  }, [memoizedFilters, sortBy, order, i18n.language]);
 
   // Trigger fetch when dependencies change
   useEffect(() => {
@@ -88,12 +90,13 @@ export const useFeaturedProjects = (): UseProjectsReturn => {
   const [projects, setProjects] = useState<Proyecto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await getProyectosDestacados();
+      const data = await getProyectosDestacados(i18n.language);
       setProjects(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch featured projects';
@@ -102,7 +105,7 @@ export const useFeaturedProjects = (): UseProjectsReturn => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     fetchProjects();

@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo.svg';
-
-/**
- * Navigation item structure.
- */
-interface NavItem {
-  label: string;
-  href: string;
-}
+import { LanguageSwitcher } from '../LanguageSwitcher';
 
 /**
  * Social link structure.
@@ -19,14 +13,6 @@ interface SocialLink {
   href: string;
   label: string;
 }
-
-const navItems: NavItem[] = [
-  { label: 'Inicio', href: '#hero' },
-  { label: 'Sobre Mí', href: '#about' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Experiencia', href: '#experience' },
-  { label: 'Contacto', href: '#contact' },
-];
 
 const socialLinks: SocialLink[] = [
   {
@@ -46,8 +32,17 @@ const socialLinks: SocialLink[] = [
  * Handles scroll effects and mobile responsiveness.
  */
 const Header = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { label: t('nav.home'), href: '#hero' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
 
   // Handle scroll effect for header background
   useEffect(() => {
@@ -97,7 +92,7 @@ const Header = () => {
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <button
                   key={item.label}
@@ -111,35 +106,42 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Social Links - Desktop */}
-            <div className="hidden md:flex items-center gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-text-muted hover:text-charcoal transition-colors p-2 hover:bg-beige-100 rounded-full"
-                  aria-label={link.label}
-                >
-                  {link.icon}
-                </a>
-              ))}
+            {/* Social Links & Language Switcher - Desktop */}
+            <div className="hidden md:flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-charcoal transition-colors p-2 hover:bg-beige-100 rounded-full"
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+              <div className="h-4 w-px bg-beige-300"></div>
+              <LanguageSwitcher />
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative z-50 p-2 text-charcoal hover:bg-beige-100 rounded-lg transition-colors"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+            <div className="flex items-center gap-4 md:hidden">
+              <LanguageSwitcher />
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="relative z-50 p-2 text-charcoal hover:bg-beige-100 rounded-lg transition-colors"
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </nav>
         </div>
 

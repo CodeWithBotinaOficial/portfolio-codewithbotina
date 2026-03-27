@@ -1,7 +1,10 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { FileDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId);
     if (element) {
@@ -57,7 +60,7 @@ const Hero = () => {
               className="mb-6"
             >
               <span className="inline-block px-4 py-1.5 bg-beige-200 text-charcoal font-medium rounded-full text-sm tracking-wide">
-                👋 Hola, soy Diego Alejandro Botina
+                👋 {t('hero.greeting')}
               </span>
             </m.div>
 
@@ -68,9 +71,9 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-charcoal"
             >
-              De los Campos de Buga a la{' '}
+              {t('hero.titlePrefix')}{' '}
               <span className="text-charcoal-light relative inline-block">
-                Vanguardia Tecnológica
+                {t('hero.titleHighlight')}
                 <svg className="absolute w-full h-3 -bottom-1 left-0 text-beige-300 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                 </svg>
@@ -84,8 +87,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="text-xl md:text-2xl text-text-muted mb-8 max-w-3xl mx-auto font-light"
             >
-              Software Engineer | System Architect | Estudiante de Commercial
-              Software Engineering en Jala University
+              {t('hero.subtitle')}
             </m.p>
 
             {/* Description */}
@@ -95,10 +97,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               className="text-base md:text-lg text-text-light mb-12 max-w-2xl mx-auto leading-relaxed"
             >
-              Con un hambre insaciable por la innovación, sueño con crear un
-              sistema operativo universal y un lenguaje de programación que
-              combine la simplicidad del lenguaje natural con la eficiencia de C y
-              Assembly. Poniendo a Colombia en la élite de la tecnología de punta.
+              {t('hero.description')}
             </m.p>
 
             {/* CTA Buttons */}
@@ -112,20 +111,20 @@ const Hero = () => {
                 onClick={() => scrollToSection('#projects')}
                 className="btn-primary rounded-xl"
               >
-                Ver Proyectos
+                {t('hero.ctaProjects')}
               </button>
               <button
                 onClick={() => scrollToSection('#contact')}
                 className="btn-secondary rounded-xl"
               >
-                Contactar
+                {t('hero.ctaContact')}
               </button>
               <button
                 onClick={handleDownloadCV}
                 className="text-charcoal hover:text-charcoal-light font-medium px-6 py-3 transition-colors flex items-center gap-2 group rounded-xl"
               >
                 <FileDown className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
-                <span>Descargar CV</span>
+                <span>{t('hero.downloadCV')}</span>
               </button>
             </m.div>
           </div>
@@ -143,7 +142,7 @@ const Hero = () => {
               onClick={() => scrollToSection('#about')}
               className="flex flex-col items-center text-text-light hover:text-charcoal transition-colors group"
             >
-              <span className="text-sm mb-3 tracking-widest uppercase text-xs">Descubre más</span>
+              <span className="text-sm mb-3 tracking-widest uppercase text-xs">{t('hero.discoverMore')}</span>
               <div className="w-6 h-10 border-2 border-text-light rounded-full flex justify-center p-1 group-hover:border-charcoal transition-colors">
                 <m.div 
                   className="w-1 h-2 bg-text-light rounded-full group-hover:bg-charcoal transition-colors"

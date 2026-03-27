@@ -28,6 +28,20 @@ const client = createClient({
 });
 
 // ============================================================================
+// I18N CONFIGURATION
+// ============================================================================
+
+export const contentfulLocaleMap: Record<string, string> = {
+  es: 'es-CO',
+  en: 'en-US',
+};
+
+const getLocaleCode = (locale?: string): string => {
+  if (!locale) return contentfulLocaleMap['es'];
+  return contentfulLocaleMap[locale] || contentfulLocaleMap['es'];
+};
+
+// ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
 
@@ -64,13 +78,15 @@ const parseEntry = <T>(entry: any): T => {
 export const getProyectos = async (
   filters?: FilterOptions,
   sortBy: 'fecha' | 'orden' = 'orden',
-  order: SortOrder = 'asc'
+  order: SortOrder = 'asc',
+  locale?: string
 ): Promise<Proyecto[]> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {
       content_type: 'proyecto',
       order: `${order === 'asc' ? '' : '-'}fields.${sortBy}`,
+      locale: getLocaleCode(locale),
     };
 
     if (filters?.destacado !== undefined) {
@@ -92,8 +108,8 @@ export const getProyectos = async (
 /**
  * Fetch featured projects only
  */
-export const getProyectosDestacados = async (): Promise<Proyecto[]> => {
-  return getProyectos({ destacado: true }, 'orden', 'asc');
+export const getProyectosDestacados = async (locale?: string): Promise<Proyecto[]> => {
+  return getProyectos({ destacado: true }, 'orden', 'asc', locale);
 };
 
 // ============================================================================
@@ -104,13 +120,15 @@ export const getProyectosDestacados = async (): Promise<Proyecto[]> => {
  * Fetch all experiences sorted by date
  */
 export const getExperiencias = async (
-  tipo?: string
+  tipo?: string,
+  locale?: string
 ): Promise<Experiencia[]> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {
       content_type: 'experiencia',
       order: '-fields.fechaInicio',
+      locale: getLocaleCode(locale),
     };
 
     if (tipo) {
@@ -128,15 +146,15 @@ export const getExperiencias = async (
 /**
  * Fetch education experiences only
  */
-export const getEducacion = async (): Promise<Experiencia[]> => {
-  return getExperiencias('Educación');
+export const getEducacion = async (locale?: string): Promise<Experiencia[]> => {
+  return getExperiencias('Educación', locale);
 };
 
 /**
  * Fetch certifications only
  */
-export const getCertificaciones = async (): Promise<Experiencia[]> => {
-  return getExperiencias('Certificación');
+export const getCertificaciones = async (locale?: string): Promise<Experiencia[]> => {
+  return getExperiencias('Certificación', locale);
 };
 
 // ============================================================================
@@ -146,11 +164,12 @@ export const getCertificaciones = async (): Promise<Experiencia[]> => {
 /**
  * Fetch all skills grouped by category
  */
-export const getHabilidades = async (): Promise<Record<string, Habilidad[]>> => {
+export const getHabilidades = async (locale?: string): Promise<Record<string, Habilidad[]>> => {
   try {
     const response = await client.getEntries({
       content_type: 'habilidad',
       order: ['-fields.nivel'],
+      locale: getLocaleCode(locale),
     });
 
     const habilidades = response.items.map((item) => parseEntry<Habilidad>(item));
@@ -177,13 +196,15 @@ export const getHabilidades = async (): Promise<Record<string, Habilidad[]>> => 
  * Fetch skills by category
  */
 export const getHabilidadesPorCategoria = async (
-  categoria: Habilidad['categoria']
+  categoria: Habilidad['categoria'],
+  locale?: string
 ): Promise<Habilidad[]> => {
   try {
     const response = await client.getEntries({
       content_type: 'habilidad',
       'fields.categoria': categoria,
       order: ['-fields.nivel'],
+      locale: getLocaleCode(locale),
     });
 
     return response.items.map((item) => parseEntry<Habilidad>(item));
