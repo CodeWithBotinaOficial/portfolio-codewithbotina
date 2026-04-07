@@ -3,6 +3,7 @@ import type {
   Proyecto,
   Experiencia,
   Habilidad,
+  Skill,
   FilterOptions,
   SortOrder,
   ContentfulAsset,
@@ -12,8 +13,11 @@ import type {
 // CLIENT CONFIGURATION
 // ============================================================================
 
-const SPACE_ID = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
-const ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
+// NOTE: We intentionally use `process.env.*` here (instead of `import.meta.env.*`)
+// so Jest/ts-jest can compile this module. Vite injects these at build/dev time
+// via `define` in vite.config.ts.
+const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID;
+const ACCESS_TOKEN = process.env.VITE_CONTENTFUL_ACCESS_TOKEN;
 
 if (!SPACE_ID || !ACCESS_TOKEN) {
   throw new Error(
@@ -210,6 +214,52 @@ export const getHabilidadesPorCategoria = async (
     return response.items.map((item) => parseEntry<Habilidad>(item));
   } catch (error) {
     console.error(`Error fetching skills in category ${categoria}:`, error);
+    return [];
+  }
+};
+
+// ============================================================================
+// SKILLS (NEW) API
+// ============================================================================
+
+/**
+ * Fetch all skills as a flat list (localized), ordered by "orden" ascending.
+ */
+export const getSkills = async (locale: string): Promise<Skill[]> => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: any = {
+      content_type: 'habilidad',
+      order: 'fields.orden',
+      locale: getLocaleCode(locale),
+      include: 1,
+    };
+
+    const response = await client.getEntries(query);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return response.items.map((item: any) => {
+      const fields = item.fields ?? {};
+      const categoriaRaw = fields.categoria as unknown;
+      const categoria =
+        Array.isArray(categoriaRaw) ? (categoriaRaw as string[]) : categoriaRaw ? [String(categoriaRaw)] : [];
+
+      const imagenUrl = getImageUrl(fields.imagen as ContentfulAsset | undefined) || undefined;
+
+      return {
+        id: item.sys.id as string,
+        nombre: String(fields.nombre ?? ''),
+        categoria,
+        nivel: typeof fields.nivel === 'number' ? fields.nivel : undefined,
+        iconoUrl: typeof fields.iconoUrl === 'string' ? fields.iconoUrl : undefined,
+        imagenUrl,
+        descripcion: typeof fields.descripcion === 'string' ? fields.descripcion : undefined,
+        destacada: typeof fields.destacada === 'boolean' ? fields.destacada : undefined,
+        orden: typeof fields.orden === 'number' ? fields.orden : undefined,
+      } satisfies Skill;
+    });
+  } catch (error) {
+    console.error('Error fetching skills:', error);
     return [];
   }
 };

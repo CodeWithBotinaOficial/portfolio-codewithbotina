@@ -7,6 +7,7 @@ import { SEO } from './components/SEO';
 const Hero = lazy(() => import('./components/sections/Hero'));
 const About = lazy(() => import('./components/sections/About'));
 const Projects = lazy(() => import('./components/sections/Projects'));
+const Skills = lazy(() => import('./components/sections/Skills'));
 const Experience = lazy(() => import('./components/sections/Experience'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
@@ -33,6 +34,7 @@ const PortfolioContent = () => {
         <Hero />
         <About />
         <Projects />
+        <Skills />
         <Experience />
         <Contact />
       </Suspense>

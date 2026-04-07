@@ -156,3 +156,5 @@ export interface FilterOptions {
   tecnologia?: string;
   categoria?: string;
 }
+
+export * from './skill';
