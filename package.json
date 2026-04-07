@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "deploy": "wrangler pages deploy dist",
     "setup:contentful-locales": "ts-node --esm scripts/setup-contentful-locales.ts",
+    "setup:contentful-skills": "ts-node --esm scripts/setup-contentful-skills.ts",
     "test": "jest"
   },
   "overrides": {

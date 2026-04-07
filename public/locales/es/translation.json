@@ -3,6 +3,7 @@
     "home": "Inicio",
     "about": "Sobre mí",
     "projects": "Proyectos",
+    "skills": "Habilidades",
     "experience": "Experiencia",
     "contact": "Contacto"
   },
@@ -75,6 +76,13 @@
     "github": "Código",
     "demo": "Demo"
   },
+  "skills": {
+    "title": "Habilidades",
+    "subtitle": "Tecnologías, metodologías y competencias que aplico en mi día a día",
+    "filterAll": "Todas",
+    "levelLabel": "Nivel",
+    "featuredLabel": "Destacada"
+  },
   "experience": {
     "title": "Experiencia & Educación",
     "subtitle": "Mi trayectoria académica y profesional",
@@ -97,7 +105,7 @@
   "seo": {
     "home": {
       "title": "Diego Botina | Desarrollador de Software",
-      "description": "Portafolio de Diego Alejandro Botina, desarrollador de software especializado en React, TypeScript y Node.js."
+      "description": "Portafolio de Diego Alejandro Botina, desarrollador de software especializado en React, TypeScript y Node.js, con proyectos, experiencia y habilidades."
     },
     "projects": {
       "title": "Proyectos | Diego Botina",
