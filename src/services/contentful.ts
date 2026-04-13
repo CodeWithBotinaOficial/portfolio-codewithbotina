@@ -8,6 +8,7 @@ import type {
   SortOrder,
   ContentfulAsset,
 } from '../types';
+import { sortByFeaturedThenOrder } from '../utils/sortByFeaturedThenOrder';
 
 // ============================================================================
 // CLIENT CONFIGURATION
@@ -89,20 +90,30 @@ export const getProyectos = async (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {
       content_type: 'proyecto',
-      order: `${order === 'asc' ? '' : '-'}fields.${sortBy}`,
       locale: getLocaleCode(locale),
     };
-
-    if (filters?.destacado !== undefined) {
-      query['fields.destacado'] = filters.destacado;
-    }
 
     if (filters?.tecnologia) {
       query['fields.tecnologias[in]'] = filters.tecnologia;
     }
 
     const response = await client.getEntries(query);
-    return response.items.map((item) => parseEntry<Proyecto>(item));
+    const projects = response.items.map((item) => parseEntry<Proyecto>(item));
+
+    // Client-side sorting as required by the featured-first rule
+    let sorted = sortByFeaturedThenOrder(projects, 'destacado');
+
+    // Handle explicit sortBy/order if it's not the default featured-first
+    // (Though the requirement says featured-first rule applies to both sections)
+    if (sortBy === 'fecha') {
+      sorted = sorted.sort((a, b) => {
+        const dateA = new Date(a.fecha).getTime();
+        const dateB = new Date(b.fecha).getTime();
+        return order === 'asc' ? dateA - dateB : dateB - dateA;
+      });
+    }
+
+    return sorted;
   } catch (error) {
     console.error('Error fetching projects:', error);
     return [];
@@ -113,7 +124,8 @@ export const getProyectos = async (
  * Fetch featured projects only
  */
 export const getProyectosDestacados = async (locale?: string): Promise<Proyecto[]> => {
-  return getProyectos({ destacado: true }, 'orden', 'asc', locale);
+  const allProjects = await getProyectos(undefined, 'orden', 'asc', locale);
+  return allProjects.filter(p => p.destacado);
 };
 
 // ============================================================================
@@ -230,7 +242,6 @@ export const getSkills = async (locale: string): Promise<Skill[]> => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {
       content_type: 'habilidad',
-      order: 'fields.orden',
       locale: getLocaleCode(locale),
       include: 1,
     };
@@ -238,7 +249,7 @@ export const getSkills = async (locale: string): Promise<Skill[]> => {
     const response = await client.getEntries(query);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return response.items.map((item: any) => {
+    const skills = response.items.map((item: any) => {
       const fields = item.fields ?? {};
       const categoriaRaw = fields.categoria as unknown;
       const categoria =
@@ -258,6 +269,8 @@ export const getSkills = async (locale: string): Promise<Skill[]> => {
         orden: typeof fields.orden === 'number' ? fields.orden : undefined,
       } satisfies Skill;
     });
+
+    return sortByFeaturedThenOrder(skills, 'destacada');
   } catch (error) {
     console.error('Error fetching skills:', error);
     return [];

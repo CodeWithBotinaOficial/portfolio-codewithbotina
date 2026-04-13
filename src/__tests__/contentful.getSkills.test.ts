@@ -46,7 +46,6 @@ describe('getSkills', () => {
     expect(mockGetEntries).toHaveBeenCalledWith(
       expect.objectContaining({
         content_type: 'habilidad',
-        order: 'fields.orden',
         locale: 'es-CO',
       })
     );
