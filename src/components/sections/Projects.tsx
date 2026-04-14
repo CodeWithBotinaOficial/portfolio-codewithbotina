@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Section, Card, MarkdownLite } from '../ui';
-import { useFeaturedProjects } from '../../hooks';
+import { useProjects } from '../../hooks';
 import {
   Github,
   ExternalLink,
@@ -15,7 +15,7 @@ import { es, enUS } from 'date-fns/locale';
 
 const Projects = () => {
   const { t, i18n } = useTranslation();
-  const { projects, loading, error } = useFeaturedProjects();
+  const { projects, loading, error } = useProjects();
   const [filter, setFilter] = useState<string>('all');
 
   const dateLocale = i18n.language.startsWith('es') ? es : enUS;
