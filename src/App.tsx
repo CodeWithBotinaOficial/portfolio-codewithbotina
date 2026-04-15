@@ -3,8 +3,8 @@ import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-do
 import { useTranslation } from 'react-i18next';
 import { Layout } from './components/layout';
 import { SEO } from './components/SEO';
+import Hero from './components/sections/Hero';
 
-const Hero = lazy(() => import('./components/sections/Hero'));
 const About = lazy(() => import('./components/sections/About'));
 const Projects = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
@@ -30,8 +30,8 @@ const PortfolioContent = () => {
         locale={i18n.language.startsWith('es') ? 'es' : 'en'}
         path={location.pathname}
       />
-      <Suspense fallback={<div className="min-h-screen" />}>
-        <Hero />
+      <Hero />
+      <Suspense fallback={null}>
         <About />
         <Projects />
         <Skills />

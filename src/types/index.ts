@@ -27,17 +27,25 @@ export interface ContentfulAsset {
   };
 }
 
+// Base interface for all Contentful entities to include common metadata
+export interface BaseContentfulEntity {
+  id?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 // ============================================================================
 // PROJECT TYPES
 // ============================================================================
 
-export interface Proyecto {
-  id?: string;
+export interface Proyecto extends BaseContentfulEntity {
   titulo: string;
   descripcionCorta: string;
   descripcionCompleta: string;
   tecnologias: string[];
+  imagen?: ContentfulAsset;
   imagenPrincipal?: ContentfulAsset;
+  imagenUrl?: string;
   urlGithub?: string;
   urlDemo?: string;
   destacado: boolean;
@@ -58,14 +66,14 @@ export interface ProyectoEntry {
 // EXPERIENCE TYPES
 // ============================================================================
 
-export interface Experiencia {
-  id?: string;
+export interface Experiencia extends BaseContentfulEntity {
   institucion: string;
   cargoTitulo: string;
   descripcion?: Document;
   fechaInicio: string;
   fechaFin?: string;
   logo?: ContentfulAsset;
+  logoUrl?: string;
   tipo: string;
   ubicacion?: string;
 }
@@ -83,12 +91,13 @@ export interface ExperienciaEntry {
 // SKILL TYPES
 // ============================================================================
 
-export interface Habilidad {
-  id?: string;
+export interface Habilidad extends BaseContentfulEntity {
   nombre: string;
   categoria: 'Frontend' | 'Backend' | 'Herramientas' | 'Lenguajes' | 'Otros';
   nivel: number;
   iconoUrl?: string;
+  imagen?: ContentfulAsset;
+  imagenUrl?: string;
 }
 
 export interface HabilidadEntry {

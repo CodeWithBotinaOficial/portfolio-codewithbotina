@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import logo from '../../assets/logo.svg';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 
 /**
@@ -86,9 +85,13 @@ const Header = () => {
               aria-label="CodeWithBotina Home"
             >
               <img 
-                src={logo} 
+                src="/logo.svg" 
                 alt="CodeWithBotina Logo" 
-                className="h-10 w-auto transition-transform duration-300 hover:scale-105" 
+                className="h-10 w-auto transition-transform duration-300 hover:scale-105"
+                width="40"
+                height="40"
+                loading="eager"
+                fetchPriority="high"
               />
             </button>
 

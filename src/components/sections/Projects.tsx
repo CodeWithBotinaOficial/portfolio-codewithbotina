@@ -9,14 +9,15 @@ import {
   Calendar,
   ArrowLeft,
 } from 'lucide-react';
-import { getImageUrl } from '../../services/contentful';
 import { format } from 'date-fns';
 import { es, enUS } from 'date-fns/locale';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const Projects = () => {
   const { t, i18n } = useTranslation();
   const { projects, loading, error } = useProjects();
   const [filter, setFilter] = useState<string>('all');
+  const shouldReduceMotion = useReducedMotion();
 
   const dateLocale = i18n.language.startsWith('es') ? es : enUS;
 
@@ -112,10 +113,10 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <m.div
               key={project.titulo}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : index * 0.1 }}
             >
               <Card
                 className="h-[550px] border-none shadow-soft hover:shadow-hover transition-shadow duration-300 rounded-2xl"
@@ -140,12 +141,15 @@ const Projects = () => {
                 {/* Card Front */}
                 <div className="h-full flex flex-col bg-surface rounded-2xl overflow-hidden">
                   {/* Project Image */}
-                  {project.imagenPrincipal && (
+                  {project.imagenUrl && (
                     <div className="relative h-48 bg-beige-200 overflow-hidden group">
                       <img
-                        src={getImageUrl(project.imagenPrincipal) || ''}
+                        src={project.imagenUrl}
                         alt={project.titulo}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        width="600"
+                        height="400"
                       />
                       {project.destacado && (
                         <div className="absolute top-4 right-4 bg-charcoal text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">

@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import useSWR from 'swr';
 import {
   getHabilidades,
   getHabilidadesPorCategoria,
@@ -26,35 +26,19 @@ interface UseSkillsReturn {
  * @returns Object containing grouped skills data, loading state, error state, and refetch function
  */
 export const useSkills = (): UseSkillsReturn => {
-  const [skills, setSkills] = useState<Record<string, Habilidad[]>>({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchSkills = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getHabilidades(i18n.language);
-      setSkills(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch skills';
-      setError(errorMessage);
-      console.error('Error fetching skills:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [i18n.language]);
-
-  useEffect(() => {
-    fetchSkills();
-  }, [fetchSkills]);
+  const { data, error, isLoading, mutate } = useSWR<Record<string, Habilidad[]>>(
+    ['skills', i18n.language],
+    ([, l]) => getHabilidades(l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    skills,
-    loading,
-    error,
-    refetch: fetchSkills,
+    skills: data ?? {},
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch skills') : null,
+    refetch: async () => { await mutate(); },
   };
 };
 
@@ -81,34 +65,18 @@ interface UseSkillsByCategoryReturn {
 export const useSkillsByCategory = (
   categoria: Habilidad['categoria']
 ): UseSkillsByCategoryReturn => {
-  const [skills, setSkills] = useState<Habilidad[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchSkills = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getHabilidadesPorCategoria(categoria, i18n.language);
-      setSkills(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch skills';
-      setError(errorMessage);
-      console.error('Error fetching skills:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [categoria, i18n.language]);
-
-  useEffect(() => {
-    fetchSkills();
-  }, [fetchSkills]);
+  const { data, error, isLoading, mutate } = useSWR<Habilidad[]>(
+    ['skills-by-category', categoria, i18n.language],
+    ([, cat, l]) => getHabilidadesPorCategoria(cat as Habilidad['categoria'], l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    skills,
-    loading,
-    error,
-    refetch: fetchSkills,
+    skills: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch skills') : null,
+    refetch: async () => { await mutate(); },
   };
 };

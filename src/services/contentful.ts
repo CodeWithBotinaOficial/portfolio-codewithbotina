@@ -1,4 +1,4 @@
-import { createClient } from 'contentful';
+import { createClient, type EntriesQueries, type Entry, type EntrySkeletonType } from 'contentful';
 import type {
   Proyecto,
   Experiencia,
@@ -7,6 +7,7 @@ import type {
   FilterOptions,
   SortOrder,
   ContentfulAsset,
+  BaseContentfulEntity,
 } from '../types';
 import { sortByFeaturedThenOrder } from '../utils/sortByFeaturedThenOrder';
 
@@ -51,22 +52,31 @@ const getLocaleCode = (locale?: string): string => {
 // ============================================================================
 
 /**
+ * Optimize Contentful image URL with query parameters
+ */
+export const optimizeContentfulImage = (url: string, width: number = 200): string => {
+  if (!url) return url;
+  const base = url.startsWith('//') ? `https:${url}` : url;
+  return `${base}?w=${width}&fm=webp&q=75`;
+};
+
+/**
  * Extract image URL from Contentful asset
  */
-export const getImageUrl = (asset: ContentfulAsset | undefined): string | null => {
+export const getImageUrl = (asset: ContentfulAsset | undefined, width?: number): string | null => {
   if (!asset?.fields?.file?.url) return null;
   const url = asset.fields.file.url;
   // Ensure HTTPS
-  return url.startsWith('//') ? `https:${url}` : url;
+  const base = url.startsWith('//') ? `https:${url}` : url;
+  return width ? optimizeContentfulImage(base, width) : base;
 };
 
 /**
  * Parse Contentful entry to typed object
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseEntry = <T>(entry: any): T => {
+const parseEntry = <T extends BaseContentfulEntity>(entry: Entry<EntrySkeletonType, undefined, string>): T => {
   return {
-    ...entry.fields,
+    ...(entry.fields as unknown as T),
     id: entry.sys.id,
     createdAt: entry.sys.createdAt,
     updatedAt: entry.sys.updatedAt,
@@ -87,8 +97,7 @@ export const getProyectos = async (
   locale?: string
 ): Promise<Proyecto[]> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const query: any = {
+    const query: Record<string, string | number | boolean | string[] | undefined> = {
       content_type: 'proyecto',
       locale: getLocaleCode(locale),
     };
@@ -97,8 +106,23 @@ export const getProyectos = async (
       query['fields.tecnologias[in]'] = filters.tecnologia;
     }
 
-    const response = await client.getEntries(query);
-    const projects = response.items.map((item) => parseEntry<Proyecto>(item));
+    const response = await client.getEntries(
+      query as unknown as EntriesQueries<EntrySkeletonType, undefined>
+    );
+    const projects = response.items.map((item) => {
+      const p = parseEntry<Proyecto>(item);
+      
+      // Try to get image from 'imagen' or 'imagenPrincipal'
+      const imageAsset = p.imagen || p.imagenPrincipal;
+      if (imageAsset) {
+        // Apply optimization to project images
+        const url = getImageUrl(imageAsset, 600);
+        if (url) {
+          p.imagenUrl = url;
+        }
+      }
+      return p;
+    });
 
     // Client-side sorting as required by the featured-first rule
     let sorted = sortByFeaturedThenOrder(projects, 'destacado');
@@ -140,8 +164,7 @@ export const getExperiencias = async (
   locale?: string
 ): Promise<Experiencia[]> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const query: any = {
+    const query: Record<string, string | number | boolean | string[] | undefined> = {
       content_type: 'experiencia',
       order: '-fields.fechaInicio',
       locale: getLocaleCode(locale),
@@ -151,8 +174,20 @@ export const getExperiencias = async (
       query['fields.tipo[in]'] = tipo;
     }
 
-    const response = await client.getEntries(query);
-    return response.items.map((item) => parseEntry<Experiencia>(item));
+    const response = await client.getEntries(
+      query as unknown as EntriesQueries<EntrySkeletonType, undefined>
+    );
+    return response.items.map((item) => {
+      const e = parseEntry<Experiencia>(item);
+      if (e.logo) {
+         // Apply optimization to experience logos
+         const url = getImageUrl(e.logo, 80);
+         if (url) {
+           e.logoUrl = url;
+         }
+      }
+      return e;
+    });
   } catch (error) {
     console.error('Error fetching experiences:', error);
     return [];
@@ -188,7 +223,16 @@ export const getHabilidades = async (locale?: string): Promise<Record<string, Ha
       locale: getLocaleCode(locale),
     });
 
-    const habilidades = response.items.map((item) => parseEntry<Habilidad>(item));
+    const habilidades = response.items.map((item) => {
+      const h = parseEntry<Habilidad>(item);
+      if (h.imagen) {
+        const url = getImageUrl(h.imagen, 80);
+        if (url) {
+          h.imagenUrl = url;
+        }
+      }
+      return h;
+    });
 
     // Group by category
     return habilidades.reduce(
@@ -223,7 +267,16 @@ export const getHabilidadesPorCategoria = async (
       locale: getLocaleCode(locale),
     });
 
-    return response.items.map((item) => parseEntry<Habilidad>(item));
+    return response.items.map((item) => {
+      const h = parseEntry<Habilidad>(item);
+      if (h.imagen) {
+        const url = getImageUrl(h.imagen, 80);
+        if (url) {
+          h.imagenUrl = url;
+        }
+      }
+      return h;
+    });
   } catch (error) {
     console.error(`Error fetching skills in category ${categoria}:`, error);
     return [];
@@ -239,8 +292,7 @@ export const getHabilidadesPorCategoria = async (
  */
 export const getSkills = async (locale: string): Promise<Skill[]> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const query: any = {
+    const query = {
       content_type: 'habilidad',
       locale: getLocaleCode(locale),
       include: 1,
@@ -248,14 +300,13 @@ export const getSkills = async (locale: string): Promise<Skill[]> => {
 
     const response = await client.getEntries(query);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const skills = response.items.map((item: any) => {
+    const skills = response.items.map((item: Entry<EntrySkeletonType, undefined, string>) => {
       const fields = item.fields ?? {};
       const categoriaRaw = fields.categoria as unknown;
       const categoria =
         Array.isArray(categoriaRaw) ? (categoriaRaw as string[]) : categoriaRaw ? [String(categoriaRaw)] : [];
 
-      const imagenUrl = getImageUrl(fields.imagen as ContentfulAsset | undefined) || undefined;
+      const imagenUrl = getImageUrl(fields.imagen as ContentfulAsset | undefined, 80) || undefined;
 
       return {
         id: item.sys.id as string,

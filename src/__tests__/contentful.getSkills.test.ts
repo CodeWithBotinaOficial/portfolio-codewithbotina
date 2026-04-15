@@ -57,7 +57,7 @@ describe('getSkills', () => {
         categoria: ['Frontend'],
         nivel: 80,
         iconoUrl: 'https://example.com/react.png',
-        imagenUrl: 'https://images.ctfassets.net/react.png',
+        imagenUrl: 'https://images.ctfassets.net/react.png?w=80&fm=webp&q=75',
         descripcion: '3 years of experience',
         destacada: true,
         orden: 1,

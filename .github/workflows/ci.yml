@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test -- --watchAll=false
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_CONTENTFUL_SPACE_ID: ${{ secrets.VITE_CONTENTFUL_SPACE_ID }}
+          VITE_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.VITE_CONTENTFUL_ACCESS_TOKEN }}
+
+      - name: Check bundle size
+        run: |
+          MAX_SIZE=600
+          for file in dist/assets/*.js; do
+            if [ -f "$file" ]; then
+              size=$(wc -c < "$file")
+              sizeKB=$((size / 1024))
+              echo "$file: ${sizeKB}KB"
+              if [ $sizeKB -gt $MAX_SIZE ]; then
+                echo "❌ Bundle $file exceeds ${MAX_SIZE}KB (${sizeKB}KB)"
+                exit 1
+              fi
+            fi
+          done
+          echo "✅ All bundles within size limit"

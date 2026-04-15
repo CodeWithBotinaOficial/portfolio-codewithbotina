@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import useSWR from 'swr';
 import { getProyectos, getProyectosDestacados } from '../services/contentful';
 import type { Proyecto, FilterOptions, SortOrder } from '../types';
 
@@ -20,8 +21,7 @@ interface UseProjectsReturn {
 /**
  * Custom hook to fetch and manage project data from Contentful.
  * 
- * Implements memoization for filters to prevent unnecessary re-fetches
- * and provides a clean interface for component consumption.
+ * Implements SWR for caching and provides a clean interface for component consumption.
  * 
  * @param filters - Optional filtering criteria for projects
  * @param sortBy - Field to sort by ('fecha' or 'orden')
@@ -33,51 +33,26 @@ export const useProjects = (
   sortBy: 'fecha' | 'orden' = 'orden',
   order: SortOrder = 'asc'
 ): UseProjectsReturn => {
-  const [projects, setProjects] = useState<Proyecto[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  // Memoize filters to prevent effect loops if a new object is passed on every render
-  const filtersString = JSON.stringify(filters);
   const memoizedFilters = useMemo(() => {
-    if (!filtersString) return undefined;
-    try {
-      return JSON.parse(filtersString) as FilterOptions;
-    } catch {
-      return undefined;
-    }
-  }, [filtersString]);
+    return filters ? JSON.stringify(filters) : 'no-filters';
+  }, [filters]);
 
-  /**
-   * Asynchronous function to fetch projects from the service.
-   * Wrapped in useCallback to be stable across renders.
-   */
-  const fetchProjects = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getProyectos(memoizedFilters, sortBy, order, i18n.language);
-      setProjects(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch projects';
-      setError(errorMessage);
-      console.error('Error fetching projects:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [memoizedFilters, sortBy, order, i18n.language]);
-
-  // Trigger fetch when dependencies change
-  useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
+  const { data, error, isLoading, mutate } = useSWR<Proyecto[]>(
+    ['projects', memoizedFilters, sortBy, order, i18n.language],
+    async ([, f, s, o, l]) => {
+      const parsedFilters = f === 'no-filters' ? undefined : JSON.parse(f as string) as FilterOptions;
+      return getProyectos(parsedFilters, s as 'fecha' | 'orden', o as SortOrder, l as string);
+    },
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    projects,
-    loading,
-    error,
-    refetch: fetchProjects,
+    projects: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch projects') : null,
+    refetch: async () => { await mutate(); },
   };
 };
 
@@ -87,34 +62,18 @@ export const useProjects = (
  * @returns Object containing featured projects data, loading state, error state, and refetch function
  */
 export const useFeaturedProjects = (): UseProjectsReturn => {
-  const [projects, setProjects] = useState<Proyecto[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchProjects = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getProyectosDestacados(i18n.language);
-      setProjects(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch featured projects';
-      setError(errorMessage);
-      console.error('Error fetching featured projects:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [i18n.language]);
-
-  useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
+  const { data, error, isLoading, mutate } = useSWR<Proyecto[]>(
+    ['featured-projects', i18n.language],
+    async ([, l]) => getProyectosDestacados(l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    projects,
-    loading,
-    error,
-    refetch: fetchProjects,
+    projects: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch featured projects') : null,
+    refetch: async () => { await mutate(); },
   };
 };

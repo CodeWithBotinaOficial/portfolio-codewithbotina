@@ -13,17 +13,23 @@ export default defineConfig(({ mode }) => {
       'process.env.VITE_CONTENTFUL_ACCESS_TOKEN': JSON.stringify(env.VITE_CONTENTFUL_ACCESS_TOKEN ?? ''),
     },
     build: {
-      chunkSizeWarningLimit: 600,
+      target: 'es2015',
+      cssCodeSplit: true,
+      chunkSizeWarningLimit: 500,
       rollupOptions: {
         output: {
           manualChunks: {
             'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-            'vendor-i18n': ['i18next', 'react-i18next'],
+            'vendor-i18n': ['i18next', 'react-i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
             'vendor-contentful': ['contentful', '@contentful/rich-text-react-renderer', '@contentful/rich-text-types'],
             'vendor-animation': ['framer-motion'],
+            'vendor-swr': ['swr'],
           },
         },
       },
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'swr'],
     },
   };
 });

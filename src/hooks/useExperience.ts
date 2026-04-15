@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import useSWR from 'swr';
 import {
   getExperiencias,
   getEducacion,
@@ -30,35 +30,19 @@ interface UseExperienceReturn {
 export const useExperience = (
   tipo?: string
 ): UseExperienceReturn => {
-  const [experiences, setExperiences] = useState<Experiencia[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchExperiences = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getExperiencias(tipo, i18n.language);
-      setExperiences(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch experiences';
-      setError(errorMessage);
-      console.error('Error fetching experiences:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [tipo, i18n.language]);
-
-  useEffect(() => {
-    fetchExperiences();
-  }, [fetchExperiences]);
+  const { data, error, isLoading, mutate } = useSWR<Experiencia[]>(
+    ['experiences', tipo, i18n.language],
+    ([, t, l]) => getExperiencias(t as string, l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    experiences,
-    loading,
-    error,
-    refetch: fetchExperiences,
+    experiences: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch experiences') : null,
+    refetch: async () => { await mutate(); },
   };
 };
 
@@ -68,35 +52,19 @@ export const useExperience = (
  * @returns Object containing education data, loading state, error state, and refetch function
  */
 export const useEducation = (): UseExperienceReturn => {
-  const [experiences, setExperiences] = useState<Experiencia[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchExperiences = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getEducacion(i18n.language);
-      setExperiences(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch education';
-      setError(errorMessage);
-      console.error('Error fetching education:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [i18n.language]);
-
-  useEffect(() => {
-    fetchExperiences();
-  }, [fetchExperiences]);
+  const { data, error, isLoading, mutate } = useSWR<Experiencia[]>(
+    ['education', i18n.language],
+    ([, l]) => getEducacion(l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    experiences,
-    loading,
-    error,
-    refetch: fetchExperiences,
+    experiences: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch education') : null,
+    refetch: async () => { await mutate(); },
   };
 };
 
@@ -106,34 +74,18 @@ export const useEducation = (): UseExperienceReturn => {
  * @returns Object containing certification data, loading state, error state, and refetch function
  */
 export const useCertifications = (): UseExperienceReturn => {
-  const [experiences, setExperiences] = useState<Experiencia[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const fetchExperiences = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await getCertificaciones(i18n.language);
-      setExperiences(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch certifications';
-      setError(errorMessage);
-      console.error('Error fetching certifications:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [i18n.language]);
-
-  useEffect(() => {
-    fetchExperiences();
-  }, [fetchExperiences]);
+  const { data, error, isLoading, mutate } = useSWR<Experiencia[]>(
+    ['certifications', i18n.language],
+    ([, l]) => getCertificaciones(l as string),
+    { revalidateOnFocus: false, dedupingInterval: 300000 }
+  );
 
   return {
-    experiences,
-    loading,
-    error,
-    refetch: fetchExperiences,
+    experiences: data ?? [],
+    loading: isLoading,
+    error: error ? (error instanceof Error ? error.message : 'Failed to fetch certifications') : null,
+    refetch: async () => { await mutate(); },
   };
 };
