@@ -3,6 +3,7 @@ import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../LanguageSwitcher';
+import LogoMark from './LogoMark';
 
 /**
  * Social link structure.
@@ -84,14 +85,10 @@ const Header = () => {
               className="relative z-50 bg-transparent p-0 border-0"
               aria-label="CodeWithBotina Home"
             >
-              <img 
-                src="/logo.svg" 
-                alt="CodeWithBotina Logo" 
-                className="h-10 w-auto transition-transform duration-300 hover:scale-105"
-                width="40"
-                height="40"
-                loading="eager"
-                fetchPriority="high"
+              <LogoMark
+                className="h-10 w-10 transition-transform duration-300 hover:scale-105"
+                size={40}
+                title="CodeWithBotina"
               />
             </button>
 

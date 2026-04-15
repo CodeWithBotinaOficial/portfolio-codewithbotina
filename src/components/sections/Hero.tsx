@@ -54,8 +54,8 @@ const Hero = () => {
           <div className="max-w-4xl mx-auto text-center">
             {/* Greeting */}
             <m.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 14 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mb-6"
             >
@@ -66,9 +66,9 @@ const Hero = () => {
 
             {/* Main Title */}
             <m.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              initial={{ y: 18 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-charcoal"
             >
               {t('hero.titlePrefix')}{' '}
@@ -82,9 +82,9 @@ const Hero = () => {
 
             {/* Subtitle */}
             <m.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              initial={{ y: 16 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-xl md:text-2xl text-text-muted mb-8 max-w-3xl mx-auto font-light"
             >
               {t('hero.subtitle')}
@@ -92,9 +92,9 @@ const Hero = () => {
 
             {/* Description */}
             <m.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              initial={{ y: 16 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-base md:text-lg text-text-light mb-12 max-w-2xl mx-auto leading-relaxed"
             >
               {t('hero.description')}

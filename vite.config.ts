@@ -1,12 +1,13 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
-    plugins: [react()],
+    plugins: [react(), svgr()],
     define: {
       // Make these available via `process.env.*` in the browser build.
       'process.env.VITE_CONTENTFUL_SPACE_ID': JSON.stringify(env.VITE_CONTENTFUL_SPACE_ID ?? ''),
