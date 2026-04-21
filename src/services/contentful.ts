@@ -40,6 +40,7 @@ const client = createClient({
 export const contentfulLocaleMap: Record<string, string> = {
   es: 'es-CO',
   en: 'en-US',
+  pt: 'pt-BR',
 };
 
 const getLocaleCode = (locale?: string): string => {

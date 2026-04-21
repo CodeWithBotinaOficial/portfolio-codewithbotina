@@ -8,13 +8,13 @@ Esta guía detalla los pasos necesarios para agregar un nuevo idioma al portafol
 ### 1. Configurar el nuevo locale en i18next
 #### Configure the new locale in i18next
 
-Edita el archivo `src/i18n.ts` para incluir el nuevo código de idioma (ej. `'fr'`) en el array de idiomas soportados.
+Edita el archivo `src/i18n.ts` para incluir el nuevo código de idioma (ej. `'pt'`) en el array de idiomas soportados.
 
 ```typescript
 // src/i18n.ts
 i18n.init({
   fallbackLng: 'es',
-  supportedLngs: ['es', 'en', 'fr'], // Agrega el nuevo idioma aquí
+  supportedLngs: ['es', 'en', 'pt'], // Agrega el nuevo idioma aquí
   // ... rest of config
 });
 ```
@@ -22,21 +22,21 @@ i18n.init({
 ### 2. Crear el archivo de traducción
 #### Create the translation file
 
-Crea una nueva carpeta y archivo en `public/locales/{nuevo_idioma}/translation.json`. Copia el contenido de `public/locales/es/translation.json` y traduce todos los valores.
+Crea una nueva carpeta y archivo en `src/locales/{nuevo_idioma}/translation.json`. Copia el contenido de `src/locales/es/translation.json` y traduce todos los valores.
 
-**Ruta:** `public/locales/fr/translation.json`
+**Ruta:** `src/locales/pt/translation.json`
 
 ### 3. Mapear el locale para Contentful
 #### Map the locale for Contentful
 
-Actualiza el objeto `contentfulLocaleMap` en `src/services/contentful.ts` para que el código corto del frontend coincida con el código de locale de Contentful (ej. `fr-FR`).
+Actualiza el objeto `contentfulLocaleMap` en `src/services/contentful.ts` para que el código corto del frontend coincida con el código de locale de Contentful (ej. `pt-BR`).
 
 ```typescript
 // src/services/contentful.ts
 export const contentfulLocaleMap: Record<string, string> = {
   es: 'es-CO',
   en: 'en-US',
-  fr: 'fr-FR', // Agrega el mapeo aquí
+  pt: 'pt-BR', // Agrega el mapeo aquí
 };
 ```
 
@@ -48,12 +48,12 @@ Modifica `src/components/LanguageSwitcher.tsx` para incluir el botón del nuevo 
 ```tsx
 // src/components/LanguageSwitcher.tsx
 const changeLanguage = (lng: string) => {
-  const supportedLocales = ['es', 'en', 'fr']; // Actualiza esta lista
+  const supportedLocales = ['es', 'en', 'pt']; // Actualiza esta lista
   // ... logic
 };
 
 // En el JSX:
-<button onClick={() => changeLanguage('fr')}>FR</button>
+<button onClick={() => changeLanguage('pt')} aria-label="Português (Brasil)">PT</button>
 ```
 
 ### 5. Configurar el idioma en Contentful (Dashboard)
@@ -62,7 +62,7 @@ const changeLanguage = (lng: string) => {
 1. Ve a tu espacio en Contentful.
 2. Navega a **Settings > Locales**.
 3. Haz clic en **Add Locale**.
-4. Selecciona el idioma deseado (ej. French - France) y guarda.
+4. Selecciona el idioma deseado (ej. Portuguese (Brazil)) y guarda.
 
 ### 6. Traducir contenido en Contentful (Dashboard)
 #### Translate content in Contentful (Dashboard)
@@ -85,7 +85,21 @@ Si has agregado el locale manualmente a través del dashboard, puedes omitir est
 npm run setup:contentful-locales
 ```
 
-### 9. Verificar integridad
+### 9. Actualizar enrutamiento en App.tsx
+#### Update routing in App.tsx
+
+Asegúrate de incluir el nuevo idioma en las validaciones de ruta en `src/App.tsx`.
+
+```typescript
+// src/App.tsx
+useEffect(() => {
+  if (lang && ['es', 'en', 'pt'].includes(lang) && i18n.language !== lang) {
+    i18n.changeLanguage(lang);
+  }
+}, [lang, i18n]);
+```
+
+### 10. Verificar integridad
 #### Verify integrity
 
 Ejecuta el linter y los tests para asegurar que no haya errores de sintaxis o lógica.
@@ -101,11 +115,12 @@ npm run test
 ### Checklist
 
 - [ ] Nuevo locale agregado a `src/i18n.ts`.
-- [ ] Archivo JSON creado en `public/locales/{lng}/`.
+- [ ] Archivo JSON creado en `src/locales/{lng}/`.
 - [ ] Mapeo agregado en `src/services/contentful.ts`.
 - [ ] Botón agregado a `LanguageSwitcher.tsx`.
 - [ ] Locale configurado en el Dashboard de Contentful.
 - [ ] Entradas traducidas en Contentful.
 - [ ] Fallback locale configurado en Contentful.
 - [ ] Script de configuración ejecutado (si aplica).
+- [ ] Rutas actualizadas en `App.tsx`.
 - [ ] Lint y Tests aprobados.
