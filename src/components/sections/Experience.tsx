@@ -5,7 +5,7 @@ import { Section } from '../ui';
 import { useExperience } from '../../hooks';
 import { Calendar, MapPin, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { format } from 'date-fns';
-import { es, enUS } from 'date-fns/locale';
+import { es, enUS, ptBR } from 'date-fns/locale';
 import { getImageUrl } from '../../services/contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, MARKS, type Document } from '@contentful/rich-text-types';
@@ -33,7 +33,13 @@ const Experience = () => {
   const { t, i18n } = useTranslation();
   const { experiences, loading, error } = useExperience();
 
-  const dateLocale = i18n.language.startsWith('es') ? es : enUS;
+  const getDateLocale = () => {
+    if (i18n.language.startsWith('es')) return es;
+    if (i18n.language.startsWith('pt')) return ptBR;
+    return enUS;
+  };
+
+  const dateLocale = getDateLocale();
 
   if (loading) {
     return (
@@ -65,9 +71,7 @@ const Experience = () => {
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
             <p className="text-text-muted">
-              {i18n.language.startsWith('es') 
-                ? 'Por favor, verifica tu conexión a Contentful.' 
-                : 'Please check your connection to Contentful.'}
+              {t('projects.errorContentful')}
             </p>
           </div>
         </Section>
@@ -87,13 +91,18 @@ const Experience = () => {
     const typeStr = Array.isArray(type) ? type[0] : type;
     const lowerType = typeStr?.toLowerCase() || '';
     
-    if (lowerType.includes('educación') || lowerType.includes('education')) return <GraduationCap className="w-5 h-5" />;
-    if (lowerType.includes('certificación') || lowerType.includes('certification')) return <Award className="w-5 h-5" />;
+    if (lowerType.includes('educación') || lowerType.includes('education') || lowerType.includes('educação')) return <GraduationCap className="w-5 h-5" />;
+    if (lowerType.includes('certificación') || lowerType.includes('certification') || lowerType.includes('certificação')) return <Award className="w-5 h-5" />;
     return <Briefcase className="w-5 h-5" />;
   };
 
   const getDisplayType = (type: string | string[]) => {
-    return Array.isArray(type) ? type[0] : type;
+    const typeStr = Array.isArray(type) ? type[0] : type;
+    const lowerType = typeStr?.toLowerCase() || '';
+
+    if (lowerType.includes('educación') || lowerType.includes('education') || lowerType.includes('educação')) return t('experience.education');
+    if (lowerType.includes('certificación') || lowerType.includes('certification') || lowerType.includes('certificação')) return t('experience.certification');
+    return t('experience.work');
   };
 
   /**
@@ -178,7 +187,7 @@ const Experience = () => {
                     <div className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       <span>
-                        {formatDate(exp.fechaInicio)} - {exp.fechaFin ? formatDate(exp.fechaFin) : (i18n.language.startsWith('es') ? 'Presente' : 'Present')}
+                        {formatDate(exp.fechaInicio)} - {exp.fechaFin ? formatDate(exp.fechaFin) : t('experience.present')}
                       </span>
                     </div>
                     {exp.ubicacion && (
@@ -205,7 +214,7 @@ const Experience = () => {
           {experiences.length === 0 && (
             <div className="text-center py-12">
               <p className="text-text-muted text-lg">
-                {i18n.language.startsWith('es') ? 'No hay experiencias registradas aún.' : 'No experiences registered yet.'}
+                {t('experience.noRecords')}
               </p>
             </div>
           )}

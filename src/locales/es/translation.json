@@ -16,7 +16,8 @@
     "ctaProjects": "Ver Proyectos",
     "ctaContact": "Contactar",
     "downloadCV": "Descargar CV",
-    "discoverMore": "Descubre más"
+    "discoverMore": "Descubre más",
+    "footerQuote": "\"De los campos de Buga a la vanguardia tecnológica\" 🇨🇴"
   },
   "about": {
     "title": "Mi Historia",
@@ -74,21 +75,33 @@
     "subtitle": "Una selección de mis trabajos más recientes",
     "viewMore": "Ver más proyectos",
     "github": "Código",
-    "demo": "Demo"
+    "demo": "Demo",
+    "errorContentful": "Por favor, verifica tu conexión a Contentful.",
+    "all": "Todos",
+    "moreDetails": "Más Detalles",
+    "backToMain": "Volver a la vista principal",
+    "featured": "Destacado",
+    "clickDetails": "Click en la tarjeta para ver detalles",
+    "notFound": "No se encontraron proyectos con \"{{filter}}\"",
+    "viewAll": "Ver todos los proyectos",
+    "viewAllGithub": "Ver Todos los Proyectos en GitHub"
   },
   "skills": {
     "title": "Habilidades",
     "subtitle": "Tecnologías, metodologías y competencias que aplico en mi día a día",
     "filterAll": "Todas",
     "levelLabel": "Nivel",
-    "featuredLabel": "Destacada"
+    "featuredLabel": "Destacada",
+    "noSkills": "No hay habilidades para esta categoría."
   },
   "experience": {
     "title": "Experiencia & Educación",
     "subtitle": "Mi trayectoria académica y profesional",
     "education": "Educación",
     "certification": "Certificaciones",
-    "work": "Experiencia Laboral"
+    "work": "Experiencia Laboral",
+    "present": "Presente",
+    "noRecords": "No hay experiencias registradas aún."
   },
   "contact": {
     "title": "Conectemos",
@@ -100,7 +113,11 @@
     "linkedinCta": "Conectar en LinkedIn"
   },
   "footer": {
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "navigation": "Navegación",
+    "contact": "Contacto",
+    "madeWith": "Hecho con",
+    "inColombia": "en Colombia"
   },
   "seo": {
     "home": {
@@ -117,4 +134,3 @@
     }
   }
 }
-

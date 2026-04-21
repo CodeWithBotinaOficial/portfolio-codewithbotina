@@ -101,9 +101,7 @@ const Skills = () => {
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
             <p className="text-text-muted">
-              {i18n.language.startsWith('es')
-                ? 'Por favor, verifica tu conexión a Contentful.'
-                : 'Please check your connection to Contentful.'}
+              {t('projects.errorContentful')}
             </p>
           </div>
         </Section>
@@ -188,9 +186,7 @@ const Skills = () => {
         {filteredSkills.length === 0 && (
           <div className="relative z-10 text-center py-10">
             <p className="text-text-muted">
-              {i18n.language.startsWith('es')
-                ? 'No hay habilidades para esta categoría.'
-                : 'No skills found for this category.'}
+              {t('skills.noSkills')}
             </p>
           </div>
         )}

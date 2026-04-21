@@ -16,12 +16,13 @@
     "ctaProjects": "Ver Projetos",
     "ctaContact": "Contatar",
     "downloadCV": "Baixar CV",
-    "discoverMore": "Descubra mais"
+    "discoverMore": "Descubra mais",
+    "footerQuote": "\"Dos campos de Buga para a vanguarda tecnológica\" 🇨🇴"
   },
   "about": {
     "title": "Minha História",
     "subtitle": "Uma jornada desde os campos de Buga até a vanguarda tecnológica",
-    "story1": "Sou <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, conhecido como Alejandro ou simplesmente Botina. Nasci em 1º de fevereiro de 2007 em Guadalajara de Buga, Valle del Cauca, Colômbia. Minhas raízes são camponesas — tanto minha mãe quanto meu pai cresceram no campo, e tive a sorte de viver nesse ambiente antes de me mudar para um lugar mais urbano, onde descobri minha paixão pela tecnologia.",
+    "story1": "Sou <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, conhecido como Alejandro or simplesmente Botina. Nasci em 1º de fevereiro de 2007 em Guadalajara de Buga, Valle del Cauca, Colômbia. Minhas raízes são camponesas — tanto minha mãe quanto meu pai cresceram no campo, e tive a sorte de viver nesse ambiente antes de me mudar para um lugar mais urbano, onde descobri minha passion pela tecnologia.",
     "story2": "Estudei na Instituição Educativa Nuestra Señora de Fátima, onde me formei com honras como o estudante com a <strong class='text-charcoal font-semibold'>maior pontuação no ICFES</strong> da minha geração, reconhecido pelo meu compromisso acadêmico e minhas contribuições para a instituição. Obtive títulos técnicos em Agropecuária e Operação Turística Local, além do meu técnico em Sistemas de Informação.",
     "quote": "O mais triste da vida é o talento desperdiçado, e as decisões que você tomar moldarão sua vida para sempre.",
     "quoteAuthor": "Desafio no Bronx (1993)",
@@ -74,21 +75,33 @@
     "subtitle": "Uma seleção dos meus trabalhos mais recentes",
     "viewMore": "Ver mais projetos",
     "github": "Código",
-    "demo": "Demo"
+    "demo": "Demo",
+    "errorContentful": "Por favor, verifique sua conexão com o Contentful.",
+    "all": "Todos",
+    "moreDetails": "Mais Detalhes",
+    "backToMain": "Voltar à visualização principal",
+    "featured": "Destaque",
+    "clickDetails": "Clique no cartão para ver detalhes",
+    "notFound": "Nenhum projeto encontrado com \"{{filter}}\"",
+    "viewAll": "Ver todos os projetos",
+    "viewAllGithub": "Ver Todos os Projetos no GitHub"
   },
   "skills": {
     "title": "Habilidades",
     "subtitle": "Tecnologias, metodologias e competências que aplico no meu dia a dia",
     "filterAll": "Todas",
     "levelLabel": "Nível",
-    "featuredLabel": "Destaque"
+    "featuredLabel": "Destaque",
+    "noSkills": "Não há habilidades para esta categoria."
   },
   "experience": {
     "title": "Experiência & Educação",
     "subtitle": "Minha trajetória acadêmica e profissional",
     "education": "Educação",
     "certification": "Certificações",
-    "work": "Experiência Profissional"
+    "work": "Experiência Profissional",
+    "present": "Presente",
+    "noRecords": "Nenhuma experiência registrada ainda."
   },
   "contact": {
     "title": "Vamos nos Conectar",
@@ -100,7 +113,11 @@
     "linkedinCta": "Conectar no LinkedIn"
   },
   "footer": {
-    "rights": "Todos os direitos reservados."
+    "rights": "Todos os direitos reservados.",
+    "navigation": "Navegação",
+    "contact": "Contato",
+    "madeWith": "Feito com",
+    "inColombia": "na Colômbia"
   },
   "seo": {
     "home": {
