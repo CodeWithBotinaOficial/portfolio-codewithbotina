@@ -17,7 +17,7 @@ const PortfolioContent = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (lang && ['es', 'en'].includes(lang) && i18n.language !== lang) {
+    if (lang && ['es', 'en', 'pt'].includes(lang) && i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
   }, [lang, i18n]);
@@ -27,7 +27,7 @@ const PortfolioContent = () => {
       <SEO 
         title={t('seo.home.title')}
         description={t('seo.home.description')}
-        locale={i18n.language.startsWith('es') ? 'es' : 'en'}
+        locale={lang || 'es'}
         path={location.pathname}
       />
       <Hero />
@@ -48,7 +48,7 @@ const RootRedirect = () => {
   
   if (location.pathname === '/') {
     const detectedLng = i18n.language.split('-')[0];
-    const targetLng = ['es', 'en'].includes(detectedLng) ? detectedLng : 'es';
+    const targetLng = ['es', 'en', 'pt'].includes(detectedLng) ? detectedLng : 'es';
     return <Navigate to={`/${targetLng}`} replace />;
   }
   

@@ -9,7 +9,7 @@
 -   **Diseño Moderno y Responsivo**: Una interfaz de usuario limpia y adaptable a cualquier tamaño de pantalla, construida con Tailwind CSS.
 -   **Componentes Reutilizables**: Desarrollado con React y TypeScript, siguiendo una arquitectura basada en componentes para facilitar el mantenimiento y la escalabilidad.
 -   **Gestión de Contenido**: El contenido del portafolio (proyectos, experiencia, etc.) se gestiona a través de Contentful, lo que permite actualizaciones sencillas sin necesidad de modificar el código.
--   **Internacionalización (i18n)**: Soporte completo para Español (`es`) e Inglés (`en`) utilizando `i18next` y la localización nativa de Contentful.
+-   **Internacionalización (i18n)**: Soporte completo para Español (`es`), Inglés (`en`) y Portugués (`pt`) utilizando `i18next` y la localización nativa de Contentful.
 -   **Animaciones Fluidas**: Uso de Framer Motion para animaciones sutiles que mejoran la experiencia de usuario.
 -   **Optimizado para el Rendimiento**: Construido con Vite para un desarrollo rápido y un empaquetado optimizado para producción.
 
@@ -30,11 +30,11 @@
 
 ## 🌐 Internacionalización (i18n)
 
-El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`).
+El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `/pt`).
 
 ### Configuración de Contentful
 Para habilitar la localización en Contentful:
-1. Asegúrate de tener el `en-US` locale configurado en tu espacio.
+1. Asegúrate de tener los locales `en-US` y `pt-BR` configurados en tu espacio.
 2. Ejecuta el script de configuración para marcar los campos como localizables:
    ```bash
    npm run setup:contentful-locales
@@ -42,9 +42,7 @@ Para habilitar la localización en Contentful:
    *Nota: Necesitarás un `CONTENTFUL_MANAGEMENT_TOKEN` en tu `.env.local`.*
 
 ### Agregar un nuevo idioma
-1. Crea el archivo de traducción en `public/locales/{lng}/translation.json`.
-2. Agrega el código del idioma a la configuración en `src/i18n.ts` y al `contentfulLocaleMap` en `src/services/contentful.ts`.
-3. Actualiza el componente `LanguageSwitcher.tsx`.
+Consulte la [Guía para Agregar un Nuevo Idioma](./docs/ADDING_NEW_LANGUAGE.md) para obtener instrucciones detalladas.
 
 ## 🛠️ Instalación y Uso Local
 

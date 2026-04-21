@@ -10,7 +10,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { format } from 'date-fns';
-import { es, enUS } from 'date-fns/locale';
+import { es, enUS, ptBR } from 'date-fns/locale';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const Projects = () => {
@@ -19,7 +19,13 @@ const Projects = () => {
   const [filter, setFilter] = useState<string>('all');
   const shouldReduceMotion = useReducedMotion();
 
-  const dateLocale = i18n.language.startsWith('es') ? es : enUS;
+  const getDateLocale = () => {
+    if (i18n.language.startsWith('es')) return es;
+    if (i18n.language.startsWith('pt')) return ptBR;
+    return enUS;
+  };
+
+  const dateLocale = getDateLocale();
 
   // Get unique technologies
   const technologies = Array.from(
@@ -62,9 +68,7 @@ const Projects = () => {
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
             <p className="text-text-muted">
-              {i18n.language.startsWith('es') 
-                ? 'Por favor, verifica tu conexión a Contentful.' 
-                : 'Please check your connection to Contentful.'}
+              {t('projects.errorContentful')}
             </p>
           </div>
         </Section>
@@ -91,7 +95,7 @@ const Projects = () => {
             }`}
             onClick={() => setFilter('all')}
           >
-            {i18n.language.startsWith('es') ? 'Todos' : 'All'} ({projects.length})
+            {t('projects.all')} ({projects.length})
           </button>
           {technologies.map((tech) => (
             <button
@@ -124,10 +128,10 @@ const Projects = () => {
                 cardBack={
                   <div className="p-6 flex flex-col h-full bg-surface rounded-2xl">
                     <div className="flex items-center justify-between mb-4 border-b border-beige-200 pb-2">
-                      <h4 className="text-lg font-bold text-charcoal">{i18n.language.startsWith('es') ? 'Más Detalles' : 'More Details'}</h4>
+                      <h4 className="text-lg font-bold text-charcoal">{t('projects.moreDetails')}</h4>
                       <button
                         className="text-text-muted hover:text-charcoal transition-colors"
-                        aria-label={i18n.language.startsWith('es') ? 'Volver a la vista principal' : 'Back to main view'}
+                        aria-label={t('projects.backToMain')}
                       >
                         <ArrowLeft className="w-5 h-5" />
                       </button>
@@ -153,7 +157,7 @@ const Projects = () => {
                       />
                       {project.destacado && (
                         <div className="absolute top-4 right-4 bg-charcoal text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                          ⭐ {i18n.language.startsWith('es') ? 'Destacado' : 'Featured'}
+                          ⭐ {t('projects.featured')}
                         </div>
                       )}
                     </div>
@@ -225,7 +229,7 @@ const Projects = () => {
                       )}
                     </div>
                     <div className="text-center text-xs text-text-light mt-4 italic">
-                      {i18n.language.startsWith('es') ? 'Click en la tarjeta para ver detalles' : 'Click on card to see details'}
+                      {t('projects.clickDetails')}
                     </div>
                   </div>
                 </div>
@@ -238,13 +242,13 @@ const Projects = () => {
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-text-muted text-lg">
-              {i18n.language.startsWith('es') ? `No se encontraron proyectos con "${filter}"` : `No projects found with "${filter}"`}
+              {t('projects.notFound', { filter })}
             </p>
             <button
               onClick={() => setFilter('all')}
               className="mt-4 text-charcoal hover:underline font-medium"
             >
-              {i18n.language.startsWith('es') ? 'Ver todos los proyectos' : 'View all projects'}
+              {t('projects.viewAll')}
             </button>
           </div>
         )}
@@ -259,7 +263,7 @@ const Projects = () => {
               className="inline-block"
             >
               <button className="btn-primary rounded-xl">
-                {i18n.language.startsWith('es') ? 'Ver Todos los Proyectos en GitHub' : 'View All Projects on GitHub'}
+                {t('projects.viewAllGithub')}
               </button>
             </a>
           </div>

@@ -11,7 +11,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('LanguageSwitcher', () => {
-  it('renders both language buttons', () => {
+  it('renders all language buttons', () => {
     render(
       <BrowserRouter>
         <LanguageSwitcher />
@@ -19,6 +19,7 @@ describe('LanguageSwitcher', () => {
     );
     expect(screen.getByText('ES')).toBeInTheDocument();
     expect(screen.getByText('EN')).toBeInTheDocument();
+    expect(screen.getByText('PT')).toBeInTheDocument();
   });
 
   it('calls changeLanguage and navigate when a language is clicked', () => {
@@ -33,5 +34,19 @@ describe('LanguageSwitcher', () => {
     
     expect(i18n.changeLanguage).toHaveBeenCalledWith('en');
     expect(mockNavigate).toHaveBeenCalledWith('/en');
+  });
+
+  it('navigates to pt when PT is clicked', () => {
+    const { i18n } = useTranslation();
+    render(
+      <BrowserRouter>
+        <LanguageSwitcher />
+      </BrowserRouter>
+    );
+    
+    fireEvent.click(screen.getByText('PT'));
+    
+    expect(i18n.changeLanguage).toHaveBeenCalledWith('pt');
+    expect(mockNavigate).toHaveBeenCalledWith('/pt');
   });
 });

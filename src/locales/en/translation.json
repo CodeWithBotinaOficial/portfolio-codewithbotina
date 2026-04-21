@@ -16,7 +16,8 @@
     "ctaProjects": "See Projects",
     "ctaContact": "Contact",
     "downloadCV": "Download CV",
-    "discoverMore": "Discover more"
+    "discoverMore": "Discover more",
+    "footerQuote": "\"From the fields of Buga to the technological vanguard\" 🇨🇴"
   },
   "about": {
     "title": "My Story",
@@ -74,21 +75,33 @@
     "subtitle": "A selection of my most recent works",
     "viewMore": "View more projects",
     "github": "Code",
-    "demo": "Demo"
+    "demo": "Demo",
+    "errorContentful": "Please check your connection to Contentful.",
+    "all": "All",
+    "moreDetails": "More Details",
+    "backToMain": "Back to main view",
+    "featured": "Featured",
+    "clickDetails": "Click on card to see details",
+    "notFound": "No projects found with \"{{filter}}\"",
+    "viewAll": "View all projects",
+    "viewAllGithub": "View All Projects on GitHub"
   },
   "skills": {
     "title": "Skills",
     "subtitle": "Technologies, methodologies and competencies I apply every day",
     "filterAll": "All",
     "levelLabel": "Level",
-    "featuredLabel": "Featured"
+    "featuredLabel": "Featured",
+    "noSkills": "No skills found for this category."
   },
   "experience": {
     "title": "Experience & Education",
     "subtitle": "My academic and professional journey",
     "education": "Education",
     "certification": "Certifications",
-    "work": "Work Experience"
+    "work": "Work Experience",
+    "present": "Present",
+    "noRecords": "No experiences registered yet."
   },
   "contact": {
     "title": "Let's Connect",
@@ -100,7 +113,11 @@
     "linkedinCta": "Connect on LinkedIn"
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "madeWith": "Made with",
+    "inColombia": "in Colombia"
   },
   "seo": {
     "home": {
@@ -117,4 +134,3 @@
     }
   }
 }
-

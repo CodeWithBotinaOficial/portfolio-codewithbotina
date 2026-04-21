@@ -25,8 +25,9 @@ async function setupLocales() {
 
     console.log('Checking locales...');
     const locales = await environment.getLocales();
+    
+    // Check en-US
     const hasEnUS = locales.items.some(locale => locale.code === 'en-US');
-
     if (!hasEnUS) {
       console.log('Adding en-US locale...');
       await environment.createLocale({
@@ -37,6 +38,20 @@ async function setupLocales() {
       console.log('Locale en-US added successfully.');
     } else {
       console.log('Locale en-US already exists.');
+    }
+
+    // Check pt-BR
+    const hasPtBR = locales.items.some(locale => locale.code === 'pt-BR');
+    if (!hasPtBR) {
+      console.log('Adding pt-BR locale...');
+      await environment.createLocale({
+        name: 'Portuguese (Brazil)',
+        code: 'pt-BR',
+        fallbackCode: 'es-CO',
+      });
+      console.log('Locale pt-BR added successfully.');
+    } else {
+      console.log('Locale pt-BR already exists.');
     }
 
     const contentTypesToLocalize = ['proyecto', 'experiencia'];

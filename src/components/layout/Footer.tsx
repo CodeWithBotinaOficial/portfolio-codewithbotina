@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
  * Footer component displaying brand info, navigation links, and copyright.
  */
 const Footer = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
@@ -29,16 +29,14 @@ const Footer = () => {
               Software Engineer | System Architect
             </p>
             <p className="text-gray-400 text-sm font-light italic">
-              {i18n.language.startsWith('es') 
-                ? '"De los campos de Buga a la vanguardia tecnológica" 🇨🇴' 
-                : '"From the fields of Buga to the technological vanguard" 🇨🇴'}
+              {t('hero.footerQuote')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="col-span-1">
             <h4 className="text-lg font-semibold mb-6 text-beige-200 font-heading">
-              {i18n.language.startsWith('es') ? 'Navegación' : 'Navigation'}
+              {t('footer.navigation')}
             </h4>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
@@ -57,7 +55,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="col-span-1">
             <h4 className="text-lg font-semibold mb-6 text-beige-200 font-heading">
-              {i18n.language.startsWith('es') ? 'Contacto' : 'Contact'}
+              {t('footer.contact')}
             </h4>
             <p className="text-gray-400 text-sm mb-2">support@codewithbotina.com</p>
             <p className="text-gray-400 text-sm">Guadalajara de Buga, Valle del Cauca</p>
@@ -70,9 +68,9 @@ const Footer = () => {
             © {currentYear} Diego Alejandro Botina. {t('footer.rights')}
           </p>
           <p className="text-gray-500 text-xs flex items-center gap-2 tracking-wide">
-            {i18n.language.startsWith('es') ? 'Hecho con' : 'Made with'}{' '}
+            {t('footer.madeWith')}{' '}
             <Heart className="w-3 h-3 text-red-500 fill-current" />{' '}
-            {i18n.language.startsWith('es') ? 'en Colombia' : 'in Colombia'}
+            {t('footer.inColombia')}
           </p>
         </div>
       </div>
