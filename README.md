@@ -9,7 +9,7 @@
 -   **Diseño Moderno y Responsivo**: Una interfaz de usuario limpia y adaptable a cualquier tamaño de pantalla, construida con Tailwind CSS.
 -   **Componentes Reutilizables**: Desarrollado con React y TypeScript, siguiendo una arquitectura basada en componentes para facilitar el mantenimiento y la escalabilidad.
 -   **Gestión de Contenido**: El contenido del portafolio (proyectos, experiencia, etc.) se gestiona a través de Contentful, lo que permite actualizaciones sencillas sin necesidad de modificar el código.
--   **Internacionalización (i18n)**: Soporte completo para Español (`es`), Inglés (`en`) y Portugués (`pt`) utilizando `i18next` y la localización nativa de Contentful.
+-   **Internacionalización (i18n)**: Soporte completo para Español (`es`), Inglés (`en`), Portugués (`pt`) y Francés (`fr`) utilizando `i18next` y la localización nativa de Contentful.
 -   **Animaciones Fluidas**: Uso de Framer Motion para animaciones sutiles que mejoran la experiencia de usuario.
 -   **Optimizado para el Rendimiento**: Construido con Vite para un desarrollo rápido y un empaquetado optimizado para producción.
 
@@ -30,7 +30,16 @@
 
 ## 🌐 Internacionalización (i18n)
 
-El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `/pt`).
+El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `/pt`, `/fr`).
+
+### Idiomas Soportados
+
+| Locale | Idioma | Contentful locale | Estado |
+|--------|--------|-------------------|--------|
+| es | Español | es-CO | ✅ Completo |
+| en | English | en-US | ✅ Completo |
+| pt | Português (Brasil) | es-CO (fallback) | ⚠️ Solo UI |
+| fr | Français | es-CO (fallback) | ⚠️ Solo UI |
 
 ### Configuración de Contentful
 Para habilitar la localización en Contentful:

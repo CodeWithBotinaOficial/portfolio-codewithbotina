@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis Diego Alejandro Botina",
+    "titlePrefix": "Des Champs de Buga à la",
+    "titleHighlight": "Avant-garde Technologique",
+    "subtitle": "Software Engineer | System Architect | Étudiant en Commercial Software Engineering à Jala University",
+    "description": "Avec une soif insatiable d'innovation, je rêve de créer un système d'exploitation universel et un langage de programmation combinant la simplicité du langage naturel avec l'efficacité du C et de l'Assembly. Mettant la Colombie dans l'élite de la technologie de pointe.",
+    "ctaProjects": "Voir les Projets",
+    "ctaContact": "Me Contacter",
+    "downloadCV": "Télécharger le CV",
+    "discoverMore": "En savoir plus",
+    "footerQuote": "\"Des champs de Buga à l'avant-garde technologique\" 🇨🇴"
+  },
+  "about": {
+    "title": "Mon Histoire",
+    "subtitle": "Un voyage des champs de Buga à l'avant-garde technologique",
+    "story1": "Je suis <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, connu sous le nom d'Alejandro ou simplement Botina. Je suis né le 1er février 2007 à Guadalajara de Buga, Valle del Cauca, Colombie. Mes racines sont paysannes — maman et papa ont tous deux grandi à la campagne, et j'ai eu la chance de vivre dans cet environnement avant de déménager dans un endroit plus urbain où j'ai découvert ma passion pour la technologie.",
+    "story2": "J'ai étudié à l'Institution Éducative Nuestra Señora de Fátima, où j'ai obtenu mon diplôme avec mention comme l'étudiant ayant le <strong class='text-charcoal font-semibold'>meilleur score ICFES</strong> de ma génération, reconnu pour mon engagement académique et mes contributions à l'institution. J'ai obtenu des diplômes techniques en Agriculture et en Opération Touristique Locale, en plus de mon brevet de technicien en Systèmes Informatiques.",
+    "quote": "La chose la plus triste dans la vie est le talent gâché, et les décisions que vous prenez façonneront votre vie pour toujours.",
+    "quoteAuthor": "Il était une fois le Bronx (1993)",
+    "story3": "Cette citation résume ma philosophie : je ne gâcherai pas mon talent. Mes parents m'ont apporté leur soutien émotionnel et financier, et je suis arrivé avec la tête haute jusqu'à aujourd'hui, fier de qui je suis et avec un avenir que je n'ai pas l'intention de gaspiller.",
+    "valuesTitle": "Mes Valeurs",
+    "values": {
+      "vision": {
+        "title": "Vision",
+        "description": "Créer une technologie qui inspire et transforme. Mes rêves incluent le développement d'un système d'exploitation universel et d'un langage de programmation révolutionnaire."
+      },
+      "loyalty": {
+        "title": "Loyauté",
+        "description": "Je valorise par-dessus tout la loyauté, le respect et l'engagement. Je crois en la construction de relations durables basées sur la confiance mutuelle."
+      },
+      "determination": {
+        "title": "Détermination",
+        "description": "Avec une soif insatiable de connaissances, je suis prêt à faire des sacrifices et à travailler dur pour atteindre mes objectifs et ne pas gâcher mon talent."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Diplômé avec mention à chaque étape de mon éducation, je recherche toujours l'excellence dans tout ce que je fais, du code aux relations humaines."
+      }
+    },
+    "trajectoryTitle": "Ma Trajectoire",
+    "milestones": {
+      "m1": {
+        "year": "2007",
+        "title": "Naissance à Buga, Valle del Cauca",
+        "description": "J'ai grandi à la campagne, connecté à mes racines paysannes."
+      },
+      "m2": {
+        "year": "2024",
+        "title": "Diplômé Bachelier avec Mention",
+        "description": "Meilleur score ICFES de mon école. Technicien Agricole et Technicien en Opération Touristique Locale (SENA)."
+      },
+      "m3": {
+        "year": "2024",
+        "title": "Technicien en Systèmes Informatiques",
+        "description": "Diplômé avec mention de Discenter's Buga."
+      },
+      "m4": {
+        "year": "2025",
+        "title": "Jala University",
+        "description": "J'ai commencé ma carrière en Commercial Software Engineering avec une concentration en Design et Architecture."
+      }
+    }
+  },
+  "projects": {
+    "title": "Projets Mis en Avant",
+    "subtitle": "Une sélection de mes travaux les plus récents",
+    "viewMore": "Voir plus de projets",
+    "github": "Code",
+    "demo": "Démo",
+    "errorContentful": "Veuillez vérifier votre connexion à Contentful.",
+    "all": "Tous",
+    "moreDetails": "Plus de Détails",
+    "backToMain": "Retour à la vue principale",
+    "featured": "En vedette",
+    "clickDetails": "Cliquez sur la carte pour voir les détails",
+    "notFound": "Aucun projet trouvé avec \"{{filter}}\"",
+    "viewAll": "Voir tous les projets",
+    "viewAllGithub": "Voir tous les projets sur GitHub"
+  },
+  "skills": {
+    "title": "Compétences",
+    "subtitle": "Technologies, méthodologies et compétences que j'applique au quotidien",
+    "filterAll": "Toutes",
+    "levelLabel": "Niveau",
+    "featuredLabel": "En vedette",
+    "noSkills": "Aucune compétence pour cette catégorie."
+  },
+  "experience": {
+    "title": "Expérience & Éducation",
+    "subtitle": "Ma trajectoire académique et professionnelle",
+    "education": "Éducation",
+    "certification": "Certifications",
+    "work": "Expérience Professionnelle",
+    "present": "Présent",
+    "noRecords": "Aucune expérience enregistrée pour le moment."
+  },
+  "contact": {
+    "title": "Connectons-nous",
+    "subtitle": "Vous avez un projet en tête ? Vous voulez collaborer ? Parlons-en !",
+    "description": "Je suis toujours ouvert à de nouvelles opportunités, collaborations et conversations intéressantes. Que vous ayez une question, une proposition de projet ou que vous souhaitiez simplement vous connecter, n'hésitez pas à me contacter !",
+    "sendEmail": "Envoyer un E-mail",
+    "collabTitle": "Intéressé par une collaboration ?",
+    "collabDescription": "Je suis toujours à la recherche de nouveaux défis et d'opportunités de croissance. Si vous avez un projet passionnant, une idée innovante ou si vous voulez simplement discuter de technologie, je serais ravi de vous entendre.",
+    "linkedinCta": "Se connecter sur LinkedIn"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "madeWith": "Fait avec",
+    "inColombia": "en Colombie"
+  },
+  "seo": {
+    "home": {
+      "title": "Diego Botina | Développeur de Logiciels",
+      "description": "Portfolio de Diego Alejandro Botina, développeur de logiciels spécialisé en React, TypeScript et Node.js, avec projets, expérience et compétences."
+    },
+    "projects": {
+      "title": "Projets | Diego Botina",
+      "description": "Explorez les projets de logiciels développés par Diego Botina."
+    },
+    "experience": {
+      "title": "Expérience | Diego Botina",
+      "description": "Parcours professionnel et académique de Diego Alejandro Botina."
+    }
+  }
+}

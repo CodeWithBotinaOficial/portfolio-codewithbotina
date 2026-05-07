@@ -20,6 +20,7 @@ describe('LanguageSwitcher', () => {
     expect(screen.getByText('ES')).toBeInTheDocument();
     expect(screen.getByText('EN')).toBeInTheDocument();
     expect(screen.getByText('PT')).toBeInTheDocument();
+    expect(screen.getByText('FR')).toBeInTheDocument();
   });
 
   it('calls changeLanguage and navigate when a language is clicked', () => {
@@ -48,5 +49,19 @@ describe('LanguageSwitcher', () => {
     
     expect(i18n.changeLanguage).toHaveBeenCalledWith('pt');
     expect(mockNavigate).toHaveBeenCalledWith('/pt');
+  });
+
+  it('navigates to fr when FR is clicked', () => {
+    const { i18n } = useTranslation();
+    render(
+      <BrowserRouter>
+        <LanguageSwitcher />
+      </BrowserRouter>
+    );
+    
+    fireEvent.click(screen.getByText('FR'));
+    
+    expect(i18n.changeLanguage).toHaveBeenCalledWith('fr');
+    expect(mockNavigate).toHaveBeenCalledWith('/fr');
   });
 });

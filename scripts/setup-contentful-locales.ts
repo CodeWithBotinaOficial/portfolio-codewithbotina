@@ -54,6 +54,20 @@ async function setupLocales() {
       console.log('Locale pt-BR already exists.');
     }
 
+    // Check fr-FR
+    const hasFrFR = locales.items.some(locale => locale.code === 'fr-FR');
+    if (!hasFrFR) {
+      console.log('Adding fr-FR locale...');
+      await environment.createLocale({
+        name: 'French (France)',
+        code: 'fr-FR',
+        fallbackCode: 'es-CO',
+      });
+      console.log('Locale fr-FR added successfully.');
+    } else {
+      console.log('Locale fr-FR already exists.');
+    }
+
     const contentTypesToLocalize = ['proyecto', 'experiencia'];
     const fieldsToLocalize: Record<string, string[]> = {
       proyecto: ['titulo', 'descripcionCorta', 'descripcionCompleta', 'tecnologias'],
