@@ -41,6 +41,7 @@ export const contentfulLocaleMap: Record<string, string> = {
   es: 'es-CO',
   en: 'en-US',
   pt: 'es-CO', // pt-BR not available in Contentful free plan — fallback to Spanish content
+  fr: 'es-CO', // Contentful free plan fallback — fr-FR ready for future upgrade
 };
 
 const getLocaleCode = (locale?: string): string => {
