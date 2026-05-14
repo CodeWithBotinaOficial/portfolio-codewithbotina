@@ -40,8 +40,9 @@ const client = createClient({
 export const contentfulLocaleMap: Record<string, string> = {
   es: 'es-CO',
   en: 'en-US',
-  pt: 'es-CO', // pt-BR not available in Contentful free plan — fallback to Spanish content
-  fr: 'es-CO', // Contentful free plan fallback — fr-FR ready for future upgrade
+  pt: 'en-US', // English fallback — more accessible than Spanish for Brazilian tech audience
+  fr: 'en-US', // English fallback — more accessible than Spanish for French tech audience
+  nl: 'en-US', // English fallback — Netherlands has very high English proficiency
 };
 
 const getLocaleCode = (locale?: string): string => {

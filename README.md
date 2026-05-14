@@ -9,7 +9,7 @@
 -   **Diseño Moderno y Responsivo**: Una interfaz de usuario limpia y adaptable a cualquier tamaño de pantalla, construida con Tailwind CSS.
 -   **Componentes Reutilizables**: Desarrollado con React y TypeScript, siguiendo una arquitectura basada en componentes para facilitar el mantenimiento y la escalabilidad.
 -   **Gestión de Contenido**: El contenido del portafolio (proyectos, experiencia, etc.) se gestiona a través de Contentful, lo que permite actualizaciones sencillas sin necesidad de modificar el código.
--   **Internacionalización (i18n)**: Soporte completo para Español (`es`), Inglés (`en`), Portugués (`pt`) y Francés (`fr`) utilizando `i18next` y la localización nativa de Contentful.
+-   **Internacionalización (i18n)**: Soporte completo para Español (`es`), Inglés (`en`), Português (`pt`), Francés (`fr`) y Neerlandés (`nl`) utilizando `i18next` y la localización nativa de Contentful.
 -   **Animaciones Fluidas**: Uso de Framer Motion para animaciones sutiles que mejoran la experiencia de usuario.
 -   **Optimizado para el Rendimiento**: Construido con Vite para un desarrollo rápido y un empaquetado optimizado para producción.
 
@@ -30,7 +30,7 @@
 
 ## 🌐 Internacionalización (i18n)
 
-El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `/pt`, `/fr`).
+El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `/pt`, `/fr`, `/nl`).
 
 ### Idiomas Soportados
 
@@ -38,8 +38,11 @@ El sitio utiliza una estrategia de enrutamiento basado en rutas (`/es`, `/en`, `
 |--------|--------|-------------------|--------|
 | es | Español | es-CO | ✅ Completo |
 | en | English | en-US | ✅ Completo |
-| pt | Português (Brasil) | es-CO (fallback) | ⚠️ Solo UI |
-| fr | Français | es-CO (fallback) | ⚠️ Solo UI |
+| pt | Português (Brasil) | en-US (fallback) | ⚠️ Solo UI |
+| fr | Français | en-US (fallback) | ⚠️ Solo UI |
+| nl | Nederlands | en-US (fallback) | ⚠️ Solo UI |
+
+> **Nota:** Para pt, fr y nl, la interfaz está totalmente traducida al idioma nativo. Las descripciones de proyectos, habilidades y contenido de experiencia se muestran en inglés (el idioma común más accesible para estas audiencias) hasta que un plan de pago de Contentful permita locales adicionales. La base de código está totalmente preparada para la activación inmediata; consulte `docs/ADDING_NEW_LANGUAGE.md`.
 
 ### Configuración de Contentful
 Para habilitar la localización en Contentful:

@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Over mij",
+    "projects": "Projecten",
+    "skills": "Vaardigheden",
+    "experience": "Ervaring",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hallo, ik ben Diego Alejandro Botina",
+    "titlePrefix": "Van het platteland van Buga tot de",
+    "titleHighlight": "Technologische Voorhoede",
+    "subtitle": "Software Engineer | System Architect | Student Commercial Software Engineering aan Jala University",
+    "description": "Met een onverzadigbare honger naar innovatie droom ik van het creëren van een universeel besturingssysteem en een programmeertaal die de eenvoud van natuurlijke taal combineert met de efficiëntie van C en Assembly. Hiermee wil ik Colombia in de elite van de modernste technologie plaatsen.",
+    "ctaProjects": "Bekijk Projecten",
+    "ctaContact": "Contact",
+    "downloadCV": "Download CV",
+    "discoverMore": "Ontdek meer",
+    "footerQuote": "\"Van het platteland van Buga tot de technologische voorhoede\" 🇨🇴"
+  },
+  "about": {
+    "title": "Mijn Verhaal",
+    "subtitle": "Een reis van het platteland van Buga tot de technologische voorhoede",
+    "story1": "Ik ben <strong class='text-charcoal font-semibold'>Diego Alejandro Botina Herrera</strong>, bekend als Alejandro of simpelweg Botina. Ik ben geboren op 1 februari 2007 in Guadalajara de Buga, Valle del Cauca, Colombia. Mijn wortels liggen op het platteland — zowel mijn moeder als vader groeiden daar op, en ik had het geluk in die omgeving te wonen voordat ik naar een meer stedelijk gebied verhuisde waar ik mijn passie voor technologie ontdekte.",
+    "story2": "Ik studeerde aan de Institución Educativa Nuestra Señora de Fátima, waar ik cum laude afstudeerde als de student met de <strong class='text-charcoal font-semibold'>hoogste ICFES-score</strong> van mijn generatie, erkend om mijn academische inzet en bijdragen aan de instelling. Ik behaalde technische diploma's in de Landbouw en Lokale Toeristische Exploitatie, naast mijn diploma als IT-systemen technicus.",
+    "quote": "Het triestste in het leven is verspild talent, en de beslissingen die je neemt zullen je leven voor altijd vormen.",
+    "quoteAuthor": "A Bronx Tale (1993)",
+    "story3": "Dit citaat vat mijn filosofie samen: ik zal mijn talent niet verspillen. Mijn ouders boden me hun emotionele en financiële steun, en ik ben met opgeheven hoofd gekomen waar ik nu ben, trots op wie ik ben en met een toekomst die ik niet van plan ben te verdoen.",
+    "valuesTitle": "Mijn Waarden",
+    "values": {
+      "vision": {
+        "title": "Visie",
+        "description": "Technologie creëren die inspireert en transformeert. Mijn dromen omvatten het ontwikkelen van een universeel besturingssysteem en een revolutionaire programmeertaal."
+      },
+      "loyalty": {
+        "title": "Loyaliteit",
+        "description": "Ik waardeer loyaliteit, respect en toewijding boven alles. Ik geloof in het opbouwen van duurzame relaties op basis van wederzijds vertrouwen."
+      },
+      "determination": {
+        "title": "Vastberadenheid",
+        "description": "Met een onverzadigbare honger naar kennis ben ik bereid om te offeren en hard te werken om mijn doelen te bereiken en mijn talent niet te verspillen."
+      },
+      "excellence": {
+        "title": "Excellentie",
+        "description": "In elke fase van mijn opleiding cum laude afgestudeerd, streef ik altijd naar excellentie in alles wat ik doe, van code tot menselijke relaties."
+      }
+    },
+    "trajectoryTitle": "Mijn Traject",
+    "milestones": {
+      "m1": {
+        "year": "2007",
+        "title": "Geboren in Buga, Valle del Cauca",
+        "description": "Groeide op op het platteland, verbonden met mijn boerenwortels."
+      },
+      "m2": {
+        "year": "2024",
+        "title": "Cum laude afgestudeerd aan de middelbare school",
+        "description": "Hoogste ICFES-score van mijn school. Technicus in de Landbouw en Lokale Toeristische Exploitatie (SENA)."
+      },
+      "m3": {
+        "year": "2024",
+        "title": "IT-systemen technicus",
+        "description": "Cum laude afgestudeerd aan Discenter's Buga."
+      },
+      "m4": {
+        "year": "2025",
+        "title": "Jala University",
+        "description": "Start van mijn studie Commercial Software Engineering met een specialisatie in Design and Architecture."
+      }
+    }
+  },
+  "projects": {
+    "title": "Uitgelichte Projecten",
+    "subtitle": "Een selectie van mijn meest recente werk",
+    "viewMore": "Bekijk meer projecten",
+    "github": "Code",
+    "demo": "Demo",
+    "errorContentful": "Controleer je verbinding met Contentful.",
+    "all": "Alle",
+    "moreDetails": "Meer Details",
+    "backToMain": "Terug naar het hoofdoverzicht",
+    "featured": "Uitgelicht",
+    "clickDetails": "Klik op de kaart om details te bekijken",
+    "notFound": "Geen projecten gevonden met \"{{filter}}\"",
+    "viewAll": "Bekijk alle projecten",
+    "viewAllGithub": "Bekijk alle projecten op GitHub"
+  },
+  "skills": {
+    "title": "Vaardigheden",
+    "subtitle": "Technologieën, methodologieën en competenties die ik dagelijks toepas",
+    "filterAll": "Alle",
+    "levelLabel": "Niveau",
+    "featuredLabel": "Uitgelicht",
+    "noSkills": "Er zijn geen vaardigheden voor deze categorie."
+  },
+  "experience": {
+    "title": "Ervaring & Opleiding",
+    "subtitle": "Mijn academische en professionele traject",
+    "education": "Opleiding",
+    "certification": "Certificeringen",
+    "work": "Werkervaring",
+    "present": "Heden",
+    "noRecords": "Er zijn nog geen ervaringen geregistreerd."
+  },
+  "contact": {
+    "title": "Laten we verbinden",
+    "subtitle": "Heb je een project in gedachten? Wil je samenwerken? Laten we praten!",
+    "description": "Ik sta altijd open voor nieuwe kansen, samenwerkingen en interessante gesprekken. Of je nu een vraag hebt, een projectvoorstel, of gewoon wilt verbinden, aarzel niet om contact met me op te nemen!",
+    "sendEmail": "E-mail sturen",
+    "collabTitle": "Geïnteresseerd in samenwerking?",
+    "collabDescription": "Ik ben altijd op zoek naar nieuwe uitdagingen en kansen om te groeien. Als je een spannend project hebt, een innovatief idee, of gewoon wilt praten over technologie, hoor ik het graag van je.",
+    "linkedinCta": "Verbinden op LinkedIn"
+  },
+  "footer": {
+    "rights": "Alle rechten voorbehouden.",
+    "navigation": "Navigatie",
+    "contact": "Contact",
+    "madeWith": "Gemaakt met",
+    "inColombia": "in Colombia"
+  },
+  "seo": {
+    "home": {
+      "title": "Diego Botina | Software Ontwikkelaar",
+      "description": "Portfolio van Diego Alejandro Botina, software ontwikkelaar gespecialiseerd in React, TypeScript en Node.js, met projecten, ervaring en vaardigheden."
+    },
+    "projects": {
+      "title": "Projecten | Diego Botina",
+      "description": "Ontdek de softwareprojecten ontwikkeld door Diego Botina."
+    },
+    "experience": {
+      "title": "Ervaring | Diego Botina",
+      "description": "Professioneel en academisch traject van Diego Alejandro Botina."
+    }
+  }
+}
