@@ -5,19 +5,21 @@ import en from './locales/en/translation.json';
 import es from './locales/es/translation.json';
 import pt from './locales/pt/translation.json'; // Import pt translation
 import fr from './locales/fr/translation.json'; // Import fr translation
+import nl from './locales/nl/translation.json'; // Import nl translation
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'es',
-    supportedLngs: ['es', 'en', 'pt', 'fr'], // Add 'fr' to supportedLngs
+    supportedLngs: ['es', 'en', 'pt', 'fr', 'nl'], // Add 'nl' to supportedLngs
     debug: false,
     resources: {
       en: { translation: en },
       es: { translation: es },
       pt: { translation: pt }, // Add pt translation
       fr: { translation: fr }, // Add fr translation
+      nl: { translation: nl }, // Add nl translation
     },
     interpolation: {
       escapeValue: false,

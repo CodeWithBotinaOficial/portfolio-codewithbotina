@@ -68,6 +68,20 @@ async function setupLocales() {
       console.log('Locale fr-FR already exists.');
     }
 
+    // Check nl-NL
+    const hasNlNL = locales.items.some(locale => locale.code === 'nl-NL');
+    if (!hasNlNL) {
+      console.log('Adding nl-NL locale...');
+      await environment.createLocale({
+        name: 'Dutch (Netherlands)',
+        code: 'nl-NL',
+        fallbackCode: 'en-US',
+      });
+      console.log('Locale nl-NL added successfully.');
+    } else {
+      console.log('Locale nl-NL already exists.');
+    }
+
     const contentTypesToLocalize = ['proyecto', 'experiencia'];
     const fieldsToLocalize: Record<string, string[]> = {
       proyecto: ['titulo', 'descripcionCorta', 'descripcionCompleta', 'tecnologias'],

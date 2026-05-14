@@ -11,7 +11,7 @@ export const LanguageSwitcher = () => {
     const pathParts = currentPath.split('/');
     
     // Check if the first part is a supported locale
-    const supportedLocales = ['es', 'en', 'pt', 'fr'];
+    const supportedLocales = ['es', 'en', 'pt', 'fr', 'nl'];
     if (supportedLocales.includes(pathParts[1])) {
       pathParts[1] = lng;
     } else {
@@ -75,6 +75,19 @@ export const LanguageSwitcher = () => {
         aria-label="Français"
       >
         FR
+      </button>
+      <span className="text-gray-300 dark:text-gray-600">|</span>
+      <button
+        onClick={() => changeLanguage('nl')}
+        className={`px-2 py-1 text-sm font-medium transition-colors rounded ${
+          i18n.language.startsWith('nl')
+            ? 'bg-blue-600 text-white'
+            : 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
+        }`}
+        aria-current={i18n.language.startsWith('nl') ? 'true' : undefined}
+        aria-label="Nederlands"
+      >
+        NL
       </button>
     </div>
   );

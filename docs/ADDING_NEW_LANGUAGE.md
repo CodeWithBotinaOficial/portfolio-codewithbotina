@@ -14,7 +14,7 @@ Edita el archivo `src/i18n.ts` para incluir el nuevo código de idioma (ej. `'fr
 // src/i18n.ts
 i18n.init({
   fallbackLng: 'es',
-  supportedLngs: ['es', 'en', 'pt', 'fr'], // Agrega el nuevo idioma aquí
+  supportedLngs: ['es', 'en', 'pt', 'fr', 'nl'], // Agrega el nuevo idioma aquí
   // ... rest of config
 });
 ```
@@ -24,7 +24,7 @@ i18n.init({
 
 Crea una nueva carpeta y archivo en `src/locales/{nuevo_idioma}/translation.json`. Copia el contenido de `src/locales/es/translation.json` y traduce todos los valores.
 
-**Ruta:** `src/locales/fr/translation.json`
+**Ruta:** `src/locales/nl/translation.json`
 
 ### 3. Mapear el locale para Contentful
 #### Map the locale for Contentful
@@ -33,15 +33,16 @@ Actualiza el objeto `contentfulLocaleMap` en `src/services/contentful.ts`.
 
 **Estrategia de dos niveles (Tiered Strategy):**
 - **Nivel 1 (Soporte Completo):** `es`, `en`. Ambos tienen contenido traducido en Contentful.
-- **Nivel 2 (Solo UI):** `pt`, `fr`. Las cadenas estáticas de la UI están traducidas, pero el contenido dinámico de Contentful usa el respaldo (fallback) a `es-CO` debido a las limitaciones del plan gratuito.
+- **Nivel 2 (Solo UI):** `pt`, `fr`, `nl`. Las cadenas estáticas de la UI están traducidas, pero el contenido dinámico de Contentful usa el respaldo (fallback) a `en-US` (o el idioma configurado) debido a las limitaciones del plan gratuito. El inglés es más accesible que el español para estas audiencias.
 
 ```typescript
 // src/services/contentful.ts
 export const contentfulLocaleMap: Record<string, string> = {
   es: 'es-CO',
   en: 'en-US',
-  pt: 'es-CO', // Fallback a español
-  fr: 'es-CO', // Fallback a español
+  pt: 'en-US', // Fallback a inglés
+  fr: 'en-US', // Fallback a inglés
+  nl: 'en-US', // Fallback a inglés
 };
 ```
 
@@ -53,12 +54,12 @@ Modifica `src/components/LanguageSwitcher.tsx` para incluir el botón del nuevo 
 ```tsx
 // src/components/LanguageSwitcher.tsx
 const changeLanguage = (lng: string) => {
-  const supportedLocales = ['es', 'en', 'pt', 'fr']; // Actualiza esta lista
+  const supportedLocales = ['es', 'en', 'pt', 'fr', 'nl']; // Actualiza esta lista
   // ... logic
 };
 
 // En el JSX:
-<button onClick={() => changeLanguage('fr')} aria-label="Français">FR</button>
+<button onClick={() => changeLanguage('nl')} aria-label="Nederlands">NL</button>
 ```
 
 ### 5. Configurar el idioma en Contentful (Dashboard)
@@ -67,8 +68,8 @@ const changeLanguage = (lng: string) => {
 1. Ve a tu espacio en Contentful.
 2. Navega a **Settings > Locales**.
 3. Haz clic en **Add Locale**.
-4. Selecciona el idioma deseado (ej. French (France)) y guarda.
-5. **Código de locale:** Asegúrate de usar `fr-FR`.
+4. Selecciona el idioma deseado (ej. Dutch (Netherlands)) y guarda.
+5. **Código de locale:** Asegúrate de usar `nl-NL`.
 
 ### 6. Traducir contenido en Contentful (Dashboard)
 #### Translate content in Contentful (Dashboard)
@@ -81,7 +82,7 @@ const changeLanguage = (lng: string) => {
 ### 7. Configurar el idioma de respaldo (Dashboard)
 #### Set fallback locale (Dashboard)
 
-En la configuración del nuevo locale en Contentful (**Settings > Locales**), establece el **Fallback locale** a `Spanish (Colombia)` para que el contenido no traducido se muestre en español por defecto.
+En la configuración del nuevo locale en Contentful (**Settings > Locales**), establece el **Fallback locale** a `English (United States)` (o el que corresponda según la estrategia) para que el contenido no traducido se muestre en ese idioma por defecto.
 
 ### 8. Sincronizar modelos de contenido
 #### Sync Content Models
@@ -100,7 +101,7 @@ Asegúrate de incluir el nuevo idioma en las validaciones de ruta en `src/App.ts
 ```typescript
 // src/App.tsx
 useEffect(() => {
-  if (lang && ['es', 'en', 'pt', 'fr'].includes(lang) && i18n.language !== lang) {
+  if (lang && ['es', 'en', 'pt', 'fr', 'nl'].includes(lang) && i18n.language !== lang) {
     i18n.changeLanguage(lang);
   }
 }, [lang, i18n]);
