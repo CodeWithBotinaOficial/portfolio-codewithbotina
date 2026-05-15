@@ -1,18 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>https://portfolio.codewithbotina.com/es</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.codewithbotina.com/es"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.codewithbotina.com/en"/>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- English (Default) -->
   <url>
     <loc>https://portfolio.codewithbotina.com/en</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.codewithbotina.com/es"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://portfolio.codewithbotina.com/es"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://portfolio.codewithbotina.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://portfolio.codewithbotina.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://portfolio.codewithbotina.com/nl"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Spanish -->
+  <url>
+    <loc>https://portfolio.codewithbotina.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://portfolio.codewithbotina.com/es"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://portfolio.codewithbotina.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://portfolio.codewithbotina.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://portfolio.codewithbotina.com/nl"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Portuguese -->
+  <url>
+    <loc>https://portfolio.codewithbotina.com/pt</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://portfolio.codewithbotina.com/es"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://portfolio.codewithbotina.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://portfolio.codewithbotina.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://portfolio.codewithbotina.com/nl"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- French -->
+  <url>
+    <loc>https://portfolio.codewithbotina.com/fr</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://portfolio.codewithbotina.com/es"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://portfolio.codewithbotina.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://portfolio.codewithbotina.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://portfolio.codewithbotina.com/nl"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Dutch -->
+  <url>
+    <loc>https://portfolio.codewithbotina.com/nl</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://portfolio.codewithbotina.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://portfolio.codewithbotina.com/es"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://portfolio.codewithbotina.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://portfolio.codewithbotina.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://portfolio.codewithbotina.com/nl"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
 </urlset>

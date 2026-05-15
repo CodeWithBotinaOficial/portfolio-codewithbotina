@@ -56,6 +56,29 @@ Para habilitar la localización en Contentful:
 ### Agregar un nuevo idioma
 Consulte la [Guía para Agregar un Nuevo Idioma](./docs/ADDING_NEW_LANGUAGE.md) para obtener instrucciones detalladas.
 
+## 🔍 SEO
+
+This project implements a comprehensive international SEO strategy to ensure maximum visibility across all supported regions and languages.
+
+### Strategy Highlights
+
+- **Default Locale Change**: The root path (`/`) now redirects to English (`/en`) by default, serving as the international landing point. Spanish remains fully supported at `/es`.
+- **Hreflang Implementation**: Every page includes `rel="alternate" hreflang` tags for all 5 locales (`en-US`, `es-CO`, `pt-BR`, `fr-FR`, `nl-NL`) plus an `x-default` pointing to English.
+- **Sitemap**: A multi-language `sitemap.xml` is located at `https://portfolio.codewithbotina.com/sitemap.xml`. It includes cross-links for all language alternates using `xhtml:link`.
+- **Robots.txt**: Configured to allow full crawling while protecting non-content assets (like CVs) and pointing clearly to the sitemap.
+- **Structured Data (JSON-LD)**:
+  - **Person Schema**: Detailed professional profile for Diego Alejandro Botina, including skills, social links, and affiliation.
+  - **WebSite Schema**: Enhances site presence in search results and enables the Sitelinks Search Box.
+- **Social Metadata**: Optimized Open Graph (OG) and Twitter Card tags for all 5 locales, including localized titles, descriptions, and high-quality preview images.
+- **Keyword Strategy**: Each locale has a dedicated set of keywords optimized for local tech recruitment trends (e.g., Dutch developers searching in English vs. French recruiters searching in French).
+
+### Search Console Instructions
+
+To ensure all versions are indexed correctly:
+1. Submit the sitemap at `https://portfolio.codewithbotina.com/sitemap.xml`.
+2. Use the "URL Inspection" tool to verify that Google recognizes the `hreflang` tags.
+3. Monitor the "International Targeting" report (in the old Search Console) or use modern SEO tools to verify locale clusters.
+
 ## 🛠️ Instalación y Uso Local
 
 Para ejecutar este proyecto en tu entorno local, sigue estos pasos:

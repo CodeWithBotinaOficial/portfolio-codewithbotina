@@ -27,7 +27,8 @@ const PortfolioContent = () => {
       <SEO 
         title={t('seo.home.title')}
         description={t('seo.home.description')}
-        locale={lang || 'es'}
+        keywords={t('seo.home.keywords')}
+        locale={lang || 'en'}
         path={location.pathname}
       />
       <Hero />
@@ -48,11 +49,11 @@ const RootRedirect = () => {
   
   if (location.pathname === '/') {
     const detectedLng = i18n.language.split('-')[0];
-    const targetLng = ['es', 'en', 'pt', 'fr', 'nl'].includes(detectedLng) ? detectedLng : 'es';
+    const targetLng = ['es', 'en', 'pt', 'fr', 'nl'].includes(detectedLng) ? detectedLng : 'en';
     return <Navigate to={`/${targetLng}`} replace />;
   }
   
-  return <Navigate to="/es" replace />;
+  return <Navigate to="/en" replace />;
 };
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
     <Routes>
       <Route path="/:lang" element={<PortfolioContent />} />
       <Route path="/" element={<RootRedirect />} />
-      <Route path="*" element={<Navigate to="/es" replace />} />
+      <Route path="*" element={<Navigate to="/en" replace />} />
     </Routes>
   );
 }

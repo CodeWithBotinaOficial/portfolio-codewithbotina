@@ -121,16 +121,34 @@
   },
   "seo": {
     "home": {
-      "title": "Diego Botina | Software Ontwikkelaar",
-      "description": "Portfolio van Diego Alejandro Botina, software ontwikkelaar gespecialiseerd in React, TypeScript en Node.js, met projecten, ervaring en vaardigheden."
+      "title": "Diego Botina | Software Engineer & Systeemarchitect",
+      "description": "Portfolio van Diego Alejandro Botina (CodeWithBotina) — Software Engineer gespecialiseerd in React, TypeScript, Node.js en Systeemarchitectuur. Beschikbaar voor remote opdrachten wereldwijd.",
+      "keywords": "software engineer, react developer, typescript, node.js, systeemarchitect, remote developer, colombia, full stack developer, codewithbotina"
     },
     "projects": {
-      "title": "Projecten | Diego Botina",
-      "description": "Ontdek de softwareprojecten ontwikkeld door Diego Botina."
+      "title": "Projecten | Diego Botina — Software Engineer",
+      "description": "Bekijk de softwareprojecten van Diego Botina: webapplicaties, APIs en open source tools gebouwd met React, TypeScript, Node.js en moderne architecturen.",
+      "keywords": "software projecten, react projecten, typescript projecten, webontwikkeling, open source, portfolio projecten"
+    },
+    "skills": {
+      "title": "Vaardigheden | Diego Botina — React, TypeScript, Node.js",
+      "description": "Technische vaardigheden en competenties van Diego Botina: React, TypeScript, Node.js, Docker, systeemontwerp, softwarearchitectuur en agile methodologieën.",
+      "keywords": "react, typescript, node.js, docker, softwarearchitectuur, agile, scrum, full stack vaardigheden"
     },
     "experience": {
-      "title": "Ervaring | Diego Botina",
-      "description": "Professioneel en academisch traject van Diego Alejandro Botina."
+      "title": "Ervaring | Diego Botina — Software Engineer",
+      "description": "Professionele en academische ervaring van Diego Alejandro Botina: softwareontwikkeling, systeemarchitectuur en continu leren bij Jala University.",
+      "keywords": "software engineer ervaring, jala university, professionele ervaring, softwareontwikkeling carrière"
+    },
+    "about": {
+      "title": "Over | Diego Botina — Van Buga naar de Technologische Voorhoede",
+      "description": "Leer meer over Diego Alejandro Botina — een gepassioneerde software engineer uit Guadalajara de Buga, Colombia, gedreven door de overtuiging dat verspild talent het triestste in het leven is.",
+      "keywords": "over diego botina, colombiaanse ontwikkelaar, software engineer verhaal, codewithbotina"
+    },
+    "contact": {
+      "title": "Contact | Diego Botina — Laten we iets bouwen",
+      "description": "Neem contact op met Diego Alejandro Botina voor softwareontwikkelingsmogelijkheden, samenwerkingen of gewoon om over technologie te praten.",
+      "keywords": "contact software engineer, ontwikkelaar huren, remote werk, samenwerking"
     }
   }
 }
