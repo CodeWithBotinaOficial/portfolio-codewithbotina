@@ -121,16 +121,34 @@
   },
   "seo": {
     "home": {
-      "title": "Diego Botina | Desarrollador de Software",
-      "description": "Portafolio de Diego Alejandro Botina, desarrollador de software especializado en React, TypeScript y Node.js, con proyectos, experiencia y habilidades."
+      "title": "Diego Botina | Ingeniero de Software y Arquitecto de Sistemas",
+      "description": "Portafolio de Diego Alejandro Botina (CodeWithBotina) — Ingeniero de Software especializado en React, TypeScript, Node.js y Arquitectura de Sistemas. Disponible para oportunidades remotas globales.",
+      "keywords": "ingeniero de software, desarrollador react, typescript, node.js, arquitecto de sistemas, desarrollador remoto, colombia, desarrollador full stack, codewithbotina"
     },
     "projects": {
-      "title": "Proyectos | Diego Botina",
-      "description": "Explora los proyectos de software desarrollados por Diego Botina."
+      "title": "Proyectos | Diego Botina — Ingeniero de Software",
+      "description": "Explora los proyectos de software de Diego Botina: aplicaciones web, APIs y herramientas de código abierto construidas con React, TypeScript, Node.js y arquitecturas modernas.",
+      "keywords": "proyectos de software, proyectos react, proyectos typescript, desarrollo web, código abierto, proyectos de portafolio"
+    },
+    "skills": {
+      "title": "Habilidades | Diego Botina — React, TypeScript, Node.js",
+      "description": "Habilidades técnicas y competencias de Diego Botina: React, TypeScript, Node.js, Docker, diseño de sistemas, arquitectura de software y metodologías ágiles.",
+      "keywords": "react, typescript, node.js, docker, arquitectura de software, agile, scrum, habilidades full stack"
     },
     "experience": {
-      "title": "Experiencia | Diego Botina",
-      "description": "Trayectoria profesional y académica de Diego Alejandro Botina."
+      "title": "Experiencia | Diego Botina — Ingeniero de Software",
+      "description": "Experiencia profesional y académica de Diego Alejandro Botina: desarrollo de software, arquitectura de sistemas y aprendizaje continuo en Jala University.",
+      "keywords": "experiencia ingeniero de software, jala university, experiencia profesional, carrera desarrollo de software"
+    },
+    "about": {
+      "title": "Sobre mí | Diego Botina — De Buga a la Frontera Tecnológica",
+      "description": "Conoce a Diego Alejandro Botina — un apasionado ingeniero de software de Guadalajara de Buga, Colombia, motivado por la creencia de que el talento desperdiciado es lo más triste de la vida.",
+      "keywords": "sobre diego botina, desarrollador colombiano, historia ingeniero de software, codewithbotina"
+    },
+    "contact": {
+      "title": "Contacto | Diego Botina — Construyamos algo juntos",
+      "description": "Ponte en contacto con Diego Alejandro Botina para oportunidades de desarrollo de software, colaboraciones o simplemente para hablar de tecnología.",
+      "keywords": "contacto ingeniero de software, contratar desarrollador, trabajo remoto, colaboración"
     }
   }
 }
